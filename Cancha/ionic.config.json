@@ -1,0 +1,7 @@
+{
+  "name": "Cancha",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}
