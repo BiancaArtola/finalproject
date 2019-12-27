@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-toolbar>
+      <ion-buttons slot="start">
+          <ion-back-button></ion-back-button>
+        </ion-buttons>
+    <ion-title>Elegi tu deporte</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col *ngFor="let icon of icons">
+          <ion-fab>
+              <ion-fab-button color="white" (click)="openCourts(icon)">
+                  <ion-img src="../../assets/icon/sports/{{icon}}.png"></ion-img>
+              </ion-fab-button>
+            </ion-fab>
+      </ion-col>
+     
+    </ion-row>
+  </ion-grid>
+</ion-content>
