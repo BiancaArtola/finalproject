@@ -1,3 +1,35 @@
 .background{
     --background:  url('../../assets/images/imagen.jpg') 0 0/100% 100% no-repeat;
 }
+
+.registrar{
+    --color: black;
+    --background: #F0C112;
+}
+
+ion-grid{
+    padding: 5%;
+}
+
+.arrow {
+    padding-top: 5%;
+    padding-left: 3%;
+}
+
+ion-input{
+    border: solid 1px grey;
+    border-radius: 50px;
+    ion-icon {
+        color: gray;
+        padding-left: 2%;
+    }
+}
+
+ion-text {
+    text-align: center;
+    font-family: 'Bowlby One SC', cursive;
+}
+
+.espacio {
+    padding: 3%;
+}

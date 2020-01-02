@@ -1,7 +1,11 @@
+
 <ion-header>
   <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
     <ion-title>
-      Ionic Blank
+      <b> Alquila tu cancha </b>
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -9,5 +13,5 @@
 <ion-content>
   <ion-button color="secondary"  (click)="goToDeporte()">Ir a deporte</ion-button>
   <ion-button color="secondary"  (click)="goToLogin()">LOGIN</ion-button>
-
+  Hola {{usuario}}
 </ion-content>

@@ -1,54 +1,49 @@
 <ion-content class="background">
   <ion-grid>   
-      <ion-row>
-        <ion-col col-4></ion-col>
-        <ion-col col-4>
-          <ion-img src="../../assets/icon/iconoApp.png" class="img-size" ></ion-img>
-        </ion-col>
-        <ion-col col-4></ion-col>
 
-      </ion-row>
-      <div class="ion-text-center">
-        <ion-row>
-          <ion-col>
-            <ion-label>
-              Usuario o Correo electronico 
-            </ion-label>
-          </ion-col>     
-        </ion-row>
-      </div>
+<!--    <ion-img src="../../assets/icon/rayo1024.png" ></ion-img> -->
+<div class="ion-text-center">
+  <ion-text>
+    <h1> BIENVENIDO </h1>
+  </ion-text>
+  </div>
     <ion-row>
-      <ion-col>
-        <ion-input></ion-input>
+      <ion-col>        
+        <ion-input type="text" [(ngModel)]="usuario" placeholder="Correo electronico">
+          <ion-icon name="contact" size="large" ></ion-icon>
+        </ion-input>
       </ion-col>
     </ion-row>
-    <div class="ion-text-center">
-      <ion-row>
-        <ion-col>
-          <ion-label>
-            Contraseña
-          </ion-label>
-        </ion-col>
-      </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <ion-input type="password" placeholder="Contraseña">
+          <ion-icon name="unlock" size="large"></ion-icon>
+        </ion-input>
+      </ion-col>
+    </ion-row>
+    <div class="ion-text-right">
+    <ion-label class="forgotPass" > ¿Olvidaste tu contraseña? </ion-label>
     </div>
     <ion-row>
-      <ion-col>
-        <ion-input type="password"></ion-input>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col>
-        <ion-button expand="block" fill="outline" color="dark">
-          Ingresar
+      <ion-col size="2"></ion-col>
+      <ion-col size="8">
+        <ion-button expand="block" (click)="goHome()">
+          <b>Ingresar</b>
         </ion-button>    
       </ion-col>
+      <ion-col size="2"></ion-col>
     </ion-row>
     <ion-row>
       <ion-col>
-        <ion-button expand="block" fill="outline" color="dark">
-          Crear una cuenta
-        </ion-button> 
+        <div class="ion-text-center">
+        ¿No tenes una cuenta? 
+        <ion-label (click)="openRegister()" class="registrar"> Registrarse </ion-label>
+        </div>
+
       </ion-col>
+    
+
     </ion-row>
 
   </ion-grid>

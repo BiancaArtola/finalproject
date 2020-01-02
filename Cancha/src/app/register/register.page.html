@@ -1,71 +1,49 @@
 <ion-content class="background">
-
-  <ion-grid>   
+  <ion-icon name="arrow-round-back" (click)="goBack()" size="large" class="arrow"></ion-icon>
+  <ion-grid>  
+    <div>
+    <ion-text>
+      <h1><b>Crear una cuenta</b></h1>
+    </ion-text>
+  </div> 
     <ion-row>
-      <ion-col>
-        <ion-label>
-          Nombre 
-        </ion-label>
-      </ion-col>     
-    </ion-row>
-    <ion-row>
-      <ion-col>
-        <ion-input></ion-input>
+      <ion-col>        
+        <ion-input type="text" [(ngModel)]="nombre" placeholder="Nombre">
+          <ion-icon name="contact" size="large" ></ion-icon>
+        </ion-input>
       </ion-col>
     </ion-row>
 
     <ion-row>
-      <ion-col>
-        <ion-label>
-          Apellido 
-        </ion-label>
-      </ion-col>     
-    </ion-row>
-    <ion-row>
-      <ion-col>
-        <ion-input></ion-input>
+      <ion-col>        
+        <ion-input type="text" [(ngModel)]="apellido" placeholder="Apellido">
+          <ion-icon name="contact" size="large" ></ion-icon>
+        </ion-input>
       </ion-col>
     </ion-row>
 
     <ion-row>
-      <ion-col>
-        <ion-label>
-          Correo electronico 
-        </ion-label>
-      </ion-col>     
-    </ion-row>
-    <ion-row>
-      <ion-col>
-        <ion-input></ion-input>
+      <ion-col>        
+        <ion-input type="text" [(ngModel)]="usuario" placeholder="Correo electronico">
+          <ion-icon name="contact" size="large" ></ion-icon>
+        </ion-input>
       </ion-col>
     </ion-row>
 
-    <ion-row>
-      <ion-col>
-        <ion-label>
-          Contraseña 
-        </ion-label>
-      </ion-col>     
-    </ion-row>
-    <ion-row>
-      <ion-col>
-        <ion-input type="password"></ion-input>
+  <ion-row>
+      <ion-col>        
+        <ion-input type="password" [(ngModel)]="pass" placeholder="Contraseña">
+          <ion-icon name="unlock" size="large" ></ion-icon>
+        </ion-input>
       </ion-col>
     </ion-row>
-
+<div class="espacio"></div>
     <ion-row>
-      <ion-col>
-        <ion-button expand="block" fill="outline" color="dark">
-          Registrarse
+      <ion-col >
+        <ion-button class="registrar" expand="block" (click)="goHome()">
+          <b>Finalizar</b>
         </ion-button> 
       </ion-col>
     </ion-row>
-
-    <ion-row>
-      <ion-col>
-        <ion-button expand="block" fill="outline" color="dark">
-          Volver
-        </ion-button> 
-      </ion-col>
-    </ion-row>
+  </ion-grid>
 </ion-content>
