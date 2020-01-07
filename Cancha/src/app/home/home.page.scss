@@ -1,3 +1,30 @@
-.my-custom-menu {
-    --width: 500px;
-  }
+ion-img{
+
+  align-items: center;
+
+}
+
+ion-button {
+  --background-color: #D8D7D2;
+  --background: #D8D7D2;
+}
+.ion-text-center{
+  align-items: center;
+}
+
+.title {
+  font-size: 1.3em;
+  padding-top: 50%;
+  padding-left: 3%;
+  padding-right: 3%;
+  padding-bottom: 3%;
+}
+
+.sport {
+  text-transform: capitalize;
+  text-align: center;
+  font-size: 0.8em;
+  color: black;
+  padding-left: 3%;
+}
+

@@ -19,12 +19,17 @@
     "@angular/platform-browser": "~8.1.2",
     "@angular/platform-browser-dynamic": "~8.1.2",
     "@angular/router": "~8.1.2",
-    "@ionic-native/core": "^5.0.0",
+    "@ionic-native/core": "^5.18.1-beta.3",
+    "@ionic-native/date-picker": "^5.19.0",
+    "@ionic-native/google-maps": "^5.0.0-beta.27",
     "@ionic-native/splash-screen": "^5.0.0",
     "@ionic-native/status-bar": "^5.0.0",
     "@ionic/angular": "^4.7.1",
     "@ionic/storage": "^2.2.0",
     "cordova-android": "8.1.0",
+    "cordova-browser": "6.0.0",
+    "cordova-plugin-datepicker": "^0.9.3",
+    "cordova-plugin-googlemaps": "^2.6.2",
     "cordova-sqlite-storage": "^4.0.0",
     "core-js": "^2.5.4",
     "rxjs": "~6.5.1",
@@ -74,10 +79,17 @@
         "ANDROID_SUPPORT_ANNOTATIONS_VERSION": "27.+"
       },
       "cordova-plugin-ionic-keyboard": {},
-      "cordova-sqlite-storage": {}
+      "cordova-sqlite-storage": {},
+      "cordova-plugin-datepicker": {},
+      "cordova-plugin-googlemaps": {
+        "API_KEY_FOR_ANDROID": "AIzaSyD_mVCh6mJWkCl-rmCyWITJdMHIIqr-PRE",
+        "PLAY_SERVICES_VERSION": "15.0.1",
+        "ANDROID_SUPPORT_V4_VERSION": "27.+"
+      }
     },
     "platforms": [
-      "android"
+      "android",
+      "browser"
     ]
   }
 }

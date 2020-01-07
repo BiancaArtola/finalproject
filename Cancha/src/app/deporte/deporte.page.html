@@ -8,16 +8,59 @@
 </ion-header>
 
 <ion-content>
-  <ion-grid>
-    <ion-row>
-      <ion-col *ngFor="let icon of icons">
-          <ion-fab>
-              <ion-fab-button color="white" (click)="openCourts(icon)">
-                  <ion-img src="../../assets/icon/sports/{{icon}}.png"></ion-img>
-              </ion-fab-button>
-            </ion-fab>
-      </ion-col>
-     
-    </ion-row>
-  </ion-grid>
+
+ <ion-grid>
+   <ion-row>
+     <ion-col size="1" class="pad">
+      <ion-icon name="calendar"></ion-icon>
+     </ion-col>
+     <ion-col class="pad">
+       <ion-label>
+         <b>Filtrar por fecha y hora:</b> 
+      </ion-label>       
+    </ion-col>
+    <ion-col>
+      <ion-datetime displayFormat="MMM DD, h A" [(ngModel)]="myDate" ></ion-datetime>
+    </ion-col>
+   </ion-row>
+
+  <ion-row>
+    <ion-col size="7"></ion-col>
+    <ion-col size="5">
+      <ion-button size="small" class="filter-button"  fill="outline"> 
+        Aplicar filtro
+      </ion-button>
+    </ion-col>
+  </ion-row>
+ </ion-grid>
+
+ <ion-grid>
+   <ion-row>
+     <ion-col>
+      <ion-label>
+        <b>Canchas disponibles</b> 
+       </ion-label>
+     </ion-col>
+     <div class="ion-text-right">
+
+      <ion-label class="label-button" (click)="openMaps()">Ver mapa</ion-label>  
+     </div>
+   </ion-row>
+
+ 
+ 
+  <ion-card (click)="openCourts()">
+    <ion-card-header>
+      <ion-img src="../../assets/images/cancha.jpg"></ion-img>
+
+      <ion-card-subtitle>Lavalle 300</ion-card-subtitle>
+      <ion-card-title>UNO BAHIA CLUB</ion-card-title>
+    </ion-card-header>
+  
+    <ion-card-content>
+    
+    </ion-card-content>
+  </ion-card>
+
+ </ion-grid>
 </ion-content>

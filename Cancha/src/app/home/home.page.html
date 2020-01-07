@@ -5,13 +5,71 @@
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-title>
-      <b> Alquila tu cancha </b>
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-button color="secondary"  (click)="goToDeporte()">Ir a deporte</ion-button>
-  <ion-button color="secondary"  (click)="goToLogin()">LOGIN</ion-button>
-  Hola {{usuario}}
+  <hr>
+  <ion-label class="title">
+    <b> Selecciona un deporte </b>
+  </ion-label>
+ 
+  <ion-grid>
+    <div class="ion-text-center" text-center>
+  <ion-row>
+      <ion-col *ngFor="let icon of icons; let i = index" size="4" >        
+        <ion-button (click)="openSport()">
+        <ion-img src="../../assets/icon/sports/{{icon}}.png"></ion-img>
+        <ion-label class="sport"> 
+          {{icon}}
+         </ion-label> 
+         </ion-button>
+      </ion-col>     
+    </ion-row>
+  </div>
+  </ion-grid>
+
+  <hr>
+  <ion-label class="title">
+    <b> Descubri nuestras canchas </b>
+  </ion-label>
+
+  <ion-card>
+    <ion-item>
+      <ion-img src="../../assets/images/cancha.jpg"></ion-img>
+      <ion-card-content>
+        <b>UNO BAHIA CLUB</b>
+        Lavalle 233
+      </ion-card-content>
+    </ion-item>    
+  </ion-card>
+  <ion-card>
+    <ion-item>
+      <ion-img src="../../assets/images/cancha.jpg"></ion-img>
+      <ion-card-content>
+        <b>UNO BAHIA CLUB</b>
+        Lavalle 233
+      </ion-card-content>
+    </ion-item>    
+  </ion-card>
+  <ion-card>
+    <ion-item>
+      <ion-img src="../../assets/images/cancha.jpg"></ion-img>
+      <ion-card-content>
+        <b>UNO BAHIA CLUB</b>
+        Lavalle 233
+      </ion-card-content>
+    </ion-item>    
+  </ion-card>
+  <ion-card>
+    <ion-item>
+      <ion-img src="../../assets/images/cancha.jpg"></ion-img>
+      <ion-card-content>
+        <b>UNO BAHIA CLUB</b>
+        Lavalle 233
+      </ion-card-content>
+    </ion-item>    
+  </ion-card>
+  
 </ion-content>

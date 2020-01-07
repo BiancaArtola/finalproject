@@ -9,7 +9,7 @@ import { NavController } from '@ionic/angular';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
-
+  icons = ['futbol', 'basket', 'voley', 'hockey', 'tennis', 'pinpon'];
   private usuario: string;
   constructor(private router: Router, private storage: Storage, private navController: NavController) {
     storage.get('user').then((val) => {
@@ -23,7 +23,7 @@ export class HomePage {
   }
 
 
-  goToDeporte(){
+  openSport(){
     this.router.navigate(['/deporte']);
     
   }

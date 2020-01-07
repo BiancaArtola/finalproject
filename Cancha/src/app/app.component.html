@@ -1,17 +1,42 @@
 <ion-app>
   <ion-menu side="start" type="push">
     <ion-header>
-      <ion-toolbar>
-        <ion-title>End Menu</ion-title>
+      <ion-toolbar class="background">
+        <ion-grid>
+          <div class="justify-content-center">
+          <ion-row>
+           
+            <ion-col size="3">
+              <ion-avatar >
+                <img src="../../assets/images/usuario.jpg">
+              </ion-avatar>
+            </ion-col>
+            <ion-col size="9">
+             <ion-text>
+               <b>Bianca Artola</b>
+             </ion-text>
+            </ion-col>
+         
+          </ion-row>
+        </div>
+        </ion-grid>  
       </ion-toolbar>
     </ion-header>
     <ion-content>
       <ion-list>
-        <ion-item>Menu Item</ion-item>
-        <ion-item>Menu Item</ion-item>
-        <ion-item>Menu Item</ion-item>
-        <ion-item>Menu Item</ion-item>
-        <ion-item>Menu Item</ion-item>
+        <ion-item>
+          <ion-icon name="person" size="large"></ion-icon>          
+          <ion-label> Mi perfil </ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-icon name="briefcase" size="large"></ion-icon>
+          <ion-label> Something </ion-label>
+        </ion-item>
+        <ion-item (click)="goToLogin()">
+          <ion-icon name="undo" size="large"></ion-icon>
+          <ion-label > Salir </ion-label>
+        </ion-item>
+ 
       </ion-list>
     </ion-content>
   </ion-menu>

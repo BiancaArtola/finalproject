@@ -1,0 +1,27 @@
+ion-avatar {
+    padding: 3%;
+}
+
+ion-text{
+    font-size: 1.1em;
+    padding-top: 50%;
+}
+
+.background{
+    --background:  url('../assets/images/fondo3.jpg') ;
+}
+
+ion-grid{
+    height: 100%;
+}
+ion-row{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+ion-label {
+    padding-left: 5%;
+}
+

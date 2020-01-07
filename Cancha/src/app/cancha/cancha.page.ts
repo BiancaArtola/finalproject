@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { NavParams } from '@ionic/angular';
+import { NavParams, ModalController } from '@ionic/angular';
 
 @Component({
   selector: 'app-cancha',
@@ -11,7 +11,7 @@ export class CanchaPage implements OnInit {
 
   @Input() sport: string;
 
-  constructor(navParams: NavParams) { 
+  constructor(navParams: NavParams, private modalController: ModalController) { 
     console.log(navParams.get('sport'));
     
   }
@@ -20,4 +20,7 @@ export class CanchaPage implements OnInit {
 
   }
 
+  goBack(){
+    this.modalController.dismiss();
+  }
 }
