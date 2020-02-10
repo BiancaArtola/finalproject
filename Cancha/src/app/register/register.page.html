@@ -1,49 +1,83 @@
 <ion-content class="background">
-  <ion-icon name="arrow-round-back" (click)="goBack()" size="large" class="arrow"></ion-icon>
-  <ion-grid>  
-    <div>
-    <ion-text>
-      <h1><b>Crear una cuenta</b></h1>
-    </ion-text>
-  </div> 
-    <ion-row>
-      <ion-col>        
-        <ion-input type="text" [(ngModel)]="nombre" placeholder="Nombre">
-          <ion-icon name="contact" size="large" ></ion-icon>
-        </ion-input>
-      </ion-col>
-    </ion-row>
+  <form [formGroup]="myForm" novalidate (ngSubmit)="register()">
 
-    <ion-row>
-      <ion-col>        
-        <ion-input type="text" [(ngModel)]="apellido" placeholder="Apellido">
-          <ion-icon name="contact" size="large" ></ion-icon>
-        </ion-input>
-      </ion-col>
-    </ion-row>
+    <ion-icon name="arrow-round-back" (click)="goBack()" size="large" class="arrow"></ion-icon>
+    <ion-grid>
+      <div>
+        <ion-text>
+          <h1><b>Crear una cuenta</b></h1>
+        </ion-text>
+      </div>
+      <ion-row>
+        <ion-col>
+          <ion-input type="text" placeholder="Nombre" formControlName="nombre">
+            <ion-icon name="contact" size="large"></ion-icon>
+          </ion-input>
+          <div *ngIf="!myForm.controls.nombre.valid && myForm.get('nombre').touched">
+            <ion-icon class="errorIcon" name="information-circle-outline"></ion-icon>
+            <ion-label class="errorMessage">El nombre no puede ser nulo</ion-label>
+          </div>
 
-    <ion-row>
-      <ion-col>        
-        <ion-input type="text" [(ngModel)]="usuario" placeholder="Correo electronico">
-          <ion-icon name="contact" size="large" ></ion-icon>
-        </ion-input>
-      </ion-col>
-    </ion-row>
+        </ion-col>
+      </ion-row>
 
-  <ion-row>
-      <ion-col>        
-        <ion-input type="password" [(ngModel)]="pass" placeholder="Contraseña">
-          <ion-icon name="unlock" size="large" ></ion-icon>
-        </ion-input>
-      </ion-col>
-    </ion-row>
-<div class="espacio"></div>
-    <ion-row>
-      <ion-col >
-        <ion-button class="registrar" expand="block" (click)="goHome()">
-          <b>Finalizar</b>
-        </ion-button> 
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-input type="text" placeholder="Apellido" formControlName="apellido">
+            <ion-icon name="contact" size="large"></ion-icon>
+          </ion-input>
+          <div *ngIf="!myForm.controls.apellido.valid && myForm.get('apellido').touched">
+            <ion-icon class="errorIcon" name="information-circle-outline"></ion-icon>
+            <ion-label class="errorMessage">El apellido no puede ser nulo</ion-label>
+          </div>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col>
+          <ion-input type="text" placeholder="Correo electronico" formControlName="usuario">
+            <ion-icon name="contact" size="large"></ion-icon>
+          </ion-input>
+          <div *ngIf="!myForm.controls.usuario.valid && myForm.get('usuario').touched">
+            <ion-icon class="errorIcon" name="information-circle-outline"></ion-icon>
+            <ion-label class="errorMessage">El usuario no puede ser nulo y debe tener formato correcto</ion-label>
+          </div>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col>
+          <ion-input type="password" placeholder="Contraseña" formControlName="password">
+            <ion-icon name="unlock" size="large"></ion-icon>
+          </ion-input>
+          <div *ngIf="!myForm.controls.password.valid && myForm.get('password').touched">
+            <ion-icon class="errorIcon" name="information-circle-outline"></ion-icon>
+            <ion-label class="errorMessage">La contraseña debe tener al menos 8 dígitos</ion-label>
+          </div>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col>
+          <ion-input type="password" placeholder="Ingrese nuevamente la contraseña" formControlName="confirmPass">
+            <ion-icon name="unlock" size="large"></ion-icon>
+          </ion-input>
+          <div *ngIf="!myForm.controls.confirmPass.valid && myForm.get('confirmPass').touched">
+            <ion-icon class="errorIcon" name="information-circle-outline"></ion-icon>
+            <ion-label class="errorMessage">La contraseña no puede ser nula y debe coincidir con la anterior</ion-label>
+          </div>
+        </ion-col>
+      </ion-row>
+
+      <div class="espacio"></div>
+
+      <ion-row>
+        <ion-col>
+          <ion-button class="registrar" expand="block" (click)="register()" [disabled]="!myForm.valid">
+            <b>Finalizar</b>
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
 </ion-content>

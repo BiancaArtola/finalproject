@@ -1,14 +1,17 @@
-ion-img{
-
-  align-items: center;
-
+ion-img {
+  width: 65%;
 }
 
+ion-fab-button {
+  width: 100px;
+  height: 100px;
+  padding-bottom: 3%;
+}
 ion-button {
-  --background-color: #D8D7D2;
-  --background: #D8D7D2;
+  --background-color: #d8d7d2;
+  --background: #d8d7d2;
 }
-.ion-text-center{
+.ion-text-center {
   align-items: center;
 }
 
@@ -22,9 +25,6 @@ ion-button {
 
 .sport {
   text-transform: capitalize;
-  text-align: center;
-  font-size: 0.8em;
+  font-size: 0.9em;
   color: black;
-  padding-left: 3%;
 }
-

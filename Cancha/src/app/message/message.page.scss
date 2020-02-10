@@ -1,0 +1,36 @@
+ion-content {
+  .ion-text-center {
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+  }
+
+  ion-textarea {
+    border: solid 1px rgb(185, 184, 184);
+    border-radius: 5px;
+    background-color: white;
+  }
+
+  ion-button {
+    --color: black;
+    --background: #f0c112;
+  }
+
+  ion-icon {
+    padding-top: 3%;
+    padding-left: 1.5%;
+  }
+
+  .ion-text-right {
+    text-align: right;
+    align-items: right;
+    justify-content: right;
+  }
+
+  ion-grid {
+    padding-top: 15%;
+  }
+}
+.background {
+  --background: url("../../assets/images/imagen.png") 0 0/100% 100% no-repeat;
+}

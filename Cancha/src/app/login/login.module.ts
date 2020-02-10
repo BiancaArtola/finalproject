@@ -8,6 +8,7 @@ import { LoginPageRoutingModule } from './login-routing.module';
 
 import { LoginPage } from './login.page';
 import { RegisterPageModule } from '../register/register.module';
+import { ForgotPasswordPageModule } from '../forgot-password/forgot-password.module';
 
 @NgModule({
   imports: [
@@ -15,7 +16,8 @@ import { RegisterPageModule } from '../register/register.module';
     FormsModule,
     IonicModule,
     LoginPageRoutingModule,
-    RegisterPageModule
+    RegisterPageModule,
+    ForgotPasswordPageModule
   ],
   declarations: [LoginPage]
 })

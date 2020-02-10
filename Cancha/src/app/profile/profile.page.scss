@@ -1,0 +1,48 @@
+ion-img {
+  border: 2px solid #fff;
+  border-radius: 50%;
+  box-shadow: 0 0 5px gray;
+  // width: 100px;
+  // height: 100px;
+}
+
+.align-self-center {
+  align-self: center;
+}
+
+.background {
+  --background: url("../../assets/images/imagen.png") 0 0/100% 100% no-repeat;
+}
+
+
+
+ion-icon {
+  padding-top: 2%;
+  padding-left: 2%;
+}
+
+ion-col {
+    text-align: center;  
+}
+
+ion-avatar {
+  display: block;
+    margin: auto;
+}
+
+.name {
+  font-size: x-large;
+}
+
+ion-content{
+  border-color: black;
+}
+.second-background{
+  background: white;
+}
+
+hr{
+  border-color: black;
+  border-width: 1px;
+  background-color: black;
+}

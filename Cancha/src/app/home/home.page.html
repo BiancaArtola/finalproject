@@ -1,4 +1,3 @@
-
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
@@ -14,20 +13,28 @@
   <ion-label class="title">
     <b> Selecciona un deporte </b>
   </ion-label>
- 
+
   <ion-grid>
     <div class="ion-text-center" text-center>
-  <ion-row>
-      <ion-col *ngFor="let icon of icons; let i = index" size="4" >        
-        <ion-button (click)="openSport()">
+      <ion-row>
+        <ion-col *ngFor="let icon of icons; let i = index" size="4">
+          <!-- <ion-button (click)="goToSport()">
         <ion-img src="../../assets/icon/sports/{{icon}}.png"></ion-img>
         <ion-label class="sport"> 
           {{icon}}
          </ion-label> 
-         </ion-button>
-      </ion-col>     
-    </ion-row>
-  </div>
+         </ion-button> -->
+          <ion-fab-button [color]="buttonColor" (click)="goToSport()">
+            <ion-img src="../../assets/icon/sports/{{icon}}.png">
+            </ion-img>
+          </ion-fab-button>
+
+          <ion-label class="sport">
+            {{icon}}
+          </ion-label>
+        </ion-col>
+      </ion-row>
+    </div>
   </ion-grid>
 
   <hr>
@@ -42,7 +49,7 @@
         <b>UNO BAHIA CLUB</b>
         Lavalle 233
       </ion-card-content>
-    </ion-item>    
+    </ion-item>
   </ion-card>
   <ion-card>
     <ion-item>
@@ -51,7 +58,7 @@
         <b>UNO BAHIA CLUB</b>
         Lavalle 233
       </ion-card-content>
-    </ion-item>    
+    </ion-item>
   </ion-card>
   <ion-card>
     <ion-item>
@@ -60,7 +67,7 @@
         <b>UNO BAHIA CLUB</b>
         Lavalle 233
       </ion-card-content>
-    </ion-item>    
+    </ion-item>
   </ion-card>
   <ion-card>
     <ion-item>
@@ -69,7 +76,32 @@
         <b>UNO BAHIA CLUB</b>
         Lavalle 233
       </ion-card-content>
-    </ion-item>    
+    </ion-item>
   </ion-card>
+
+
+  <!-- <ion-tabs>
+    <ion-tab-bar slot="bottom">
+      <ion-tab-button>
+        <ion-icon name="home"></ion-icon>
+        <ion-label>Inicio</ion-label>
+        <ion-badge>6</ion-badge>
+      </ion-tab-button>
   
+      <ion-tab-button>
+        <ion-icon name="person"></ion-icon>
+        <ion-label>Perfil</ion-label>
+      </ion-tab-button>
+  
+      <ion-tab-button tab="map">
+        <ion-icon name="map"></ion-icon>
+        <ion-label>Mapa</ion-label>
+      </ion-tab-button>
+  
+      <ion-tab-button tab="about">
+        <ion-icon name="information-circle"></ion-icon>
+        <ion-label>Informacion</ion-label>
+      </ion-tab-button>
+    </ion-tab-bar>
+  </ion-tabs> -->
 </ion-content>

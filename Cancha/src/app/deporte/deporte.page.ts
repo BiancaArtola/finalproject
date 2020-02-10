@@ -1,8 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { CanchaPage } from '../cancha/cancha.page';
 import { DatePicker } from '@ionic-native/date-picker/ngx';
-import { MapsPage } from '../maps/maps.page';
 import { Router } from '@angular/router';
 
 @Component({
@@ -10,26 +9,19 @@ import { Router } from '@angular/router';
   templateUrl: './deporte.page.html',
   styleUrls: ['./deporte.page.scss'],
 })
-export class DeportePage implements OnInit {
-  icons = ['futbol', 'basket', 'voleibol', 'tennis'];
-  public date;
-  myDate: String = new Date().toISOString();
-  
-  constructor(private router: Router,private datePicker: DatePicker, public modalController: ModalController) { }
+export class DeportePage {
 
-  ngOnInit() {
-  }
+  private date;
+  private actualDate: String = new Date().toISOString();
 
-  async openCourts(){
-    const modal = await this.modalController.create({
-      component: CanchaPage,
-    });
-    return await modal.present();
-  }
+  constructor(private router: Router, private datePicker: DatePicker,
+    public modalController: ModalController) { }
 
 
-
-  showDatePicker(){
+  /**
+   * Metodo utilizado para abrir el selector de fecha y hora
+   */
+  showDatePicker() {
     this.datePicker.show({
       date: new Date(),
       mode: 'date',
@@ -42,8 +34,15 @@ export class DeportePage implements OnInit {
     );
   }
 
-  async openMaps(){
+  async openMaps() {
     this.router.navigate(['/maps']);
     // API AIzaSyD_mVCh6mJWkCl-rmCyWITJdMHIIqr-PRE
+  }
+
+  async openCourts() {
+    const modal = await this.modalController.create({
+      component: CanchaPage,
+    });
+    return await modal.present();
   }
 }

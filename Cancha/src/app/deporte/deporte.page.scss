@@ -1,36 +1,39 @@
-ion-datetime{
-    border: black;
+ion-datetime {
+  border: black;
 }
 
 ion-label {
-    font-size: 0.9em;
-    padding-top: 5%;
+  font-size: 0.9em;
+  padding-top: 5%;
 }
 
-.label-button{
-    color: gray;
+.label-button {
+  color: gray;
 }
 
-.ion-text-right{
-    text-align: right;
-    align-items: right;
-    justify-content: right;
-    padding-right: 5%;
+.ion-text-right {
+  text-align: right;
+  align-items: right;
+  justify-content: right;
+  padding-right: 5%;
 }
 
 .filter-button {
-    --color: black;
-    --background: white;
-    --border-color: black;
+  --color: black;
+  --background: white;
+  --border-color: black;
 }
 
-.ion-text-center{
-    text-align: center;
-    align-items: center;
-    justify-content: center;
-  }
+.ion-text-center {
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+}
 
 .pad {
-    padding-top: 4%;
+  padding-top: 4%;
 }
 
+ion-card-content {
+  color: red;
+}

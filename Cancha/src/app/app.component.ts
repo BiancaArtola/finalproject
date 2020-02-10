@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
 
-import { Platform, MenuController } from '@ionic/angular';
+import { Platform, MenuController, ModalController } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Router } from '@angular/router';
 import { Environment } from '@ionic-native/google-maps';
+import { MessagePage } from './message/message.page';
+import { ProfilePage } from './profile/profile.page';
 
 @Component({
   selector: 'app-root',
@@ -12,12 +14,9 @@ import { Environment } from '@ionic-native/google-maps';
   styleUrls: ['app.component.scss']
 })
 export class AppComponent {
-  constructor(
-    private router: Router, 
-    private menu: MenuController,
-    private platform: Platform,
-    private splashScreen: SplashScreen,
-    private statusBar: StatusBar
+  constructor(private router: Router, private modalController:ModalController,
+    private menu: MenuController, private platform: Platform,
+    private splashScreen: SplashScreen, private statusBar: StatusBar
   ) {
     this.initializeApp();
   }
@@ -42,4 +41,23 @@ export class AppComponent {
     this.router.navigate(['/login']);
     this.menu.close();
   }
+
+  async goToMessage(){
+    this.menu.close();
+
+    const modal = await this.modalController.create({
+      component: MessagePage,
+    });
+    return await modal.present();
+  }
+
+  async goToProfile(){
+    this.menu.close();
+
+    const modal = await this.modalController.create({
+      component: ProfilePage,
+    });
+    return await modal.present();
+  }
+
 }

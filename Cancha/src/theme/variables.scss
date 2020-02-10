@@ -82,6 +82,15 @@
   --ion-color-toolbar-contrast-rgb: 0,0,0;
   --ion-color-toolbar-shade: #b4e087;
   --ion-color-toolbar-tint: #d1ffa3;
+
+  --ion-color-new: #c0c0c0;
+  --ion-color-new-rgb: 192,192,192;
+  --ion-color-new-contrast: #000000;
+  --ion-color-new-contrast-rgb: 0,0,0;
+  --ion-color-new-shade: #a9a9a9;
+  --ion-color-new-tint: #c6c6c6;
+
+
 }
 
 .ion-color-toolbar {
@@ -91,4 +100,14 @@
   --ion-color-contrast-rgb: var(--ion-color-toolbar-contrast-rgb);
   --ion-color-shade: var(--ion-color-toolbar-shade);
   --ion-color-tint: var(--ion-color-toolbar-tint);
+}
+
+
+.ion-color-new {
+  --ion-color-base: var(--ion-color-new);
+  --ion-color-base-rgb: var(--ion-color-new-rgb);
+  --ion-color-contrast: var(--ion-color-new-contrast);
+  --ion-color-contrast-rgb: var(--ion-color-new-contrast-rgb);
+  --ion-color-shade: var(--ion-color-new-shade);
+  --ion-color-tint: var(--ion-color-new-tint);
 }

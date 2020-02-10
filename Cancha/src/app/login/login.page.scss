@@ -1,56 +1,57 @@
-.background{
-    --background:  url('../../assets/images/imagen.jpg') 0 0/100% 100% no-repeat;
+.background {
+  --background: url("../../assets/images/imagen.png") 0 0/100% 100% no-repeat;
 }
-.ion-text-center{
-    text-align: center;
-    align-items: center;
-    justify-content: center;
-    .registrar{
-        color:  #F0C112;
-    }
-}
-
-.ion-text-right{
-    text-align: right;
-    align-items: right;
-    justify-content: right;
+.ion-text-center {
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  .registrar {
+    color: #f0c112;
+  }
 }
 
-ion-input{
-    border: solid 1px grey;
-    border-radius: 50px;
+.ion-text-right {
+  text-align: right;
+  align-items: right;
+  justify-content: right;
+}
+
+ion-input {
+  border: solid 1px grey;
+  border-radius: 50px;
 }
 
 ion-button {
-    --color: black;
-    --background: #F0C112;
+  --color: black;
+  --background: #f0c112;
 }
 
 .titulo {
-    font-size: 1.5em;
+  font-size: 1.5em;
 }
 
 ion-img {
-    align-items: center;
-   width: 80px; height: 80px; 
+  align-items: center;
+  width: 80px;
+  height: 80px;
 }
 
 ion-icon {
-    color: gray;
-    padding-left: 2%;
+  color: gray;
+  padding-left: 2%;
 }
 
 ion-text {
-    font-family: 'Bowlby One SC', cursive;
-    font-size: 10em;
-    padding-bottom: 5%;
+  font-family: "Bowlby One SC", cursive;
+  font-size: 10em;
+  padding-bottom: 5%;
 }
 ion-grid {
-    padding-top: 25%;
+  padding-top: 25%;
 }
 
 .forgotPass {
-    color: grey;
-    font-size: 0.7em;
-    padding-right: 4%;
+  color: grey;
+  font-size: 0.7em;
+  padding-right: 4%;
 }
