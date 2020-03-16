@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-col size="1">
+      <ion-icon name="arrow-round-back" (click)="goBack()" size="large" class="arrow"> </ion-icon>
+    </ion-col>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        Reserva para una cancha de <b>{{cancha.Deporte}}</b> en el complejo <b>{{cancha.Nombre}}</b>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        El precio total (el cual se debera pagar en el Complejo) es de ${{cancha.Precio}}.
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        El importe a cobrar <b>NO</b> se descontara de su tarjeta.
+        El precio de la seña es del 30% del monto total. 
+        Este monto se cobrara de la tarjeta SOLO en caso de que no se concurra al turno y este no sea cancelado 24 horas antes.
+        
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-content>

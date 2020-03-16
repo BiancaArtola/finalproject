@@ -11,3 +11,23 @@ ion-button {
   --color: black;
   --background: #f0c112;
 }
+
+.comentario {
+  color: blue;
+  font-size: 0.8em;
+  font-style: italic;
+}
+
+.ion-text-end {
+  text-align: end;
+  padding: 3%;
+}
+
+ion-list {
+  padding-top: 3%;
+  padding-bottom: 3%;
+}
+
+hr {
+  border: black;
+}

@@ -24,7 +24,7 @@
           {{icon}}
          </ion-label> 
          </ion-button> -->
-          <ion-fab-button [color]="buttonColor" (click)="goToSport()">
+          <ion-fab-button color="gray" (click)="goToSport(icon)">
             <ion-img src="../../assets/icon/sports/{{icon}}.png">
             </ion-img>
           </ion-fab-button>
@@ -42,66 +42,14 @@
     <b> Descubri nuestras canchas </b>
   </ion-label>
 
-  <ion-card>
-    <ion-item>
-      <ion-img src="../../assets/images/cancha.jpg"></ion-img>
+  <ion-card  *ngFor="let number of [0,1]">
+    <ion-item *ngIf="canchas">
+      <ion-img src="{{canchas[number].imagen}}"></ion-img>
       <ion-card-content>
-        <b>UNO BAHIA CLUB</b>
-        Lavalle 233
-      </ion-card-content>
-    </ion-item>
-  </ion-card>
-  <ion-card>
-    <ion-item>
-      <ion-img src="../../assets/images/cancha.jpg"></ion-img>
-      <ion-card-content>
-        <b>UNO BAHIA CLUB</b>
-        Lavalle 233
-      </ion-card-content>
-    </ion-item>
-  </ion-card>
-  <ion-card>
-    <ion-item>
-      <ion-img src="../../assets/images/cancha.jpg"></ion-img>
-      <ion-card-content>
-        <b>UNO BAHIA CLUB</b>
-        Lavalle 233
-      </ion-card-content>
-    </ion-item>
-  </ion-card>
-  <ion-card>
-    <ion-item>
-      <ion-img src="../../assets/images/cancha.jpg"></ion-img>
-      <ion-card-content>
-        <b>UNO BAHIA CLUB</b>
-        Lavalle 233
+        <b>{{canchas[number].nombre}}</b>
+        {{canchas[number].ubicacion}}        
       </ion-card-content>
     </ion-item>
   </ion-card>
 
-
-  <!-- <ion-tabs>
-    <ion-tab-bar slot="bottom">
-      <ion-tab-button>
-        <ion-icon name="home"></ion-icon>
-        <ion-label>Inicio</ion-label>
-        <ion-badge>6</ion-badge>
-      </ion-tab-button>
-  
-      <ion-tab-button>
-        <ion-icon name="person"></ion-icon>
-        <ion-label>Perfil</ion-label>
-      </ion-tab-button>
-  
-      <ion-tab-button tab="map">
-        <ion-icon name="map"></ion-icon>
-        <ion-label>Mapa</ion-label>
-      </ion-tab-button>
-  
-      <ion-tab-button tab="about">
-        <ion-icon name="information-circle"></ion-icon>
-        <ion-label>Informacion</ion-label>
-      </ion-tab-button>
-    </ion-tab-bar>
-  </ion-tabs> -->
 </ion-content>

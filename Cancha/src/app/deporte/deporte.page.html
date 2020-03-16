@@ -47,23 +47,33 @@
       </div>
     </ion-row>
 
-
-
-    <ion-card (click)="openCourts()">
+    <div *ngFor="let cancha of canchas">    
+    <ion-card (click)="openCourts(cancha.id)" *ngIf="canchas">
       <ion-card-header>
-        <ion-img src="../../assets/images/cancha.jpg"></ion-img>
+        <ion-img src="{{cancha.imagen}}"></ion-img>
 
-        <ion-card-subtitle>Lavalle 300</ion-card-subtitle>
-        <ion-card-title>UNO BAHIA CLUB</ion-card-title>
+        <ion-card-subtitle>{{cancha.ubicacion}}</ion-card-subtitle>
+        <ion-card-title>{{cancha.nombre}}</ion-card-title>
 
       </ion-card-header>
 
 
       <ion-card-content>
-        <b> $1500.40 </b>
+        <b> ${{cancha.precio}} </b>
       </ion-card-content>
     </ion-card>
 
+ 
+    </div>
+
+  <div *ngIf="canchas">
+    <ion-text *ngIf="canchas.length == 0" class="information">
+      {{canchas}}
+     <i> En este momento no hay cancha disponibles. </i> 
+    </ion-text>
+  </div>
+   
+  
   </ion-grid>
 
 

@@ -1,0 +1,29 @@
+var uno = {
+      id: 0,
+      nombre: "UNO Bahia Club",
+      ubicacion: "Lavalle 605, B8000 Bahía Blanca, Buenos Aires",
+      telefono: 2914501012,
+      precio: 1500,
+      imagen: "https://2.bp.blogspot.com/-kZ4j7YKzLIw/UZgFy18hvII/AAAAAAAAMd8/vKeP_3EtT0w/s1600/_DSC0003.jpg",
+      estrellas: 1,
+      descripcion: "Estamos en Lavalle 605, Bahía Blanca. De Lunes a Viernes de 7.00hs a 22.30hs y los sábados de 9.00hs a 13.00hs y de 17.00hs a 20.00hs. Nuestro Club cuenta con 3 estacionamientos. Vestuarios. Duchas. Buffet. Local de ropa deportiva. Quincho con parrilla. Canchas de fútbol 5 y fútbol 6. Canchas de Voley, Hockey, Handball y Tenis. Canchas de Basquet y Basquet 3. Squash. Pista para running de 100mts.",
+      deporte: "futbol",
+      cronograma: firebase.firestore.Timestamp.fromDate(new Date("December 10, 1815")),
+      coordenadas: [-38.7149182,-62.2548287],
+      comentarios: []
+};
+
+var shopping = {
+      id: 1,
+      nombre: "Shopping Futbol Club",
+      ubicacion: "Raúl Scalabrini Ortiz 199",
+      telefono: 2914353288,
+      precio: 1500,
+      imagen: "https://scontent.faep9-2.fna.fbcdn.net/v/t1.0-9/14088514_298801890478875_1388104237771315384_n.jpg?_nc_cat=110&_nc_sid=dd9801&_nc_ohc=oZlbulnvw8MAX8KpX2j&_nc_ht=scontent.faep9-2.fna&oh=79a53ebfc13ca1e8aaae21f76af01404&oe=5E9553D5",
+      estrellas: 1,
+      descripcion: "Canchas de Fútbol 5 y 7 sobre césped sintético.",
+      deporte: "futbol",
+      cronograma: firebase.firestore.Timestamp.fromDate(new Date("December 10, 1815")),
+      coordenadas: [38.7066358° S, 62.2532615° W],
+      comentarios: ["Excelente lugar para jugar un partido y compartir un asado"]
+}

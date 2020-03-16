@@ -22,10 +22,11 @@ import { TutorialPageModule } from './tutorial/tutorial.module';
 import { ProfilePageModule } from './profile/profile.module';
 
 import { FirebaseAuth } from './../services/FirebaseAuth';
-import { ConexionBDD } from '../services/ConexionBDD';
 
 import { HttpClientModule } from '@angular/common/http';
 import { RegisterPageModule } from './register/register.module';
+import { ReservasPageModule } from './reservas/reservas.module';
+import { CommentsPageModule } from './comments/comments.module';
 
 
 @NgModule({
@@ -42,10 +43,11 @@ import { RegisterPageModule } from './register/register.module';
     TutorialPageModule,
     HttpClientModule,
     RegisterPageModule,
+    ReservasPageModule,
+    CommentsPageModule,
     AngularFireModule.initializeApp(environment.firebase)
   ],
   providers: [
-    ConexionBDD,
     StatusBar,
     SplashScreen,
     DatePicker,    

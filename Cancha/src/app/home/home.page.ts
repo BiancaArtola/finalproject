@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Storage } from '@ionic/storage';
-import { NavController, ModalController } from '@ionic/angular';
+import { NavController, ModalController, LoadingController } from '@ionic/angular';
 import { TutorialPage } from '../tutorial/tutorial.page';
-import { ConexionBDD } from '../../services/ConexionBDD';
 import { FirebaseAuth } from 'src/services/FirebaseAuth';
 
 @Component({
@@ -12,14 +11,15 @@ import { FirebaseAuth } from 'src/services/FirebaseAuth';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
-  private buttonColor: string = "new";
 
+  private canchas ;
   icons = ['futbol', 'basket', 'voley', 'hockey', 'tennis', 'pinpon'];
   private usuario: string;
 
   constructor(private router: Router, private storage: Storage, private navController: NavController,
-    private modalController: ModalController, private conexion: ConexionBDD, private firebaseAuth: FirebaseAuth) {
-    storage.get('user').then((val) => {
+    private modalController: ModalController, private firebaseAuth: FirebaseAuth, private loadingController: LoadingController) {
+   
+      storage.get('user').then((val) => {
       if (!val) {
         storage.get('tutorial').then((tutorial) => {
           if (!tutorial) { //Si el usuario aun no se registro ni vio el tutorial
@@ -33,12 +33,27 @@ export class HomePage {
       }
       else { //El usuario ya esta registrado entonces se dirige hacia la pagina de inicio
         console.log("Si hay usuario ", val);
-        this.usuario = val;
-        this.conexion.get().subscribe((data) => console.log(data));
+        this.presentLoading().then(()=>{
+         // this.firebaseAuth.setCancha();
+          this.firebaseAuth.getAllDocumentsInCollection().then(information => {
+            this.canchas = information;            
+            this.loadingController.dismiss();
+          });
+          this.usuario = val;
+        })
+        
       }
     });
   }
 
+
+  
+  async presentLoading() {
+    const loading = await this.loadingController.create({
+      duration: 2000
+    });
+    await loading.present();
+  }
 
   async goToTutorial() {
     const modal = await this.modalController.create({
@@ -47,10 +62,8 @@ export class HomePage {
     return await modal.present();
   }
 
-  goToSport() {
-    this.buttonColor = "red";
-
-    this.router.navigate(['/deporte']);
+  goToSport(sport: String) {    
+    this.router.navigate(['/deporte', sport]);
   }
 
   goToLogin() {

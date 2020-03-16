@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { ModalController, LoadingController } from '@ionic/angular';
 import { CanchaPage } from '../cancha/cancha.page';
 import { DatePicker } from '@ionic-native/date-picker/ngx';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute, Params } from '@angular/router';
+import { FirebaseAuth } from 'src/services/FirebaseAuth';
 
 @Component({
   selector: 'app-deporte',
@@ -14,9 +15,34 @@ export class DeportePage {
   private date;
   private actualDate: String = new Date().toISOString();
 
-  constructor(private router: Router, private datePicker: DatePicker,
-    public modalController: ModalController) { }
+  private sport: String;
+  private canchas;
 
+  constructor(private router: Router, private datePicker: DatePicker,private firebaseAuth: FirebaseAuth,
+    public modalController: ModalController, private route: ActivatedRoute, private loadingController: LoadingController) { }
+
+    ngOnInit() {
+      this.route.params.subscribe((params: Params) => {
+       this.sport= params['sport'];
+
+       this.presentLoading().then(()=>{
+        this.firebaseAuth.getDocumentsWithSport(this.sport).then((information)=>{
+          this.canchas = information;  
+          this.loadingController.dismiss();
+          console.log(this.canchas);
+          
+        });
+       })
+      
+      });
+  }
+
+  async presentLoading() {
+    const loading = await this.loadingController.create({
+      duration: 2000
+    });
+    await loading.present();
+  }
 
   /**
    * Metodo utilizado para abrir el selector de fecha y hora
@@ -39,9 +65,13 @@ export class DeportePage {
     // API AIzaSyD_mVCh6mJWkCl-rmCyWITJdMHIIqr-PRE
   }
 
-  async openCourts() {
+  async openCourts(id: number) {
     const modal = await this.modalController.create({
       component: CanchaPage,
+      componentProps:
+      {
+        id: id
+      }
     });
     return await modal.present();
   }
