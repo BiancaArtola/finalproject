@@ -48,6 +48,22 @@ const routes: Routes = [
     path: 'comments',
     loadChildren: () => import('./comments/comments.module').then( m => m.CommentsPageModule)
   },
+  {
+    path: 'filters',
+    loadChildren: () => import('./filters/filters.module').then( m => m.FiltersPageModule)
+  },
+  {
+    path: 'order',
+    loadChildren: () => import('./order/order.module').then( m => m.OrderPageModule)
+  },
+  {
+    path: 'other-sport',
+    loadChildren: () => import('./other-sport/other-sport.module').then( m => m.OtherSportPageModule)
+  },
+  {
+    path: 'help',
+    loadChildren: () => import('./help/help.module').then( m => m.HelpPageModule)
+  },
 ];
 
 @NgModule({

@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Storage } from '@ionic/storage';
-import { NavController, ModalController, LoadingController } from '@ionic/angular';
+import { NavController, ModalController, LoadingController, AlertController } from '@ionic/angular';
 import { TutorialPage } from '../tutorial/tutorial.page';
 import { FirebaseAuth } from 'src/services/FirebaseAuth';
+import { MessagePage } from '../message/message.page';
 
 @Component({
   selector: 'app-home',
@@ -12,14 +13,16 @@ import { FirebaseAuth } from 'src/services/FirebaseAuth';
 })
 export class HomePage {
 
-  private canchas ;
-  icons = ['futbol', 'basket', 'voley', 'hockey', 'tennis', 'pinpon'];
+  private canchas;
+  icons1 = ['futbol', 'basket', 'voley', 'hockey'];
+  icons2 = ['tennis', 'padel', 'pinpon', 'otros'];
   private usuario: string;
 
   constructor(private router: Router, private storage: Storage, private navController: NavController,
-    private modalController: ModalController, private firebaseAuth: FirebaseAuth, private loadingController: LoadingController) {
-   
-      storage.get('user').then((val) => {
+    private modalController: ModalController, private firebaseAuth: FirebaseAuth,
+    private loadingController: LoadingController, private alertController: AlertController) {
+
+    storage.get('user').then((val) => {
       if (!val) {
         storage.get('tutorial').then((tutorial) => {
           if (!tutorial) { //Si el usuario aun no se registro ni vio el tutorial
@@ -33,21 +36,21 @@ export class HomePage {
       }
       else { //El usuario ya esta registrado entonces se dirige hacia la pagina de inicio
         console.log("Si hay usuario ", val);
-        this.presentLoading().then(()=>{
-         // this.firebaseAuth.setCancha();
+        this.presentLoading().then(() => {
+          // this.firebaseAuth.setCancha();
           this.firebaseAuth.getAllDocumentsInCollection().then(information => {
-            this.canchas = information;            
+            this.canchas = information;
             this.loadingController.dismiss();
           });
           this.usuario = val;
         })
-        
+
       }
     });
   }
 
 
-  
+
   async presentLoading() {
     const loading = await this.loadingController.create({
       duration: 2000
@@ -62,9 +65,40 @@ export class HomePage {
     return await modal.present();
   }
 
-  goToSport(sport: String) {    
-    this.router.navigate(['/deporte', sport]);
+  goToSport(sport: String) {
+    if (sport === 'otros')
+      this.createAlert();
+    else
+      this.router.navigate(['/deporte', sport]);
   }
+
+
+  async createAlert() {
+    const alert = await this.alertController.create({
+      header: '¿Buscas practicar otro deporte?',
+      message: 'Por el momento no contamos con alquileres disponibles para otros deportes. Recomendanos alguna cancha para otro deporte!',
+      buttons: [
+      {
+        text: 'Cancelar',
+        role: 'cancel'
+      }, {
+        text: 'Recomendar ',
+        handler: () => {          
+          this.openRecomendations();
+        }
+      }
+    ]
+    });
+    await alert.present();
+  }
+
+  async openRecomendations(){
+    const modal = await this.modalController.create({
+      component: MessagePage,
+    });
+    return await modal.present();
+  }
+
 
   goToLogin() {
     this.firebaseAuth.logoutUser().then(() => {

@@ -10,6 +10,7 @@ import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 })
 export class ForgotPasswordPage {
   private resetPasswordForm: FormGroup;
+  private emailModel;
 
   constructor(private modalController: ModalController, private firebaseAuth: FirebaseAuth,
     private alertController: AlertController, public formBuilder: FormBuilder) {
@@ -20,7 +21,6 @@ export class ForgotPasswordPage {
   createForm() {
     return this.formBuilder.group({
       email: ['', Validators.compose([
-        Validators.required,
         Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')
       ])],
     });
@@ -32,8 +32,13 @@ export class ForgotPasswordPage {
 
   resetPassword() {
     this.firebaseAuth.resetPassword(this.resetPasswordForm.value.email).then(() => {
+      this.emailModel = null;
       this.showMessage("Revise su correo", "Se ha enviado un email para recuperar su contraseña.")
-    });
+    })
+    .catch((error)=>{
+      this.showMessage("Este usuario no existe.", "Por favor, revise el email que ha ingresado.");      
+    })
+    ;
   }
 
   async showMessage(header, message) {

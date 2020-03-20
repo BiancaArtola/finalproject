@@ -9,6 +9,8 @@ import { DeportePageRoutingModule } from './deporte-routing.module';
 import { DeportePage } from './deporte.page';
 import { CanchaPageModule } from '../cancha/cancha.module';
 import { MapsPageModule } from '../maps/maps.module';
+import { FiltersPageModule } from '../filters/filters.module';
+import { OrderPageModule } from '../order/order.module';
 
 @NgModule({
   imports: [
@@ -17,7 +19,9 @@ import { MapsPageModule } from '../maps/maps.module';
     IonicModule,
     DeportePageRoutingModule,
     CanchaPageModule,
-    MapsPageModule
+    FiltersPageModule,
+    MapsPageModule,
+    OrderPageModule
   ],
   declarations: [DeportePage]
 })

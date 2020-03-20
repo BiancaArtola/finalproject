@@ -4,6 +4,8 @@ import { CanchaPage } from '../cancha/cancha.page';
 import { DatePicker } from '@ionic-native/date-picker/ngx';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { FirebaseAuth } from 'src/services/FirebaseAuth';
+import { FiltersPage } from '../filters/filters.page';
+import { OrderPage } from '../order/order.page';
 
 @Component({
   selector: 'app-deporte',
@@ -14,27 +16,30 @@ export class DeportePage {
 
   private date;
   private actualDate: String = new Date().toISOString();
+  monthNames = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
 
   private sport: String;
   private canchas;
 
-  constructor(private router: Router, private datePicker: DatePicker,private firebaseAuth: FirebaseAuth,
+  
+
+  constructor(private router: Router, private datePicker: DatePicker, private firebaseAuth: FirebaseAuth,
     public modalController: ModalController, private route: ActivatedRoute, private loadingController: LoadingController) { }
 
-    ngOnInit() {
-      this.route.params.subscribe((params: Params) => {
-       this.sport= params['sport'];
+  ngOnInit() {
+    this.route.params.subscribe((params: Params) => {
+      this.sport = params['sport'];
 
-       this.presentLoading().then(()=>{
-        this.firebaseAuth.getDocumentsWithSport(this.sport).then((information)=>{
-          this.canchas = information;  
+      this.presentLoading().then(() => {
+        this.firebaseAuth.getDocumentsWithSport(this.sport).then((information) => {
+          this.canchas = information;
           this.loadingController.dismiss();
           console.log(this.canchas);
-          
+
         });
-       })
-      
-      });
+      })
+
+    });
   }
 
   async presentLoading() {
@@ -75,4 +80,25 @@ export class DeportePage {
     });
     return await modal.present();
   }
+
+
+  async filter(){
+    const modal = await this.modalController.create({
+      component: FiltersPage,
+      componentProps:
+      {
+        sport: this.sport
+      }
+    });
+    return await modal.present();
+  }
+
+  async order(){
+    const modal = await this.modalController.create({
+      component: OrderPage,
+      cssClass: 'my-custom-modal-css'
+    });
+    return await modal.present();
+  }
+  
 }

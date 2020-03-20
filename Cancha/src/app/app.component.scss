@@ -1,5 +1,10 @@
 ion-avatar {
     padding: 3%;
+    margin: auto;
+    // width:40% !important;  
+    // height :20% !important;  
+    width: 125px;
+    height: 125px;
 }
 
 ion-text{
@@ -23,5 +28,9 @@ ion-row{
 
 ion-label {
     padding-left: 5%;
+    font-size: small;
 }
 
+.name {
+    font-size: x-large;
+}

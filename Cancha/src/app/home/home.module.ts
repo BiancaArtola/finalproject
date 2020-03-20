@@ -5,14 +5,12 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
 import { HomePage } from './home.page';
-import { TutorialPageModule } from '../tutorial/tutorial.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-   // TutorialPageModule,
     RouterModule.forChild([
       {
         path: '',
@@ -22,4 +20,4 @@ import { TutorialPageModule } from '../tutorial/tutorial.module';
   ],
   declarations: [HomePage]
 })
-export class HomePageModule {}
+export class HomePageModule { }

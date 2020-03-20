@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { Environment } from '@ionic-native/google-maps';
 import { MessagePage } from './message/message.page';
 import { ProfilePage } from './profile/profile.page';
+import { HelpPage } from './help/help.page';
 
 @Component({
   selector: 'app-root',
@@ -56,6 +57,19 @@ export class AppComponent {
 
     const modal = await this.modalController.create({
       component: ProfilePage,
+    });
+    return await modal.present();
+  }
+
+  goHome(){
+    this.menu.close();
+  }
+
+  async goToHelp(){
+    this.menu.close();
+
+    const modal = await this.modalController.create({
+      component: HelpPage,
     });
     return await modal.present();
   }

@@ -27,6 +27,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { RegisterPageModule } from './register/register.module';
 import { ReservasPageModule } from './reservas/reservas.module';
 import { CommentsPageModule } from './comments/comments.module';
+import { HelpPageModule } from './help/help.module';
 
 
 @NgModule({
@@ -45,6 +46,7 @@ import { CommentsPageModule } from './comments/comments.module';
     RegisterPageModule,
     ReservasPageModule,
     CommentsPageModule,
+    HelpPageModule,
     AngularFireModule.initializeApp(environment.firebase)
   ],
   providers: [

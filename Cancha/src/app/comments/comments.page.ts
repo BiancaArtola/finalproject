@@ -13,7 +13,7 @@ export class CommentsPage implements OnInit {
   private contenido: string;
   private usuario: string;
 
-  constructor(private navParams: NavParams, private storage: Storage, private firebaseAuth: FirebaseAuth) { 
+  constructor(private navParams: NavParams, private storage: Storage, private firebaseAuth: FirebaseAuth) {
     this.id = navParams.get('id');
 
   }
@@ -21,14 +21,14 @@ export class CommentsPage implements OnInit {
   ngOnInit() {
   }
 
-  sendMessage(){
-  this.storage.get('user').then((usuario)=>{
+  sendMessage() {
+    this.storage.get('user').then((usuario) => {
 
-    this.firebaseAuth.setComment(this.id, this.contenido, usuario)
+      this.firebaseAuth.setComment(this.id, this.contenido, usuario)
 
-  });
+    });
 
-      
-    }
+
+  }
 
 }

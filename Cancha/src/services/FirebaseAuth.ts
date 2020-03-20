@@ -15,7 +15,7 @@ export class FirebaseAuth {
       this.app = firebase.initializeApp(environment.firebase);
       this.db = firebase.firestore(this.app);
 
-  }
+    }
   }
 
 

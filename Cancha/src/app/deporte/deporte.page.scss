@@ -2,9 +2,13 @@ ion-datetime {
   border: black;
 }
 
+ion-icon {
+  padding: 0%;
+  color: black;
+}
+
 ion-label {
-  font-size: 0.9em;
-  padding-top: 5%;
+  color: black;
 }
 
 .label-button {
@@ -18,20 +22,10 @@ ion-label {
   padding-right: 5%;
 }
 
-.filter-button {
-  --color: black;
-  --background: white;
-  --border-color: black;
-}
-
 .ion-text-center {
   text-align: center;
   align-items: center;
   justify-content: center;
-}
-
-.pad {
-  padding-top: 4%;
 }
 
 ion-card-content {
@@ -41,4 +35,67 @@ ion-card-content {
 .information {
   color: grey;
   font-size: 0.7em;
+}
+
+ion-row {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+.label-sport {
+  font-size: large;
+  padding-left: 3%;
+  text-transform: capitalize;
+}
+
+.labelbutton {
+  font-style: bold;
+  font-size: small;
+  color: grey;
+}
+
+.button-border {
+  border-top-width: 0.01em;
+  border-bottom-width: 0.01em;
+  border-top-color: rgb(202, 201, 201);
+  border-bottom-color: rgb(202, 201, 201);
+  border-top-style: solid;
+  border-bottom-style: solid;
+
+  box-shadow: 0 0 2px rgb(202, 201, 201);
+}
+
+.right {
+  border-right-width: 0.01em;
+  border-right-color: rgb(202, 201, 201);
+  border-right-style: solid;
+}
+
+.iconbuttons {
+  color: grey;
+  padding-right: 2%;
+}
+
+ion-header {
+  padding-bottom: 0%;
+}
+
+.grid {
+  padding: 0%;
+}
+
+ion-card-content{
+  .horarios {
+    color: grey;
+    font-style: italic;
+  }
+  b{
+    text-align: end;
+  }
+}
+
+ion-fab-button {
+  color: warning;
+  
 }

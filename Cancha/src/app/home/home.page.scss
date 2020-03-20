@@ -1,30 +1,37 @@
-ion-img {
-  width: 65%;
-}
+ion-content {
+  .icons {
+    width: 65%;
+  }
 
-ion-fab-button {
-  width: 100px;
-  height: 100px;
-  padding-bottom: 3%;
-}
-ion-button {
-  --background-color: #d8d7d2;
-  --background: #d8d7d2;
-}
-.ion-text-center {
-  align-items: center;
-}
+  ion-fab-button {
+    width: 80px;
+    height: 80px;
+    padding-bottom: 3%;
+  }
 
-.title {
-  font-size: 1.3em;
-  padding-top: 50%;
-  padding-left: 3%;
-  padding-right: 3%;
-  padding-bottom: 3%;
-}
+  .ion-text-center {
+    align-items: center;
+  }
 
-.sport {
-  text-transform: capitalize;
-  font-size: 0.9em;
-  color: black;
+  .title {
+    font-size: 1.3em;
+    padding-top: 50%;
+    padding-left: 3%;
+    padding-right: 3%;
+    padding-bottom: 3%;
+  }
+
+  .sport {
+    text-transform: capitalize;
+    font-size: 0.9em;
+    color: black;
+  }
+
+  .information-icon {
+    padding: 2%;
+  }
+
+  .city-name {
+    --color: #f0c112;
+  }
 }
