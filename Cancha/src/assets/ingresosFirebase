@@ -28,5 +28,20 @@ var shopping = {
       comentarios: ["Excelente lugar para jugar un partido y compartir un asado"]
 }
 
+var desvio = {
+      id: 2,
+      nombre: "El desvio",
+      ubicacion: "Esnaola 550",
+      telefono: 2914546866,
+      precio: 2000,
+      imagen: "https://scontent.faep9-2.fna.fbcdn.net/v/t1.0-9/14088514_298801890478875_1388104237771315384_n.jpg?_nc_cat=110&_nc_sid=dd9801&_nc_ohc=oZlbulnvw8MAX8KpX2j&_nc_ht=scontent.faep9-2.fna&oh=79a53ebfc13ca1e8aaae21f76af01404&oe=5E9553D5",
+      estrellas: 1,
+      descripcion: "Complejo con varios salones para la realización de eventos. Casita de fiestas y Cancha de fútbol. Nueva cancha de fútbol dentro del salón. L",
+      deporte: "futbol",
+      cronograma: firebase.firestore.Timestamp.fromDate(new Date("December 10, 1815")),
+      coordenadas: [38.7066358° S, 62.2532615° W],
+      comentarios: ["Excelente lugar para jugar un partido y compartir un asado"]
+}
+
 
 ALT+SHIFT+F

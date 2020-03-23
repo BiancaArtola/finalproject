@@ -8,6 +8,7 @@ import { Environment } from '@ionic-native/google-maps';
 import { MessagePage } from './message/message.page';
 import { ProfilePage } from './profile/profile.page';
 import { HelpPage } from './help/help.page';
+import { FirebaseAuth } from 'src/services/FirebaseAuth';
 
 @Component({
   selector: 'app-root',
@@ -15,11 +16,19 @@ import { HelpPage } from './help/help.page';
   styleUrls: ['app.component.scss']
 })
 export class AppComponent {
+
+  private userName;
+
   constructor(private router: Router, private modalController:ModalController,
-    private menu: MenuController, private platform: Platform,
+    private menu: MenuController, private platform: Platform, private firebaseAuth: FirebaseAuth,
     private splashScreen: SplashScreen, private statusBar: StatusBar
   ) {
     this.initializeApp();
+  
+    this.firebaseAuth.getUserName().then((nombre) =>{
+      this.userName = nombre;      
+    })
+
   }
 
   initializeApp() {
@@ -35,6 +44,8 @@ export class AppComponent {
 
       this.statusBar.styleDefault();
       this.splashScreen.hide();
+
+      
     });
   }
 

@@ -17,10 +17,11 @@ export class HomePage {
   icons1 = ['futbol', 'basket', 'voley', 'hockey'];
   icons2 = ['tennis', 'padel', 'pinpon', 'otros'];
   private usuario: string;
-
+  private name: string
   constructor(private router: Router, private storage: Storage, private navController: NavController,
     private modalController: ModalController, private firebaseAuth: FirebaseAuth,
     private loadingController: LoadingController, private alertController: AlertController) {
+console.log("home");
 
     storage.get('user').then((val) => {
       if (!val) {
@@ -37,7 +38,6 @@ export class HomePage {
       else { //El usuario ya esta registrado entonces se dirige hacia la pagina de inicio
         console.log("Si hay usuario ", val);
         this.presentLoading().then(() => {
-          // this.firebaseAuth.setCancha();
           this.firebaseAuth.getAllDocumentsInCollection().then(information => {
             this.canchas = information;
             this.loadingController.dismiss();

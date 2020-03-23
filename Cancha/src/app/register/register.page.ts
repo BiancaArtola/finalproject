@@ -23,7 +23,10 @@ export class RegisterPage {
   async register() {
     if (this.myForm.valid) {
       if (!this.checkPasswords()) {
-        this.firebaseAuth.signupUser(this.myForm.value.usuario, this.myForm.value.password).then(
+        var name = this.myForm.value.nombre + " " + this.myForm.value.apellido;
+        console.log(name);
+        
+        this.firebaseAuth.signupUser(this.myForm.value.usuario, this.myForm.value.password, name).then(
           () => {
             this.goHome();
             this.showMessage("Bienvenido", "El usuario se ha creado con exito");

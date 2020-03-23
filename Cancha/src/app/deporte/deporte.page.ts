@@ -21,7 +21,7 @@ export class DeportePage {
   private sport: String;
   private canchas;
 
-  
+
 
   constructor(private router: Router, private datePicker: DatePicker, private firebaseAuth: FirebaseAuth,
     public modalController: ModalController, private route: ActivatedRoute, private loadingController: LoadingController) { }
@@ -82,7 +82,7 @@ export class DeportePage {
   }
 
 
-  async filter(){
+  async filter() {
     const modal = await this.modalController.create({
       component: FiltersPage,
       componentProps:
@@ -93,12 +93,35 @@ export class DeportePage {
     return await modal.present();
   }
 
-  async order(){
+  async order() {
     const modal = await this.modalController.create({
       component: OrderPage,
       cssClass: 'my-custom-modal-css'
     });
-    return await modal.present();
+    await modal.present();
+
+    const { data } = await modal.onWillDismiss();
+    this.reorderArray(data);
   }
-  
-}
+
+  reorderArray(data) {    
+    if (data.condition.localeCompare("menor")==0) {
+      this.canchas.sort(function (a, b) {
+        if (a.precio > b.precio)
+          return 1;
+        else if (a.precio < b.precio)
+          return -1;
+        return 0;
+      });
+    } else if (data.condition.localeCompare("mayor")==0) {      
+      this.canchas.sort(function (a, b) {
+        if (a.precio < b.precio)
+          return 1;
+        else if (a.precio > b.precio)
+          return -1;
+        return 0;
+      });
+    }
+  }
+    
+  }
