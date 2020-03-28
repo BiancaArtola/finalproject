@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
+import { FirebaseAuth } from 'src/services/FirebaseAuth';
 
 @Component({
   selector: 'app-profile',
@@ -8,7 +9,15 @@ import { ModalController } from '@ionic/angular';
 })
 export class ProfilePage implements OnInit {
 
-  constructor(private modalController: ModalController) { }
+  private nombre;
+
+
+  constructor(private modalController: ModalController, private firebaseAuth: FirebaseAuth) {
+    this.firebaseAuth.getUserName().then((nombre) =>{
+      this.nombre = nombre;      
+    })
+
+   }
 
   ngOnInit() {
   }

@@ -28,7 +28,7 @@
     </ion-card-header>
 
     <ion-card-content>
-     {{cancha.descripcion}}
+      {{cancha.descripcion}}
     </ion-card-content>
 
 
@@ -43,18 +43,23 @@
     </ion-list-header>
 
     <ion-item>
-      <ion-label *ngIf="!cancha.comentarios">No hay comentarios aun.</ion-label>
-      <div *ngIf="cancha.comentarios">
-      <ion-label *ngFor="let comentario of cancha.comentarios; let i = index">
-        <p><i>"{{cancha.comentarios[i]}}"</i></p>
-        <hr>
-      </ion-label>
-    </div>
+      <ion-label *ngIf="cancha.comentarios.length == 0" class="noComments">No hay comentarios aun.</ion-label>
+      <div *ngIf="cancha.comentarios || cancha.comentarios.length != 0">
+        <ion-item  *ngFor="let comentario of cancha.comentarios; let i = index">
+          <ion-avatar slot="start">
+            <img src="../../assets/images/usuario.jpg">
+          </ion-avatar>
+          <ion-label>
+            <h5><b> {{cancha.comentarios[i].nombre}}</b></h5>
+            <p><i>"{{cancha.comentarios[i].comentario}}"</i></p>
+          </ion-label>
+        </ion-item>
+      </div>
     </ion-item>
 
     <div class="ion-text-end">
-    <ion-text (click)="openComments()" class="comentario"> Deja un comentario sobre esta cancha </ion-text>
-  </div>
+      <ion-text (click)="openComments()" class="comentario"> Deja un comentario sobre esta cancha </ion-text>
+    </div>
   </ion-list>
 
 </ion-content>

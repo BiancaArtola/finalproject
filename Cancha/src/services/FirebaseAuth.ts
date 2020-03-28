@@ -101,18 +101,25 @@ export class FirebaseAuth {
       });
   }
 
-  setComment(id: number, comentario: string, usuario: string) {
-    console.log("id: ", id, "comentario: ", comentario, "usuario: ", usuario);
-
-    this.db.collection("canchas").doc("0").update({
-      comentarios: firebase.firestore.FieldValue.arrayUnion(comentario)
+  setComment(id: number, comentario: string) {
+  let idString = id.toString();
+ 
+    this.getUserName().then((nombre) => {
+      this.db.collection("canchas").doc(idString).update(
+        {
+          comentarios: firebase.firestore.FieldValue.arrayUnion({
+            comentario: comentario,
+            nombre: nombre
+          })
+        })
+        .then(function () {
+          console.log("Document successfully written!");
+        })
+        .catch(function (error) {
+          console.error("Error writing document: ", error);
+        });
     })
-      .then(function () {
-        console.log("Document successfully written!");
-      })
-      .catch(function (error) {
-        console.error("Error writing document: ", error);
-      });
+
   }
 
   loginUser(email: string, password: string): Promise<firebase.auth.UserCredential> {
@@ -125,7 +132,7 @@ export class FirebaseAuth {
       .createUserWithEmailAndPassword(email, password).then((user) => {
         if (user) {
           user.user.updateProfile({
-            displayName: "Bianca Artola"
+            displayName: nombre
           })
         }
       })
@@ -141,13 +148,13 @@ export class FirebaseAuth {
 
   getUserName() {
     return new Promise((resolve, reject) => {
-    firebase.auth().onAuthStateChanged(function(user) {
-      if (user) {
-        var displayName = user.displayName;       
-        resolve(displayName);     
-      }
+      firebase.auth().onAuthStateChanged(function (user) {
+        if (user) {
+          var displayName = user.displayName;
+          resolve(displayName);
+        }
+      });
     });
-  });
-}
+  }
 
 }

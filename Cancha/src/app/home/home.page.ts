@@ -5,6 +5,7 @@ import { NavController, ModalController, LoadingController, AlertController } fr
 import { TutorialPage } from '../tutorial/tutorial.page';
 import { FirebaseAuth } from 'src/services/FirebaseAuth';
 import { MessagePage } from '../message/message.page';
+import { CanchaPage } from '../cancha/cancha.page';
 
 @Component({
   selector: 'app-home',
@@ -18,10 +19,11 @@ export class HomePage {
   icons2 = ['tennis', 'padel', 'pinpon', 'otros'];
   private usuario: string;
   private name: string
+
+
   constructor(private router: Router, private storage: Storage, private navController: NavController,
     private modalController: ModalController, private firebaseAuth: FirebaseAuth,
     private loadingController: LoadingController, private alertController: AlertController) {
-console.log("home");
 
     storage.get('user').then((val) => {
       if (!val) {
@@ -48,8 +50,6 @@ console.log("home");
       }
     });
   }
-
-
 
   async presentLoading() {
     const loading = await this.loadingController.create({
@@ -92,13 +92,24 @@ console.log("home");
     await alert.present();
   }
 
+  async openCourt(id:number){
+    const modal = await this.modalController.create({
+      component: CanchaPage,
+      componentProps:
+      {
+        id: id
+      }
+    });
+    return await modal.present();
+  }
+
+
   async openRecomendations(){
     const modal = await this.modalController.create({
       component: MessagePage,
     });
     return await modal.present();
   }
-
 
   goToLogin() {
     this.firebaseAuth.logoutUser().then(() => {
@@ -107,6 +118,10 @@ console.log("home");
       console.log("Ocurrio un error.");
 
     })
+  }
+
+  searchSport(){
+
   }
 
 

@@ -5,7 +5,7 @@
     </ion-buttons>
     <ion-buttons slot="end">
       <ion-text color="warning" class="city-name"> <b> Bahia Blanca </b></ion-text>
-      <ion-icon src="assets/icon/chevron-down.svg" color="warning" ></ion-icon>
+      <ion-icon src="assets/icon/chevron-down.png" color="warning" ></ion-icon>
     </ion-buttons>
     <ion-title>
     </ion-title>
@@ -29,7 +29,6 @@
         </ion-col>
       </ion-row>
 
-
       <ion-row>
         <ion-col *ngFor="let icon of icons1; let i = index" size="3">
           <ion-label class="sport">
@@ -47,7 +46,6 @@
         </ion-col>
       </ion-row>
 
-
       <ion-row>
         <ion-col *ngFor="let icon of icons2; let i = index" size="3">
           <ion-label class="sport">
@@ -63,10 +61,8 @@
     <b> Descubri nuestras canchas </b>
   </ion-label>
 
-
-  <ion-card *ngFor="let number of [0,1]">
+  <ion-card *ngFor="let number of [0,1]" (click)="openCourt(number)">
     <ion-item *ngIf="canchas">
-
       <ion-grid>
         <ion-row>
           <ion-col size="5">
@@ -85,9 +81,33 @@
           </ion-col>
         </ion-row>
       </ion-grid>
-
-
     </ion-item>
   </ion-card>
+
+  <ion-label *ngIf="!canchas" class="labelCanchas">No hay canchas disponibles por el momento.</ion-label>
+
+  <hr>
+
+  <ion-grid>
+    <ion-row>
+      <ion-label class="title">
+        <b> Busqueda por nombre </b>
+      </ion-label>
+    </ion-row>
+
+    <ion-row>
+      <ion-col size="10">
+        <ion-input placeholder="Ingrese un nombre.."></ion-input>
+
+      </ion-col>
+      <ion-col size="2">
+        <ion-button click="searchSport()">
+          <ion-icon slot="icon-only" name="send" size="large"></ion-icon>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+
 
 </ion-content>

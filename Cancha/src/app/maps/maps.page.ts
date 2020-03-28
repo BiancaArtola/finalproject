@@ -11,6 +11,7 @@ import {
   GoogleMapsAnimation,
   MyLocation
 } from '@ionic-native/google-maps';
+import { ActivatedRoute, Params } from '@angular/router';
 
 interface Marcadores {
   titulo: string;
@@ -32,15 +33,23 @@ export class MapsPage implements OnInit {
 
   latitud: number;
   longitud: number;
-  //marcadores: Marcadores;
+  //markers: Marker[];
 
-  constructor(public toastCtrl: ToastController, private platform: Platform) { }
+  canchas= [{ lat: -38.7162826, lng: -62.2583714 },{ lat: -38.7164612, lng: -61.3221848 }];
+
+  constructor(public toastCtrl: ToastController, private platform: Platform,
+    private route: ActivatedRoute) { }
 
   ngOnInit() {
+    // this.route.params.subscribe((params: Params) => {
+    //   this.canchas = params['canchas'];
+      console.log("viendo ",this.canchas);
+      
     // Since ngOnInit() is executed before `deviceready` event,
     // you have to wait the event.
     this.platform.ready();
     this.loadMap();
+    //});
   }
 
   loadMap() {
@@ -63,38 +72,30 @@ export class MapsPage implements OnInit {
 
     // Get the location of you
     this.map.getMyLocation().then((location: MyLocation) => {
-      console.log(JSON.stringify(location, null, 2));
 
       // Move the map camera to the location with animation
       this.map.animateCamera({
         target: location.latLng,
-        zoom: 17,
+        zoom: 15,
         duration: 5000
       });
 
-      // this.marcadores.titulo = "UNO bahia club"
-      // this.marcadores.subtitulo= "Lavalle 32"
-      // this.marcadores.latitud=-38.7162826;
-      // this.marcadores.longitud = -62.2583714;
+      this.addMarker();
 
-      var myLatLng = { lat: this.latitud, lng: this.longitud };
 
-      this.addMarker(myLatLng);
-      // //add a marker
-      // let marker: Marker = this.map.addMarkerSync({
-      //   title: '@ionic-native/google-maps plugin!',
-      //   snippet: 'This plugin is awesome!',
-      //   position: location.latLng,
-      //   animation: GoogleMapsAnimation.BOUNCE
-      // });
+      let marker: Marker = this.map.addMarkerSync({
+        title: 'Tu ubicación actual',
+        position: location.latLng,
+        animation: GoogleMapsAnimation.BOUNCE
+      });
 
-      // //show the infoWindow
-      // marker.showInfoWindow();
+      //show the infoWindow
+      marker.showInfoWindow();
 
-      // //If clicked it, display the alert
-      // marker.on(GoogleMapsEvent.MARKER_CLICK).subscribe(() => {
-      //   this.showToast('clicked!');
-      // });
+      //If clicked it, display the alert
+      marker.on(GoogleMapsEvent.MARKER_CLICK).subscribe(() => {
+        this.showToast('clicked!');
+      });
 
       this.map.on(GoogleMapsEvent.MAP_READY).subscribe(
         (data) => {
@@ -108,23 +109,21 @@ export class MapsPage implements OnInit {
       });
   }
 
-  addMarker(position) {
-    //add a marker
-    let marker: Marker = this.map.addMarkerSync({
-      title: "Titutlo",
-      snippet: "Subtitulo",
-      position: position,
-      animation: GoogleMapsAnimation.BOUNCE
+  addMarker() { 
+    let markers = new Array();
+    let contador:number = 0;
+
+    this.canchas.forEach(element => {
+      markers[contador] = this.map.addMarkerSync({
+        title: "puto",
+        position: element,
+        animation: GoogleMapsAnimation.BOUNCE
+      });
+      markers[contador].showInfoWindow();
+
+      contador = contador++;
     });
-
-    //show the infoWindow
-    marker.showInfoWindow();
-
-    //If clicked it, display the alert
-    marker.on(GoogleMapsEvent.MARKER_CLICK).subscribe(() => {
-      this.showToast('clicked!');
-    });
-
+  
   }
 
 

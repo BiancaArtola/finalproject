@@ -1,14 +1,66 @@
 <ion-content class="background">
   <ion-slides pager="true" [options]="slideOpts">
     <ion-slide>
-      <h1>Slide 1</h1>
+      <h1>
+        <ion-img src="../../assets/icon/tutorial1.png"></ion-img>
+        <!-- <ion-icon name="football"></ion-icon> -->
+        <ion-title>
+          <b> ¡Bienvenido! </b>
+        </ion-title>
+        <div class="label">
+          <ion-label>
+            En esta aplicación podras realizar el alquiler de una cancha de manera <b>fácil, segura y rápida.</b>
+          </ion-label>
+        </div>
+
+      </h1>
     </ion-slide>
     <ion-slide>
-      <h1>Slide 2</h1>
+      <h1>
+        <ion-img src="../../assets/icon/tutorial2.png"></ion-img>
+        <ion-title>
+          <b> ¡Es muy sencillo! </b>
+        </ion-title>
+        <div class="label">
+          <ion-label>
+            Inicialmente, solo debes loguearte y seleccionar el <b>deporte que quieras jugar.</b>
+          </ion-label>
+        </div>
+      </h1>
     </ion-slide>
+    
     <ion-slide>
-      <h1>Slide 3</h1>
-      <ion-button (click)="dismiss()">Empecemos!</ion-button>
+      <h1>
+        <ion-img src="../../assets/icon/tutorial3.png"></ion-img>
+        <ion-title class="tituloChico">
+          <b> Aplicá los filtros que desees</b>
+        </ion-title>
+        <div class="label">
+          <ion-label>
+            Selecciona la <b>fecha, hora y distintas características que desees</b> para tu búsqueda.
+          </ion-label>
+        </div>
+
+      </h1>
+    </ion-slide>
+
+    <ion-slide>
+      <h1>
+        <ion-img src="../../assets/icon/tutorial4.png" class="imagenChica"></ion-img>
+        <ion-title>
+          <b> Por último...</b>
+        </ion-title>
+        <div class="label">
+          <ion-label>
+            Luego, buscaras la cancha que sea ideal para vos. <b>Seleccionas, reservas, y listo!</b>
+          </ion-label>
+        </div>
+        <hr>
+        <ion-button (click)="dismiss()">
+          <b>Empecemos</b>
+        </ion-button>
+
+      </h1>
     </ion-slide>
   </ion-slides>
 </ion-content>

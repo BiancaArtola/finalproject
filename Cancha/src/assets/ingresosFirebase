@@ -10,7 +10,17 @@ var uno = {
       deporte: "futbol",
       cronograma: firebase.firestore.Timestamp.fromDate(new Date("December 10, 1815")),
       coordenadas: [-38.7149182,-62.2548287],
-      comentarios: []
+      comentarios:
+      0
+      comentario
+      "Excelente cancha"
+      nombre
+      "pepe"
+      1
+      comentario
+      "Buen lugar"
+      nombre
+      "Bianca Artola"
 };
 
 var shopping = {

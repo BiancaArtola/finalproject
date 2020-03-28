@@ -66,6 +66,7 @@ export class DeportePage {
   }
 
   async openMaps() {
+    let canchas = this.canchas ;
     this.router.navigate(['/maps']);
     // API AIzaSyD_mVCh6mJWkCl-rmCyWITJdMHIIqr-PRE
   }

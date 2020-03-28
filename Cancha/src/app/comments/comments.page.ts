@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { NavParams } from '@ionic/angular';
+import { NavParams, ModalController, ToastController } from '@ionic/angular';
 import { FirebaseAuth } from 'src/services/FirebaseAuth';
 import { Storage } from '@ionic/storage';
 
@@ -13,7 +13,8 @@ export class CommentsPage implements OnInit {
   private contenido: string;
   private usuario: string;
 
-  constructor(private navParams: NavParams, private storage: Storage, private firebaseAuth: FirebaseAuth) {
+  constructor(private navParams: NavParams, private storage: Storage, private toastController: ToastController,
+     private firebaseAuth: FirebaseAuth, private modalController: ModalController) {
     this.id = navParams.get('id');
 
   }
@@ -23,12 +24,18 @@ export class CommentsPage implements OnInit {
 
   sendMessage() {
     this.storage.get('user').then((usuario) => {
-
-      this.firebaseAuth.setComment(this.id, this.contenido, usuario)
-
+      this.firebaseAuth.setComment(this.id, this.contenido)
+      this.modalController.dismiss();
+      this.presentToast();
     });
+  }
 
-
+  async presentToast() {
+    const toast = await this.toastController.create({
+      message: 'Tu comentario ha sido enviado con éxito.',
+      duration: 2000
+    });
+    toast.present();
   }
 
 }

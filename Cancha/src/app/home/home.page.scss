@@ -15,7 +15,6 @@ ion-content {
 
   .title {
     font-size: 1.3em;
-    padding-top: 50%;
     padding-left: 3%;
     padding-right: 3%;
     padding-bottom: 3%;
@@ -33,5 +32,24 @@ ion-content {
 
   .city-name {
     --color: #f0c112;
+  }
+
+  .labelCanchas{
+    padding-left: 5%;
+    color: gray;
+    font-style: italic;
+    font-size: small;
+  }
+
+  ion-button {
+    --color: black;
+    --background: white;
+    padding: 1%;
+  }
+
+  ion-input {
+    border: solid 1px rgb(185, 184, 184);
+    border-radius: 5px;
+    padding-left: 10%
   }
 }

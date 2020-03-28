@@ -1,3 +1,38 @@
 .background {
   --background: url("../../assets/images/imagen.png") 0 0/100% 100% no-repeat;
 }
+
+ion-icon {
+  padding-top: 15%;
+  font-size: 150px;
+}
+
+ion-title {
+  padding-top:10%;
+  font-size: xx-large;
+}
+
+.tituloChico {
+  font-size: x-large;
+}
+ion-label {
+  font-size: medium;
+}
+
+.label {
+  padding: 5%
+}
+
+ion-button {
+  --color: black;
+  --background: #f0c112;
+}
+
+ion-img {
+  padding-top: 15%;
+}
+
+.imagenChica{
+  size: small;
+  font-size: small;
+}

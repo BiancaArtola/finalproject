@@ -31,3 +31,17 @@ ion-list {
 hr {
   border: black;
 }
+
+h5 {
+  text-transform: capitalize;
+}
+
+ion-avatar {
+  border: solid 1px rgb(185, 184, 184);
+
+}
+
+.noComments {
+  color: gray;
+  font-style: italic;
+}
