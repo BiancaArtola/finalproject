@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { ModalController, LoadingController } from '@ionic/angular';
 import { CanchaPage } from '../cancha/cancha.page';
 import { DatePicker } from '@ionic-native/date-picker/ngx';
-import { Router, ActivatedRoute, Params } from '@angular/router';
+import { Router, ActivatedRoute, Params, NavigationExtras } from '@angular/router';
 import { FirebaseAuth } from 'src/services/FirebaseAuth';
 import { FiltersPage } from '../filters/filters.page';
 import { OrderPage } from '../order/order.page';
@@ -66,8 +66,12 @@ export class DeportePage {
   }
 
   async openMaps() {
-    let canchas = this.canchas ;
-    this.router.navigate(['/maps']);
+    let navigationExtras: NavigationExtras = {
+      queryParams: {
+        special: JSON.stringify(this.canchas)
+      }
+    };
+    this.router.navigate(['/maps'], navigationExtras);
     // API AIzaSyD_mVCh6mJWkCl-rmCyWITJdMHIIqr-PRE
   }
 

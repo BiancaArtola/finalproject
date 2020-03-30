@@ -11,7 +11,7 @@ import {
   GoogleMapsAnimation,
   MyLocation
 } from '@ionic-native/google-maps';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 
 interface Marcadores {
   titulo: string;
@@ -34,17 +34,23 @@ export class MapsPage implements OnInit {
   latitud: number;
   longitud: number;
   //markers: Marker[];
-
-  canchas= [{ lat: -38.7162826, lng: -62.2583714 },{ lat: -38.7164612, lng: -61.3221848 }];
+  data;
+  canchas = [{ lat: -38.7162826, lng: -62.2583714 }, { lat: -38.7164612, lng: -61.3221848 }];
 
   constructor(public toastCtrl: ToastController, private platform: Platform,
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute, private router: Router) {
+    this.route.queryParams.subscribe(params => {
+      if (params && params.special) {
+        this.data = JSON.parse(params.special);
+      }
+    });
+  }
 
   ngOnInit() {
     // this.route.params.subscribe((params: Params) => {
     //   this.canchas = params['canchas'];
-      console.log("viendo ",this.canchas);
-      
+    console.log("viendo ", this.data);
+
     // Since ngOnInit() is executed before `deviceready` event,
     // you have to wait the event.
     this.platform.ready();
@@ -86,22 +92,23 @@ export class MapsPage implements OnInit {
       let marker: Marker = this.map.addMarkerSync({
         title: 'Tu ubicación actual',
         position: location.latLng,
-        animation: GoogleMapsAnimation.BOUNCE
+        animation: GoogleMapsAnimation.BOUNCE,
+        icon: 'http://maps.google.com/mapfiles/ms/icons/red-dot.png'
       });
 
       //show the infoWindow
       marker.showInfoWindow();
 
       //If clicked it, display the alert
-      marker.on(GoogleMapsEvent.MARKER_CLICK).subscribe(() => {
-        this.showToast('clicked!');
-      });
+      // marker.on(GoogleMapsEvent.MARKER_CLICK).subscribe(() => {
+      //   this.showToast('clicked!');
+      // });
 
-      this.map.on(GoogleMapsEvent.MAP_READY).subscribe(
-        (data) => {
-          console.log("Click MAP", data);
-        }
-      );
+      // this.map.on(GoogleMapsEvent.MAP_READY).subscribe(
+      //   (data) => {
+      //     console.log("Click MAP", data);
+      //   }
+      // );
     })
       .catch(err => {
         //this.loading.dismiss();
@@ -109,21 +116,23 @@ export class MapsPage implements OnInit {
       });
   }
 
-  addMarker() { 
+  addMarker() {
     let markers = new Array();
-    let contador:number = 0;
+    let contador: number = 0;
 
-    this.canchas.forEach(element => {
+    this.data.forEach(element => {   
+      
       markers[contador] = this.map.addMarkerSync({
-        title: "puto",
-        position: element,
-        animation: GoogleMapsAnimation.BOUNCE
+        title: element.nombre,
+        position: { lat: element.coordenadas[0], lng: element.coordenadas[1] },
+        animation: GoogleMapsAnimation.BOUNCE,
+        icon: 'http://maps.google.com/mapfiles/ms/icons/purple-dot.png'
       });
       markers[contador].showInfoWindow();
 
       contador = contador++;
     });
-  
+
   }
 
 

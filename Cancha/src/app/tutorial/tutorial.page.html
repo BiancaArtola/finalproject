@@ -1,18 +1,25 @@
 <ion-content class="background">
-  <ion-slides pager="true" [options]="slideOpts">
+  <div class="ion-text-right">
+    <ion-text class="textSaltar" *ngIf="showText" (click)="dismiss()">
+      <b>Saltar</b>
+    </ion-text>
+  </div>
+
+  <ion-slides #slides pager="true" [options]="slideOpts" (ionSlideDidChange)="slideChanged()">
     <ion-slide>
       <h1>
         <ion-img src="../../assets/icon/tutorial1.png"></ion-img>
-        <!-- <ion-icon name="football"></ion-icon> -->
         <ion-title>
           <b> ¡Bienvenido! </b>
         </ion-title>
         <div class="label">
           <ion-label>
-            En esta aplicación podras realizar el alquiler de una cancha de manera <b>fácil, segura y rápida.</b>
+            En esta aplicación podrás realizar el alquiler de una cancha de manera <b>fácil, segura y rápida.</b>
           </ion-label>
         </div>
-
+        <hr>
+        <hr>
+        <hr>
       </h1>
     </ion-slide>
     <ion-slide>
@@ -26,9 +33,12 @@
             Inicialmente, solo debes loguearte y seleccionar el <b>deporte que quieras jugar.</b>
           </ion-label>
         </div>
+        <hr>
+        <hr>
+        <hr>
       </h1>
     </ion-slide>
-    
+
     <ion-slide>
       <h1>
         <ion-img src="../../assets/icon/tutorial3.png"></ion-img>
@@ -37,10 +47,12 @@
         </ion-title>
         <div class="label">
           <ion-label>
-            Selecciona la <b>fecha, hora y distintas características que desees</b> para tu búsqueda.
+            Seleccioná la <b>fecha, hora y distintas características que desees</b> para tu búsqueda.
           </ion-label>
         </div>
-
+        <hr>
+        <hr>
+        <hr>
       </h1>
     </ion-slide>
 
@@ -55,11 +67,13 @@
             Luego, buscaras la cancha que sea ideal para vos. <b>Seleccionas, reservas, y listo!</b>
           </ion-label>
         </div>
+        <ion-text (click)="dismiss()" class="textSaltar textPadding">
+          <b><i>¡Comenzar!</i></b>
+        </ion-text>
         <hr>
-        <ion-button (click)="dismiss()">
-          <b>Empecemos</b>
-        </ion-button>
-
+        <hr>
+        <hr>
+        <hr>
       </h1>
     </ion-slide>
   </ion-slides>

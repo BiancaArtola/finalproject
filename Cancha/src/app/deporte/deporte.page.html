@@ -82,11 +82,11 @@
 
     </div>
 
-    <div *ngIf="canchas">
+    <div *ngIf="canchas" class="informationText">
       <ion-text *ngIf="canchas.length == 0" class="information">
-        {{canchas}}
         <i> En este momento no hay cancha disponibles. </i>
       </ion-text>
+      <ion-text class="recomendationText"><b>¿Querés recomendarnos alguna?</b></ion-text>
     </div>
 
 

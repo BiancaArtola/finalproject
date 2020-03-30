@@ -34,7 +34,18 @@ ion-card-content {
 
 .information {
   color: grey;
-  font-size: 0.7em;
+  font-size: medium;
+}
+
+.recomendationText {
+  font-size: small;
+  color: #f0c112;
+}
+
+.informationText{
+  padding: 3%;
+  align-items: center;
+
 }
 
 ion-row {
