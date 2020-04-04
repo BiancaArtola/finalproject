@@ -33,7 +33,6 @@ export class MapsPage implements OnInit {
 
   latitud: number;
   longitud: number;
-  //markers: Marker[];
   data;
   canchas = [{ lat: -38.7162826, lng: -62.2583714 }, { lat: -38.7164612, lng: -61.3221848 }];
 
@@ -47,15 +46,10 @@ export class MapsPage implements OnInit {
   }
 
   ngOnInit() {
-    // this.route.params.subscribe((params: Params) => {
-    //   this.canchas = params['canchas'];
-    console.log("viendo ", this.data);
-
     // Since ngOnInit() is executed before `deviceready` event,
     // you have to wait the event.
     this.platform.ready();
     this.loadMap();
-    //});
   }
 
   loadMap() {

@@ -28,8 +28,8 @@
         </ion-label>
 
         <ion-item >
-          <ion-select interface="popover" [(ngModel)]="horarios"
-          placeholder="Selecciona un horario" okText="Seleccionar" cancelText="Cancelar">
+          <ion-select interface="popover" [(ngModel)]="horariosModelo" disabled={{horariosDisabled}}
+          placeholder="Selecciona un horario" okText="Seleccionar" cancelText="Cancelar" (ionChange)="changeSelect()">
             <ion-select-option *ngFor="let hour of hours" >{{hour}}:00 hs</ion-select-option>
           </ion-select>
         </ion-item>
@@ -43,7 +43,8 @@
         <ion-list *ngIf="parts">
           <ion-item *ngFor="let part of parts">
             <ion-label>{{part.val}}</ion-label>
-            <ion-checkbox slot="end" [(ngModel)]="part.isChecked"></ion-checkbox>
+            <ion-checkbox slot="end" [(ngModel)]="part.isChecked"
+              (ionChange)="daysSelect()" disabled={{daysDisabled}}></ion-checkbox>
           </ion-item>
         </ion-list>
       </ion-col>
@@ -55,12 +56,10 @@
           <b> Tipo de cancha </b>
         </ion-label>
         <ion-item>
-          <ion-select placeholder="Selecciona una opción" [(ngModel)]="tipoCancha"
-          okText="Seleccionar" cancelText="Cancelar">
-            <ion-select-option value="5">Futbol 5</ion-select-option>
-            <ion-select-option value="7">Futbol 7</ion-select-option>
-            <ion-select-option value="9">Futbol 9</ion-select-option>
-            <ion-select-option value="11">Futbol 11</ion-select-option>
+          <ion-select interface="popover" placeholder="Selecciona una opción"
+           [(ngModel)]="tipoCanchaModelo" disabled={{tipoCanchaDisabled}}
+          okText="Seleccionar" cancelText="Cancelar" (ionChange)="tipoCanchaSelect()">
+            <ion-select-option *ngFor="let tipo of tipoCancha">{{tipo}}</ion-select-option>
           </ion-select>
         </ion-item>
       </ion-col>
@@ -72,12 +71,39 @@
           <b> Cantidad de jugadores </b>
         </ion-label>
         <ion-item >
-          <ion-select interface="popover" [(ngModel)]="cantJugadores"
+          <ion-select interface="popover" [(ngModel)]="cantJugadoresModelo"
+           (ionChange)="cantJugadoresSelect()" disabled={{cantJugadoresDisabled}}
           placeholder="Seleccione la cantidad de jugadores" okText="Seleccionar" cancelText="Cancelar">
             <ion-select-option *ngFor="let cant of cantidadJugadores" >{{cant}} jugadores</ion-select-option>
           </ion-select>
         </ion-item>
       </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <ion-label>
+          <b> Material del piso </b>
+        </ion-label>
+        <ion-item >
+          <ion-select interface="popover" [(ngModel)]="materialModelo"
+          placeholder="Seleccione material del piso" okText="Seleccionar" cancelText="Cancelar">
+            <ion-select-option *ngFor="let material of materialPiso" >{{material}}</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+        <ion-item>
+          <ion-toggle slot="start" name="banana" color="warning" 
+          checked="{{toggleChecked}}" (ionChange)="toggle()" ></ion-toggle>
+        </ion-item>
+     
+        <ion-label class="paddingTop">
+          <b>Techada</b>
+        </ion-label>        
+      
     </ion-row>
   </ion-grid>
 
@@ -92,7 +118,7 @@
         </ion-button>
       </ion-col>
       <ion-col size="6">
-        <ion-button class="button-yellow" expand="block">
+        <ion-button class="button-yellow" expand="block" (click)="filtrar()">
           <b>Aplicar filtro </b>
         </ion-button>
       </ion-col>

@@ -21,9 +21,7 @@ export class CanchaPage {
     this.presentLoading().then(() => {
       this.firebaseAuth.getDocument(this.id).then((cancha) => {
         this.cancha = cancha;
-        this.loadingController.dismiss();      
-        console.log(this.cancha.comentarios[0].nombre);
-          
+        this.loadingController.dismiss();                
       })
     })  
   }

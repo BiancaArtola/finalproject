@@ -14,10 +14,8 @@ export class FirebaseAuth {
     if (!firebase.apps.length) {
       this.app = firebase.initializeApp(environment.firebase);
       this.db = firebase.firestore(this.app);
-
     }
   }
-
 
   getInformation(): Promise<void> {
     return new Promise((resolve, reject) => {
@@ -78,20 +76,22 @@ export class FirebaseAuth {
   }
 
   setCancha() {
-    this.db.collection("canchas").doc("2") //CAMBIAR DOC TMBBBBBBBBB
+    this.db.collection("canchas").doc("3") //CAMBIAR DOC TMBBBBBBBBB
       .set({
-        id: 2,
-        nombre: "El desvio",
-        ubicacion: "Esnaola 550",
-        telefono: 2914546866,
-        precio: 2000,
-        imagen: "https://scontent.faep9-2.fna.fbcdn.net/v/t1.0-9/14088514_298801890478875_1388104237771315384_n.jpg?_nc_cat=110&_nc_sid=dd9801&_nc_ohc=oZlbulnvw8MAX8KpX2j&_nc_ht=scontent.faep9-2.fna&oh=79a53ebfc13ca1e8aaae21f76af01404&oe=5E9553D5",
-        estrellas: 1,
-        descripcion: "Complejo con varios salones para la realización de eventos. Casita de fiestas y Cancha de fútbol. Nueva cancha de fútbol dentro del salón. L",
-        deporte: "futbol",
-        cronograma: firebase.firestore.Timestamp.fromDate(new Date("December 10, 1815")),
-        coordenadas: [38.7066358, 62.2532615],
-        comentarios: ["Excelente lugar para jugar un partido y compartir un asado"]
+          id: 3,
+          nombre: "El nacional",
+          ubicacion: "14 de Julio 3250",
+          telefono: 2914860739,
+          precio: 700,
+          imagen: "https://viapais.com.ar/files/2018/11/20181128175803_35398258_0_body.jpg",
+          estrellas: 1,
+          descripcion: "El Club El Nacional es un club polideportivo de la ciudad de Bahía Blanca, Argentina fundado en septiembre de 1919.",
+          deporte: "tennis",
+          cronograma: firebase.firestore.Timestamp.fromDate(new Date("December 10, 1815")),
+          coordenadas: [38.7066358, 62.2532615],
+          comentarios: [],
+          techada: false,
+          piso: "ladrillo"
       })
       .then(function () {
         console.log("Se agrego correctamente");
@@ -101,9 +101,34 @@ export class FirebaseAuth {
       });
   }
 
+  searchByName(name) {
+    return new Promise((resolve, reject) => {
+      this.db.collection("canchas").where("nombre", "==", name)
+        .get().then(function (querySnapshot) {
+          let hayResultado = false;
+
+          querySnapshot.forEach(function (doc) {
+            resolve(doc.data().id);
+            hayResultado = true;
+          });
+
+          if (!hayResultado){
+
+            reject();
+            console.log("me estoy volviendo loca");
+            
+          }
+        })
+        .catch(function(error) {
+          console.log("Error getting documents: ", error);
+      });
+  
+    })
+  }
+
   setComment(id: number, comentario: string) {
-  let idString = id.toString();
- 
+    let idString = id.toString();
+
     this.getUserName().then((nombre) => {
       this.db.collection("canchas").doc(idString).update(
         {
@@ -120,6 +145,45 @@ export class FirebaseAuth {
         });
     })
 
+  }
+
+  filterOneCondition(condition, value, sport){
+    return new Promise((resolve, reject) => {
+      this.db.collection("canchas").where("deporte", "==", sport).where(condition, "==", value)
+        .get().then(function (querySnapshot) {
+          let canchas = [];
+          querySnapshot.forEach(function (doc) {
+            canchas.push(doc.data())
+          });
+          resolve(canchas);
+        });
+    })
+  }
+
+  filterTwoConditions(condition, value, condition2, value2, sport){
+    return new Promise((resolve, reject) => {
+      this.db.collection("canchas").where("deporte", "==", sport).where(condition, "==", value).where(condition2, "==", value2)
+        .get().then(function (querySnapshot) {
+          let canchas = [];
+          querySnapshot.forEach(function (doc) {
+            canchas.push(doc.data())
+          });
+          resolve(canchas);
+        });
+    })
+  }
+
+  filterTreeConditions(condition, value, condition2, value2, condition3, value3, sport){
+    return new Promise((resolve, reject) => {
+      this.db.collection("canchas").where("deporte", "==", sport).where(condition, "==", value).where(condition2, "==", value2).where(condition3, "==", value3)
+        .get().then(function (querySnapshot) {
+          let canchas = [];
+          querySnapshot.forEach(function (doc) {
+            canchas.push(doc.data())
+          });
+          resolve(canchas);
+        });
+    })
   }
 
   loginUser(email: string, password: string): Promise<firebase.auth.UserCredential> {

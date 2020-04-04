@@ -71,7 +71,7 @@
           <ion-col size="7">
             <ion-card-content>
               <ion-row>
-                <b>{{canchas[number].nombre}}</b>
+                <b class="capitalize">{{canchas[number].nombre}}</b>
               </ion-row>
               <ion-row>
                 {{canchas[number].ubicacion}}
@@ -97,11 +97,11 @@
 
     <ion-row>
       <ion-col size="10">
-        <ion-input placeholder="Ingrese un nombre.."></ion-input>
+        <ion-input [(ngModel)]="modeloCancha" placeholder="Ingrese un nombre.."></ion-input>
 
       </ion-col>
       <ion-col size="2">
-        <ion-button click="searchSport()">
+        <ion-button (click)="searchSport()">
           <ion-icon slot="icon-only" name="send" size="large"></ion-icon>
         </ion-button>
       </ion-col>

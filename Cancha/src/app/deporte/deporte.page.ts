@@ -95,7 +95,19 @@ export class DeportePage {
         sport: this.sport
       }
     });
-    return await modal.present();
+    await modal.present();
+    const { data } = await modal.onWillDismiss();
+    
+    if (data != null){
+      this.canchas = data;
+      this.loadingController.dismiss();
+    }
+    else {
+      this.firebaseAuth.getDocumentsWithSport(this.sport).then((information) => {
+        this.canchas = information;
+        this.loadingController.dismiss();
+      });
+    }
   }
 
   async order() {
@@ -109,8 +121,8 @@ export class DeportePage {
     this.reorderArray(data);
   }
 
-  reorderArray(data) {    
-    if (data.condition.localeCompare("menor")==0) {
+  reorderArray(data) {
+    if (data.condition.localeCompare("menor") == 0) {
       this.canchas.sort(function (a, b) {
         if (a.precio > b.precio)
           return 1;
@@ -118,7 +130,7 @@ export class DeportePage {
           return -1;
         return 0;
       });
-    } else if (data.condition.localeCompare("mayor")==0) {      
+    } else if (data.condition.localeCompare("mayor") == 0) {
       this.canchas.sort(function (a, b) {
         if (a.precio < b.precio)
           return 1;
@@ -126,7 +138,15 @@ export class DeportePage {
           return -1;
         return 0;
       });
+    } else if (data.condition.localeCompare("alfabeticamente") == 0) {
+      this.canchas.sort(function (a, b) {
+        if (a.nombre > b.nombre)
+          return 1;
+        else if (a.nombre < b.nombre)
+          return -1;
+        return 0;
+      });
     }
   }
-    
-  }
+
+}

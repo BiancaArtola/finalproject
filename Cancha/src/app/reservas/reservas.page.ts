@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController, NavParams } from '@ionic/angular';
+import { ModalController, NavParams, AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-reservas',
@@ -11,12 +11,8 @@ export class ReservasPage implements OnInit {
   private cancha;
 
 
-  constructor(private modalController: ModalController, private navParams: NavParams) { 
-
-    this.cancha = navParams.get('cancha');
-    console.log(this.cancha);
-    
-  
+  constructor(private modalController: ModalController, private navParams: NavParams, private alertController: AlertController) { 
+    this.cancha = navParams.get('cancha');      
   }
 
   ngOnInit() {
@@ -25,5 +21,19 @@ export class ReservasPage implements OnInit {
 
   goBack() {
     this.modalController.dismiss();
+  }
+
+  pay() {
+    this.showMessage("¡El pago ha sido realizado con exito!", "Podes ver la reserva en tu perfil.");
+    this.goBack();
+  }
+
+  async showMessage(header, message) {
+    const alert = await this.alertController.create({
+      header: header,
+      message: message,
+      buttons: ['OK']
+    });
+    await alert.present();
   }
 }

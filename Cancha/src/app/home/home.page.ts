@@ -19,6 +19,7 @@ export class HomePage {
   icons2 = ['tennis', 'padel', 'pinpon', 'otros'];
   private usuario: string;
   private name: string
+  private modeloCancha;
 
 
   constructor(private router: Router, private storage: Storage, private navController: NavController,
@@ -40,6 +41,7 @@ export class HomePage {
       else { //El usuario ya esta registrado entonces se dirige hacia la pagina de inicio
         console.log("Si hay usuario ", val);
         this.presentLoading().then(() => {
+          //this.firebaseAuth.setCancha();
           this.firebaseAuth.getAllDocumentsInCollection().then(information => {
             this.canchas = information;
             this.loadingController.dismiss();
@@ -78,21 +80,21 @@ export class HomePage {
       header: '¿Buscas practicar otro deporte?',
       message: 'Por el momento no contamos con alquileres disponibles para otros deportes. Recomendanos alguna cancha para otro deporte!',
       buttons: [
-      {
-        text: 'Cancelar',
-        role: 'cancel'
-      }, {
-        text: 'Recomendar ',
-        handler: () => {          
-          this.openRecomendations();
+        {
+          text: 'Cancelar',
+          role: 'cancel'
+        }, {
+          text: 'Recomendar ',
+          handler: () => {
+            this.openRecomendations();
+          }
         }
-      }
-    ]
+      ]
     });
     await alert.present();
   }
 
-  async openCourt(id:number){
+  async openCourt(id: number) {
     const modal = await this.modalController.create({
       component: CanchaPage,
       componentProps:
@@ -104,7 +106,7 @@ export class HomePage {
   }
 
 
-  async openRecomendations(){
+  async openRecomendations() {
     const modal = await this.modalController.create({
       component: MessagePage,
     });
@@ -120,8 +122,30 @@ export class HomePage {
     })
   }
 
-  searchSport(){
+  async searchSport() {
+    const loading = await this.loadingController.create();
+    await loading.present();
+    this.firebaseAuth.searchByName(this.modeloCancha.toLowerCase())
+      .then((cancha: number) => {
+        this.openCourt(cancha);
+        this.modeloCancha = "";
+        this.loadingController.dismiss();
+      })
+      .catch(() => {
+        let header = "No se ha encontrado ninguna cancha con el nombre '" + this.modeloCancha + "'";
+        let message = "Realice la búsqueda nuevamente. ¡También puede conocer nuevas canchas recorriendo nuestras opciones!"
+        this.showAlertSport(header, message);
+      })
+  }
 
+  async showAlertSport(header, message) {
+    const alert = await this.alertController.create({
+      header: header,
+      message: message,
+      buttons: ['OK']
+    });
+    this.loadingController.dismiss();
+    await alert.present();
   }
 
 
