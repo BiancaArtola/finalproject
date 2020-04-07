@@ -15,6 +15,8 @@ export class ProfilePage implements OnInit {
   constructor(private modalController: ModalController, private firebaseAuth: FirebaseAuth) {
     this.firebaseAuth.getUserName().then((nombre) =>{
       this.nombre = nombre;      
+      console.log(this.nombre);
+      
     })
 
    }

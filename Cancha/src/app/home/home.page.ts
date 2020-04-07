@@ -54,9 +54,7 @@ export class HomePage {
   }
 
   async presentLoading() {
-    const loading = await this.loadingController.create({
-      duration: 2000
-    });
+    const loading = await this.loadingController.create();
     await loading.present();
   }
 

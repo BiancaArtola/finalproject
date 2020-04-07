@@ -26,9 +26,11 @@ import { FirebaseAuth } from './../services/FirebaseAuth';
 import { HttpClientModule } from '@angular/common/http';
 import { RegisterPageModule } from './register/register.module';
 import { ReservasPageModule } from './reservas/reservas.module';
+
 import { CommentsPageModule } from './comments/comments.module';
 import { HelpPageModule } from './help/help.module';
 import { CanchaPageModule } from './cancha/cancha.module';
+import { PayPageModule } from './pay/pay.module';
 
 
 @NgModule({
@@ -49,6 +51,7 @@ import { CanchaPageModule } from './cancha/cancha.module';
     CommentsPageModule,
     HelpPageModule,
     CanchaPageModule,
+    PayPageModule,
     AngularFireModule.initializeApp(environment.firebase)
   ],
   providers: [

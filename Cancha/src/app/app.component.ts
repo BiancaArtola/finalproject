@@ -9,6 +9,7 @@ import { MessagePage } from './message/message.page';
 import { ProfilePage } from './profile/profile.page';
 import { HelpPage } from './help/help.page';
 import { FirebaseAuth } from 'src/services/FirebaseAuth';
+import { ReservasPage } from './reservas/reservas.page';
 
 @Component({
   selector: 'app-root',
@@ -26,7 +27,10 @@ export class AppComponent {
     this.initializeApp();
   
     this.firebaseAuth.getUserName().then((nombre) =>{
-      this.userName = nombre;      
+      
+      this.userName = nombre;  
+      console.log("here", this.userName);
+    
     })
 
   }
@@ -81,6 +85,15 @@ export class AppComponent {
 
     const modal = await this.modalController.create({
       component: HelpPage,
+    });
+    return await modal.present();
+  }
+
+  async goToReservas(){
+    this.menu.close();
+
+    const modal = await this.modalController.create({
+      component: ReservasPage,
     });
     return await modal.present();
   }

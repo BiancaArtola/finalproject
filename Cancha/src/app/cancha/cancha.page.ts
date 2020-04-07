@@ -1,8 +1,8 @@
 import { Component, Input } from '@angular/core';
 import { NavParams, ModalController, LoadingController } from '@ionic/angular';
 import { FirebaseAuth } from 'src/services/FirebaseAuth';
-import { ReservasPage } from '../reservas/reservas.page';
 import { CommentsPage } from '../comments/comments.page';
+import { PayPage } from '../pay/pay.page';
 
 @Component({
   selector: 'app-cancha',
@@ -26,9 +26,9 @@ export class CanchaPage {
     })  
   }
 
-  async openReservas() {
+  async openPagos() {
     const modal = await this.modalController.create({
-      component: ReservasPage,
+      component: PayPage,
       componentProps:
       {
         cancha: this.cancha

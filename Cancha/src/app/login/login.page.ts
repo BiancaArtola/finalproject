@@ -36,12 +36,6 @@ export class LoginPage {
   }
 
   async goHome() {
-    // const loading = await this.loadingController.create({
-    //   translucent: true
-    // });
-    // await loading.present();
-    console.log(" nombre ", this.myForm.value.usuario, " pass ", this.myForm.value.password);
-
     this.firebaseAuth.loginUser(this.myForm.value.usuario, this.myForm.value.password).then(
       () => {
         this.storage.set('user', this.usuario);

@@ -1,13 +1,17 @@
 .background {
-    --background: url("../../assets/images/imagen.png") 0 0/100% 100% no-repeat;
-  }
+  --background: url("../../assets/images/imagen.png") 0 0/100% 100% no-repeat;
+}
 
 .labelTitle {
   font-size: x-large;
 }
+.labelReservas {
+  font-size: large;
+  padding: 2%;
+}
 
 ion-icon {
-  padding: 3%
+  padding: 3%;
 }
 
 ion-button {
@@ -16,5 +20,17 @@ ion-button {
 }
 
 ion-label {
-  font-size: large;
+  font-size: medium;
+  color: gray;
+  padding-left: 3%;
+  padding-right: 3%;
+  font-style: italic;
+}
+
+ion-grid {
+  padding: 2%;
+}
+
+.reserveText {
+  color: #f0c112;
 }

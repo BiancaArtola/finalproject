@@ -1,39 +1,77 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController, NavParams, AlertController } from '@ionic/angular';
+import { ModalController } from '@ionic/angular';
+import { FirebaseAuth } from 'src/services/FirebaseAuth';
 
 @Component({
   selector: 'app-reservas',
   templateUrl: './reservas.page.html',
   styleUrls: ['./reservas.page.scss'],
 })
-export class ReservasPage implements OnInit {
+export class ReservasPage {
 
-  private cancha;
+  private reservas;
+  private reservasActivas=[];
+  private reservasConcretadas = [];
+  private hayReservasActivas: boolean = false;
+  private hayReservasConcretadas: boolean = false;
 
-
-  constructor(private modalController: ModalController, private navParams: NavParams, private alertController: AlertController) { 
-    this.cancha = navParams.get('cancha');      
+  constructor(private modalController: ModalController, private firebaseAuth: FirebaseAuth) {
   }
 
   ngOnInit() {
+    this.getReservas();
+
   }
 
 
-  goBack() {
-    this.modalController.dismiss();
+  getReservas() {
+    this.firebaseAuth.getUid().then((uid) => {
+      this.firebaseAuth.getReservas(uid).then((reservas) => {
+        this.reservas = reservas;
+        this.setReservas()
+      })
+    })
+
   }
 
-  pay() {
-    this.showMessage("¡El pago ha sido realizado con exito!", "Podes ver la reserva en tu perfil.");
-    this.goBack();
+  setReservas() {
+    // console.log(this.reservas[0].fecha);
+    // console.log(this.reservas[1].fecha);
+    // var hoy = Date.now();
+    // console.log(hoy);
+
+
+    var date: Date= this.reservas[0].fecha.toDate();
+    var formatDate = date.getDate() + "/" + date.getMonth() +"/" + date.getFullYear();
+    console.log(formatDate);
+    
+
+    // var prueba = this.reservas[0].fecha.seconds;
+    // console.log(new Date(prueba*1000));
+
+    // console.log(date.getDate());
+
+    this.separeReservas();
+    console.log(this.reservasConcretadas);
+    
+
+
   }
 
-  async showMessage(header, message) {
-    const alert = await this.alertController.create({
-      header: header,
-      message: message,
-      buttons: ['OK']
+  separeReservas() {
+    this.reservas.forEach(element => {
+      var date: Date= element.fecha.toDate();
+      var formatDate = date.getDate() + "/" + date.getMonth() +"/" + date.getFullYear();
+      if (element.fecha.seconds * 1000 < Date.now()){
+        element.fecha = formatDate;
+        this.reservasConcretadas.push(element);
+      }else{
+        element.fecha = formatDate;
+        this.reservasActivas.push(element);}
     });
-    await alert.present();
+  }
+
+  dismiss() {
+    this.modalController.dismiss();
   }
 }

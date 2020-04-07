@@ -78,20 +78,20 @@ export class FirebaseAuth {
   setCancha() {
     this.db.collection("canchas").doc("3") //CAMBIAR DOC TMBBBBBBBBB
       .set({
-          id: 3,
-          nombre: "El nacional",
-          ubicacion: "14 de Julio 3250",
-          telefono: 2914860739,
-          precio: 700,
-          imagen: "https://viapais.com.ar/files/2018/11/20181128175803_35398258_0_body.jpg",
-          estrellas: 1,
-          descripcion: "El Club El Nacional es un club polideportivo de la ciudad de Bahía Blanca, Argentina fundado en septiembre de 1919.",
-          deporte: "tennis",
-          cronograma: firebase.firestore.Timestamp.fromDate(new Date("December 10, 1815")),
-          coordenadas: [38.7066358, 62.2532615],
-          comentarios: [],
-          techada: false,
-          piso: "ladrillo"
+        id: 3,
+        nombre: "El nacional",
+        ubicacion: "14 de Julio 3250",
+        telefono: 2914860739,
+        precio: 700,
+        imagen: "https://viapais.com.ar/files/2018/11/20181128175803_35398258_0_body.jpg",
+        estrellas: 1,
+        descripcion: "El Club El Nacional es un club polideportivo de la ciudad de Bahía Blanca, Argentina fundado en septiembre de 1919.",
+        deporte: "tennis",
+        cronograma: firebase.firestore.Timestamp.fromDate(new Date("December 10, 1815")),
+        coordenadas: [38.7066358, 62.2532615],
+        comentarios: [],
+        techada: false,
+        piso: "ladrillo"
       })
       .then(function () {
         console.log("Se agrego correctamente");
@@ -112,17 +112,17 @@ export class FirebaseAuth {
             hayResultado = true;
           });
 
-          if (!hayResultado){
+          if (!hayResultado) {
 
             reject();
             console.log("me estoy volviendo loca");
-            
+
           }
         })
-        .catch(function(error) {
+        .catch(function (error) {
           console.log("Error getting documents: ", error);
-      });
-  
+        });
+
     })
   }
 
@@ -147,7 +147,7 @@ export class FirebaseAuth {
 
   }
 
-  filterOneCondition(condition, value, sport){
+  filterOneCondition(condition, value, sport) {
     return new Promise((resolve, reject) => {
       this.db.collection("canchas").where("deporte", "==", sport).where(condition, "==", value)
         .get().then(function (querySnapshot) {
@@ -160,7 +160,7 @@ export class FirebaseAuth {
     })
   }
 
-  filterTwoConditions(condition, value, condition2, value2, sport){
+  filterTwoConditions(condition, value, condition2, value2, sport) {
     return new Promise((resolve, reject) => {
       this.db.collection("canchas").where("deporte", "==", sport).where(condition, "==", value).where(condition2, "==", value2)
         .get().then(function (querySnapshot) {
@@ -173,7 +173,7 @@ export class FirebaseAuth {
     })
   }
 
-  filterTreeConditions(condition, value, condition2, value2, condition3, value3, sport){
+  filterTreeConditions(condition, value, condition2, value2, condition3, value3, sport) {
     return new Promise((resolve, reject) => {
       this.db.collection("canchas").where("deporte", "==", sport).where(condition, "==", value).where(condition2, "==", value2).where(condition3, "==", value3)
         .get().then(function (querySnapshot) {
@@ -202,6 +202,27 @@ export class FirebaseAuth {
       })
   }
 
+
+  getUid() {
+    return new Promise((resolve, reject) => {
+      firebase.auth().onAuthStateChanged(function (user) {
+        if (user) {
+          var uid = user.uid;
+          resolve(uid);
+        }
+      });
+    });
+  }
+
+  getReservas(uid) {
+    return new Promise((resolve, reject) => {
+      this.db.collection("reservas").doc(uid)
+        .get().then(function (querySnapshot) {
+          resolve(querySnapshot.data().canchas);
+        });
+    })
+  }
+
   resetPassword(email: string): Promise<void> {
     return firebase.auth().sendPasswordResetEmail(email);
   }
@@ -218,6 +239,18 @@ export class FirebaseAuth {
           resolve(displayName);
         }
       });
+    });
+  }
+
+  updateUserName(userName: string) {
+    return new Promise((resolve, reject) => {
+      firebase.auth().onAuthStateChanged(function (user) {
+        if (user) {
+          user.updateProfile({
+            displayName: "lola garcia"
+          })
+        }
+      })
     });
   }
 
