@@ -13,8 +13,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-
+<ion-content>  
   <ion-card *ngIf="cancha">
     <ion-card-header>
       <ion-img src="{{cancha.imagen}}"></ion-img>
@@ -45,7 +44,7 @@
     <ion-item>
       <ion-label *ngIf="cancha.comentarios.length == 0" class="noComments">No hay comentarios aun.</ion-label>
       <div *ngIf="cancha.comentarios || cancha.comentarios.length != 0">
-        <ion-item  *ngFor="let comentario of cancha.comentarios; let i = index">
+        <ion-item *ngFor="let comentario of cancha.comentarios; let i = index">
           <ion-avatar slot="start">
             <img src="../../assets/images/usuario.jpg">
           </ion-avatar>

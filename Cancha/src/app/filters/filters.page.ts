@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { ModalController, NavParams, ToastController, LoadingController } from '@ionic/angular';
 import { FilterService } from 'src/services/filter.service';
 import { FirebaseAuth } from 'src/services/FirebaseAuth';
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'app-filters',
@@ -12,8 +13,6 @@ export class FiltersPage implements OnInit {
 
   @Input() sport: string;
 
-  private horaActual: number = new Date().getTime();
-  private actualDate: String = new Date().toISOString();
 
   private monthNames = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
   private hours = [];
@@ -39,12 +38,38 @@ export class FiltersPage implements OnInit {
 
   constructor(private modalController: ModalController, private navParams: NavParams,
     private firebaseAuth: FirebaseAuth, private loadingController: LoadingController,
-    private toastController: ToastController, private filterService: FilterService) {
+    private toastController: ToastController, private filterService: FilterService,
+    private storage: Storage) {
     this.setHours();
     this.sport = navParams.get('sport');
-  }
+    }
+  
 
   ngOnInit() {
+    this.getStorage();
+  }
+
+
+  getStorage() {
+    this.storage.get('materialModelo').then((material) => {
+      if (material)
+        this.materialModelo = material;
+    });
+    this.storage.get('horariosModelo').then((horario) => {
+      if (horario)
+        this.horariosModelo = horario;
+    });
+
+    if (this.sport == "futbol") {
+      this.storage.get('cantJugadoresModelo').then((jugadores) => {
+        if (jugadores)
+          this.cantJugadoresModelo = jugadores;
+      });
+      this.storage.get('tipoCanchaModelo').then((cancha) => {
+        if (cancha)
+          this.tipoCanchaModelo = cancha;
+      });
+    }
   }
 
   dismiss() {
@@ -107,7 +132,17 @@ export class FiltersPage implements OnInit {
     this.tipoCanchaDisabled = true;
   }
 
+  saveStorage() {
+    this.storage.set('materialModelo', this.materialModelo);
+    this.storage.set('horariosModelo', this.horariosModelo);
+    if (this.sport == "futbol") {
+      this.storage.set('cantJugadoresModelo', this.cantJugadoresModelo);
+      this.storage.set('tipoCanchaModelo', this.tipoCanchaModelo);
+    }
+  }
+
   filtrar() {
+    this.saveStorage();
     if (this.sport == "futbol")
       this.filterFutbol();
     else

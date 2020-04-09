@@ -31,6 +31,7 @@ import { CommentsPageModule } from './comments/comments.module';
 import { HelpPageModule } from './help/help.module';
 import { CanchaPageModule } from './cancha/cancha.module';
 import { PayPageModule } from './pay/pay.module';
+import { Storage } from '@ionic/storage';
 
 
 @NgModule({

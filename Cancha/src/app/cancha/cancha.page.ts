@@ -12,11 +12,13 @@ import { PayPage } from '../pay/pay.page';
 export class CanchaPage {
 
   @Input() id: number;
+  @Input() date;
   private cancha;
 
   constructor(navParams: NavParams, private modalController: ModalController, 
     private loadingController: LoadingController, private firebaseAuth: FirebaseAuth) {
     this.id = navParams.get('id');
+    this.date = navParams.get('date');
 
     this.presentLoading().then(() => {
       this.firebaseAuth.getDocument(this.id).then((cancha) => {
@@ -31,7 +33,8 @@ export class CanchaPage {
       component: PayPage,
       componentProps:
       {
-        cancha: this.cancha
+        cancha: this.cancha,
+        date: this.date
       }
     });
     return await modal.present();

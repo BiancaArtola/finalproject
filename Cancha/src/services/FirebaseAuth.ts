@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import * as firebase from 'firebase/app';
 import 'firebase/auth';
 import { environment } from 'src/environments/environment';
+import { ReservasPage } from 'src/app/reservas/reservas.page';
 
 @Injectable({
   providedIn: 'root'
@@ -153,6 +154,8 @@ export class FirebaseAuth {
         .get().then(function (querySnapshot) {
           let canchas = [];
           querySnapshot.forEach(function (doc) {
+            
+            console.log(doc.data());
             canchas.push(doc.data())
           });
           resolve(canchas);
@@ -214,11 +217,56 @@ export class FirebaseAuth {
     });
   }
 
+  setReserva(uid, nombre, icono){
+    this.db.collection("reservas").doc(uid).update(
+      {
+        canchas: firebase.firestore.FieldValue.arrayUnion({
+          fecha: firebase.firestore.Timestamp.fromDate(new Date()),
+          nombre: nombre,
+          icono: icono,
+          id: Date.now()
+        })
+      })
+  }
+
   getReservas(uid) {
     return new Promise((resolve, reject) => {
       this.db.collection("reservas").doc(uid)
         .get().then(function (querySnapshot) {
           resolve(querySnapshot.data().canchas);
+        });
+    })
+  }
+
+  cancelarReserva(uid){
+    //console.log(id);
+    
+    return new Promise((resolve, reject) => {
+      this.db.collection("reservas").doc(uid)
+      .get().then(function (querySnapshot) {
+
+        console.log("KE ONDIIII");
+        
+        querySnapshot.forEach(function(doc) {
+          console.log(doc.data());
+          
+          //doc.ref.delete();
+        });
+
+      });
+    });
+  }
+
+  getCancha(id:number){
+    return new Promise((resolve, reject) => {
+      this.db.collection("canchas").where("id", "==", id)
+        .get().then((cancha) => {
+          let canchas = [];
+          cancha.forEach(function (doc) {
+            
+            canchas.push(doc.data())
+          });          
+          resolve(canchas[0]);
         });
     })
   }

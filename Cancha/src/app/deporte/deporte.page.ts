@@ -6,6 +6,9 @@ import { Router, ActivatedRoute, Params, NavigationExtras } from '@angular/route
 import { FirebaseAuth } from 'src/services/FirebaseAuth';
 import { FiltersPage } from '../filters/filters.page';
 import { OrderPage } from '../order/order.page';
+import { Storage } from '@ionic/storage';
+import { storage } from 'firebase';
+
 
 @Component({
   selector: 'app-deporte',
@@ -16,15 +19,24 @@ export class DeportePage {
 
   private date;
   private actualDate: String = new Date().toISOString();
-  monthNames = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
+  private maxDay;
+
+  private dateModel = new Date().toISOString();
+
+  private monthNames = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
 
   private sport: String;
   private canchas;
 
 
-
   constructor(private router: Router, private datePicker: DatePicker, private firebaseAuth: FirebaseAuth,
-    public modalController: ModalController, private route: ActivatedRoute, private loadingController: LoadingController) { }
+    public modalController: ModalController, private route: ActivatedRoute,
+    private loadingController: LoadingController, private storage: Storage) {
+    this.maxDay = new Date();
+    this.maxDay.setDate(this.maxDay.getDate() + 10);
+    this.maxDay = this.maxDay.toISOString();
+
+  }
 
   ngOnInit() {
     this.route.params.subscribe((params: Params) => {
@@ -34,11 +46,8 @@ export class DeportePage {
         this.firebaseAuth.getDocumentsWithSport(this.sport).then((information) => {
           this.canchas = information;
           this.loadingController.dismiss();
-          console.log(this.canchas);
-
         });
       })
-
     });
   }
 
@@ -49,21 +58,6 @@ export class DeportePage {
     await loading.present();
   }
 
-  /**
-   * Metodo utilizado para abrir el selector de fecha y hora
-   */
-  showDatePicker() {
-    this.datePicker.show({
-      date: new Date(),
-      mode: 'date',
-      androidTheme: this.datePicker.ANDROID_THEMES.THEME_HOLO_DARK
-    }).then(
-      date => {
-        this.date = date;
-      },
-      err => console.log('Error occurred while getting date: ', err)
-    );
-  }
 
   async openMaps() {
     let navigationExtras: NavigationExtras = {
@@ -76,11 +70,13 @@ export class DeportePage {
   }
 
   async openCourts(id: number) {
+    this.clearStorage();
     const modal = await this.modalController.create({
       component: CanchaPage,
       componentProps:
       {
-        id: id
+        id: id,
+        date: this.dateModel
       }
     });
     return await modal.present();
@@ -97,8 +93,8 @@ export class DeportePage {
     });
     await modal.present();
     const { data } = await modal.onWillDismiss();
-    
-    if (data != null){
+
+    if (data != null) {
       this.canchas = data;
       this.loadingController.dismiss();
     }
@@ -147,6 +143,17 @@ export class DeportePage {
         return 0;
       });
     }
+  }
+
+
+  clearStorage() {
+    console.log("aca");
+    
+    this.storage.set('materialModelo', null);
+    this.storage.set('horariosModelo', null);
+
+    this.storage.set('cantJugadoresModelo', null);
+    this.storage.set('tipoCanchaModelo', null);
   }
 
 }

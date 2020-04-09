@@ -1,6 +1,6 @@
 var uno = {
       id: 0,
-      nombre: "UNO Bahia Club",
+      nombre: "uno bahia club",
       ubicacion: "Lavalle 605, B8000 Bahía Blanca, Buenos Aires",
       telefono: 2914501012,
       precio: 1500,
@@ -12,12 +12,13 @@ var uno = {
       coordenadas: [-38.7149182,-62.2548287],
       techada: true,
       cantJugadores: 9,
-      tipoCancha: "futbol 9"
+      tipoCancha: "futbol 9",
+      icono: "https://mercadofit1-129a8.kxcdn.com/wp-content/uploads/2019/11/Uno-Bah%C3%ADa-Club-celebr%C3%B3-20-a%C3%B1os-en-el-mercado.jpg"
 };
 
 var shopping = {
       id: 1,
-      nombre: "Shopping Futbol Club",
+      nombre: "shopping futbol club",
       ubicacion: "Raúl Scalabrini Ortiz 199",
       telefono: 2914353288,
       precio: 1500,
@@ -30,12 +31,13 @@ var shopping = {
       comentarios: ["Excelente lugar para jugar un partido y compartir un asado"],
       techada: true,
       cantJugadores: 9,
-      tipoCancha: "futbol 9"
+      tipoCancha: "futbol 9",
+      icono: "https://casarli.com.ar/images/grafico/sfc/01.jpg"
 }
 
 var desvio = {
       id: 2,
-      nombre: "El desvio",
+      nombre: "el desvio",
       ubicacion: "Esnaola 550",
       telefono: 2914546866,
       precio: 2000,
@@ -53,7 +55,7 @@ var desvio = {
 
 var elNacional = {
       id: 3,
-      nombre: "El nacional",
+      nombre: "el nacional",
       ubicacion: "14 de Julio 3250",
       telefono: 2914860739,
       precio: 700,
@@ -64,7 +66,8 @@ var elNacional = {
       cronograma: firebase.firestore.Timestamp.fromDate(new Date("December 10, 1815")),
       coordenadas: [38.7066358° S, 62.2532615° W],
       comentarios: [],
-      techada: false
+      techada: false,
+      icono: "https://pbs.twimg.com/profile_images/672493648613933056/67Aue43e_400x400.jpg"
 }
 
 

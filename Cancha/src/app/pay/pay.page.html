@@ -1,33 +1,103 @@
 <ion-content class="background">
-  <ion-icon name="arrow-round-back" (click)="goBack()" size="large" class="goBack"></ion-icon>
-
   <ion-grid>
-    <ion-row class="ion-text-center">
-      <ion-col class="labelTitle">
-        Reserva para una cancha de <b>{{cancha.deporte}}</b> en el complejo <b class="capitalize">{{cancha.nombre}}</b>
-      </ion-col>
-    </ion-row>
     <ion-row>
-      <ion-col class="ion-text-center">
-        <ion-label>
-          El precio total (el cual se debera pagar en el Complejo) es de ${{cancha.precio}}.
-        </ion-label>
+      <ion-col size="2">
+        <ion-icon name="arrow-round-back" (click)="goBack()" size="large" class="goBack"></ion-icon>
       </ion-col>
-    </ion-row>
-    <ion-row class="ion-text-center">
       <ion-col>
-        <ion-label>
-          El importe a cobrar <b>NO</b> se descontara de su tarjeta.
-          El precio de la seña es del 10% del monto total.
-          Este monto se cobrara de la tarjeta SOLO en caso de que no se concurra al turno y este no sea cancelado 24
-          horas antes.
+        <ion-label class="title">
+          <b>Concretar la reserva</b>
         </ion-label>
       </ion-col>
     </ion-row>
 
-    <ion-row>
+    <ion-card>
+      <ion-row>
+        <ion-col size="4">
+          <ion-label>
+            <b>Complejo</b>
+          </ion-label>
+        </ion-col>
+        <ion-col>
+          <ion-label class="capitalize"> {{cancha.nombre}}</ion-label>
+        </ion-col>
+      </ion-row>
+      <hr>
+
+      <ion-row>
+        <ion-col size="4">
+          <ion-label>
+            <b>Deporte</b>
+          </ion-label>
+        </ion-col>
+        <ion-col>
+          <ion-label class="capitalize"> {{cancha.deporte}}</ion-label>
+        </ion-col>
+      </ion-row>
+      <hr>
+
+      <ion-row>
+        <ion-col size="4">
+          <ion-label>
+            <b>Fecha</b>
+          </ion-label>
+        </ion-col>
+        <ion-col>
+          <ion-label>
+            Martes 12, Abril.
+          </ion-label>
+        </ion-col>
+      </ion-row>
+      <hr>
+
+      <ion-row>
+        <ion-col size="4">
+          <ion-label>
+            <b>Hora</b>
+          </ion-label>
+        </ion-col>
+        <ion-col>
+          <ion-label>
+            18:00 - 19:00hs
+          </ion-label>
+        </ion-col>
+      </ion-row>
+      <hr>
+
+      <ion-row>
+        <ion-col size="4">
+          <ion-label><b>Precio final</b></ion-label>
+        </ion-col>
+        <ion-col>
+          <ion-label> ${{cancha.precio}}</ion-label>
+        </ion-col>
+      </ion-row>
+      <hr>
+
+      <ion-row>
+        <ion-col size="4">
+          <ion-label> <b>Politica de cancelación</b></ion-label>
+        </ion-col>
+        <ion-col>
+          <ion-label>
+            El importe a cobrar <b>NO</b> se descontara de su tarjeta.
+            El precio de la seña es del 10% del monto total.
+            Este monto se cobrara de la tarjeta SOLO en caso de que no se concurra al turno y este no sea cancelado 24
+            horas antes.
+          </ion-label>
+        </ion-col>
+      </ion-row>
+
+    </ion-card>
+
+
+    <ion-row class="ion-text-center">
       <ion-col>
-        <ion-button expand="full" (click)="pay()">Realizar pago</ion-button>
+        <ion-button (click)="pay()">
+          <ion-label>
+            <b>Realizar pago</b>
+          </ion-label>
+        </ion-button>
 
       </ion-col>
     </ion-row>

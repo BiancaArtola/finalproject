@@ -9,22 +9,9 @@
   font-size: large;
   padding: 2%;
 }
-
-ion-icon {
-  padding: 3%;
-}
-
 ion-button {
   --color: black;
   --background: #f0c112;
-}
-
-ion-label {
-  font-size: medium;
-  color: gray;
-  padding-left: 3%;
-  padding-right: 3%;
-  font-style: italic;
 }
 
 ion-grid {
@@ -33,4 +20,46 @@ ion-grid {
 
 .reserveText {
   color: #f0c112;
+}
+
+.padding {
+  padding-left: 20%;
+}
+
+ion-img {
+  border: 0, 5px solid black;
+  box-shadow: 0 0 1px gray;
+}
+
+.blackandwhite {
+  filter: grayscale(100%);
+}
+
+
+.blackLetter {
+  color: black;
+}
+
+.noHayReservas {
+  font-size: small;
+  color: gray;
+  padding-left: 3%;
+  padding-right: 3%;
+  font-style: italic;
+}
+
+.ion-text-right{
+  text-align: right;
+  align-items: right;
+  justify-content: right;
+}
+
+.cancelText{
+  color:red;
+  font-size: small;
+  padding-right: 2%;
+}
+
+.cancelIcon {
+  color: red;
 }
