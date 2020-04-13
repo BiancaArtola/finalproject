@@ -109,6 +109,8 @@ export class FirebaseAuth {
           let hayResultado = false;
 
           querySnapshot.forEach(function (doc) {
+            console.log(doc.data().id);
+
             resolve(doc.data().id);
             hayResultado = true;
           });
@@ -116,7 +118,6 @@ export class FirebaseAuth {
           if (!hayResultado) {
 
             reject();
-            console.log("me estoy volviendo loca");
 
           }
         })
@@ -154,7 +155,7 @@ export class FirebaseAuth {
         .get().then(function (querySnapshot) {
           let canchas = [];
           querySnapshot.forEach(function (doc) {
-            
+
             console.log(doc.data());
             canchas.push(doc.data())
           });
@@ -217,55 +218,76 @@ export class FirebaseAuth {
     });
   }
 
-  setReserva(uid, nombre, icono){
+  setReserva(uid, nombre, icono, date) {
+
+    console.log(this.db.collection("reservas").doc(uid));
+
     this.db.collection("reservas").doc(uid).update(
       {
         canchas: firebase.firestore.FieldValue.arrayUnion({
-          fecha: firebase.firestore.Timestamp.fromDate(new Date()),
+          fecha: firebase.firestore.Timestamp.fromDate(new Date(date)),
           nombre: nombre,
           icono: icono,
           id: Date.now()
         })
-      })
+      }).catch(() => {
+        this.db.collection("reservas").doc(uid).set(
+          {
+            canchas: firebase.firestore.FieldValue.arrayUnion({
+              fecha: firebase.firestore.Timestamp.fromDate(new Date(date)),
+              nombre: nombre,
+              icono: icono,
+              id: Date.now()
+            })
+          })
+      }
+      )
+
   }
 
   getReservas(uid) {
     return new Promise((resolve, reject) => {
       this.db.collection("reservas").doc(uid)
         .get().then(function (querySnapshot) {
+          if (querySnapshot.data())
           resolve(querySnapshot.data().canchas);
         });
     })
   }
 
-  cancelarReserva(uid){
-    //console.log(id);
-    
+  cancelarReserva(uid, id) {
     return new Promise((resolve, reject) => {
-      this.db.collection("reservas").doc(uid)
-      .get().then(function (querySnapshot) {
-
-        console.log("KE ONDIIII");
-        
-        querySnapshot.forEach(function(doc) {
-          console.log(doc.data());
-          
-          //doc.ref.delete();
+      let docRef = this.db.collection("reservas").doc(uid);
+      docRef.get().then(function (querySnapshot) {
+        let index = 0;
+        querySnapshot.data().canchas.forEach(element => {
+          if (element.id == id) {
+            docRef.update({
+              canchas: firebase.firestore.FieldValue.arrayRemove({
+                fecha: querySnapshot.data().canchas[index].fecha,
+                nombre: querySnapshot.data().canchas[index].nombre,
+                icono: querySnapshot.data().canchas[index].icono,
+                id: querySnapshot.data().canchas[index].id
+              })
+            });
+            resolve(true);
+          }
+          else index++;
         });
-
       });
     });
   }
 
-  getCancha(id:number){
+
+  getCancha(id: number) {
     return new Promise((resolve, reject) => {
       this.db.collection("canchas").where("id", "==", id)
         .get().then((cancha) => {
           let canchas = [];
           cancha.forEach(function (doc) {
-            
+
             canchas.push(doc.data())
-          });          
+          });
           resolve(canchas[0]);
         });
     })
@@ -300,6 +322,15 @@ export class FirebaseAuth {
         }
       })
     });
+  }
+
+  sendMessage(mensaje){
+    return new Promise((resolve, reject) => {
+      this.db.collection("mensajes").add({
+        message: mensaje
+      }).then(()=> resolve(true))
+    });
+
   }
 
 }

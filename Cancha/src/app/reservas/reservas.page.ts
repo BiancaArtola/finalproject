@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController, AlertController } from '@ionic/angular';
+import { ModalController, AlertController, LoadingController } from '@ionic/angular';
 import { FirebaseAuth } from 'src/services/FirebaseAuth';
 
 @Component({
@@ -15,7 +15,7 @@ export class ReservasPage {
   private uid;
 
   constructor(private modalController: ModalController, private firebaseAuth: FirebaseAuth,
-    private alertController: AlertController) {
+    private alertController: AlertController, private loadingController: LoadingController) {
   }
 
   ngOnInit() {
@@ -75,11 +75,25 @@ export class ReservasPage {
     await alert.present();
   }
 
-  cancelarReserva(reserva){
-    console.log(reserva.id);
-    
-   this.firebaseAuth.cancelarReserva(this.uid);
-    
+  cancelarReserva(reserva) {
+    this.presentLoading();
+
+    this.firebaseAuth.cancelarReserva(this.uid, reserva.id).then((cancelado) => {
+      if (cancelado){
+        this.reservas = null;
+        this.reservasActivas = [];
+        this.reservasConcretadas = [];
+        this.getReservas();
+      }
+      this.loadingController.dismiss()
+    })
+
   }
+
+  async presentLoading() {
+    const loading = await this.loadingController.create();
+    await loading.present();
+  }
+
 
 }

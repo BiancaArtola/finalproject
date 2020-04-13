@@ -13,7 +13,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>  
+<ion-content>
   <ion-card *ngIf="cancha">
     <ion-card-header>
       <ion-img src="{{cancha.imagen}}"></ion-img>
@@ -27,14 +27,51 @@
     </ion-card-header>
 
     <ion-card-content>
-      {{cancha.descripcion}}
+      <ion-text class="descriptionText"> {{cancha.descripcion}}</ion-text>
+
     </ion-card-content>
 
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-label>
+            <b>Deporte: </b>
+          </ion-label>
+          <ion-label class="capitalize">
+            {{cancha.deporte}}
+          </ion-label>
+        </ion-col>
+       
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-label>
+            <b>Tipo de piso:</b>
+          </ion-label>
+          <ion-label class="capitalize">
+            {{cancha.piso}}
+          </ion-label>
+        </ion-col>
+       
+      </ion-row>
+      <!-- <ion-row>
+        <ion-label>
+          <b>Horarios disponibles</b>
+        </ion-label>
+      </ion-row>
 
-    <ion-button expand="full" (click)="openPagos()">
-      <b>Reservar</b>
-    </ion-button>
+      <ion-row>
+        <ion-col *ngFor="let hora of horas">
+          <ion-button class="buttonHours" (click)="updateActive(hora)" [ngClass]="{ 'buttonTouched': active === hora}">
+            {{hora}}:00</ion-button>
+        </ion-col>
+      </ion-row> -->
+
+    </ion-grid>
+
   </ion-card>
+
+
 
   <ion-list *ngIf="cancha">
     <ion-list-header>
@@ -62,3 +99,13 @@
   </ion-list>
 
 </ion-content>
+
+<ion-footer>
+
+  <div class="padding">
+    <ion-button expand="full" (click)="openPagos()">
+      <b>Reservar</b>
+    </ion-button>
+
+  </div>
+</ion-footer>

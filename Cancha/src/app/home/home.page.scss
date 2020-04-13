@@ -9,10 +9,6 @@ ion-content {
     padding-bottom: 3%;
   }
 
-  .ion-text-center {
-    align-items: center;
-  }
-
   .title {
     font-size: 1.3em;
     padding-left: 3%;
@@ -51,5 +47,29 @@ ion-content {
     border: solid 1px rgb(185, 184, 184);
     border-radius: 5px;
     padding-left: 10%
+  }
+
+  .miniIcon{
+    padding: 2%
+  }
+
+  .ubicationLabel{
+    font-size: small;
+  }
+
+  .nameText {
+    font-size: large;
+  }
+
+  ion-card{
+    padding: 0%;
+  }
+
+  ion-grid {
+    padding: 0%
+  }
+
+  ion-item {
+    padding: 0%
   }
 }

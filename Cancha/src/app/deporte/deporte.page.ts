@@ -147,7 +147,6 @@ export class DeportePage {
 
 
   clearStorage() {
-    console.log("aca");
     
     this.storage.set('materialModelo', null);
     this.storage.set('horariosModelo', null);

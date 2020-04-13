@@ -9,7 +9,7 @@
 
 ion-button {
   --color: black;
-  --background: #f0c112;
+  --background: white;
 }
 
 .comentario {
@@ -44,8 +44,26 @@ ion-avatar {
 .noComments {
   color: gray;
   font-style: italic;
+  font-size: small;
 }
 
 ion-card-title {
   text-transform: capitalize;
+}
+
+.buttonHours{
+  --background: #F3DB83
+}
+
+.buttonTouched{ 
+  --background: #f0c112;
+}
+
+.padding {
+  padding-left: 2.5%;
+  padding-right: 2.5%;
+}
+
+.descriptionText{
+  font-size: small;
 }

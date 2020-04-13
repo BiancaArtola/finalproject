@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { NavParams, ModalController, LoadingController } from '@ionic/angular';
+import { NavParams, ModalController, LoadingController, AlertController } from '@ionic/angular';
 import { FirebaseAuth } from 'src/services/FirebaseAuth';
 import { CommentsPage } from '../comments/comments.page';
 import { PayPage } from '../pay/pay.page';
@@ -14,8 +14,12 @@ export class CanchaPage {
   @Input() id: number;
   @Input() date;
   private cancha;
+  private horas = [19, 20, 21, 22];
+  private active;
 
-  constructor(navParams: NavParams, private modalController: ModalController, 
+
+  constructor(navParams: NavParams, private modalController: ModalController,
+    private alertController: AlertController,
     private loadingController: LoadingController, private firebaseAuth: FirebaseAuth) {
     this.id = navParams.get('id');
     this.date = navParams.get('date');
@@ -23,21 +27,38 @@ export class CanchaPage {
     this.presentLoading().then(() => {
       this.firebaseAuth.getDocument(this.id).then((cancha) => {
         this.cancha = cancha;
-        this.loadingController.dismiss();                
+        this.loadingController.dismiss();
       })
-    })  
+    })
+  }
+
+  updateActive(hora) {
+    this.active = hora;
   }
 
   async openPagos() {
-    const modal = await this.modalController.create({
-      component: PayPage,
-      componentProps:
-      {
-        cancha: this.cancha,
-        date: this.date
-      }
+    if (this.active) {
+      const modal = await this.modalController.create({
+        component: PayPage,
+        componentProps:
+        {
+          cancha: this.cancha,
+          date: this.date,
+          hora: this.active
+        }
+      });
+      return await modal.present();
+    }
+    else 
+    this.showMessage("Debe seleccionar un horario para comenzar con la reserva")
+  }
+
+  async showMessage(header) {
+    const alert = await this.alertController.create({
+      header: header,
+      buttons: ['OK']
     });
-    return await modal.present();
+    await alert.present();
   }
 
   async presentLoading() {

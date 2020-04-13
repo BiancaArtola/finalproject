@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { ToastController, ModalController } from '@ionic/angular';
-import { EmailComposer } from '@ionic-native/email-composer/ngx';
+import { ToastController, ModalController, LoadingController } from '@ionic/angular';
+import { FirebaseAuth } from 'src/services/FirebaseAuth';
 
 @Component({
   selector: 'app-message',
@@ -11,8 +11,12 @@ export class MessagePage {
 
   private contenido: string;
 
-  constructor(public toastController: ToastController, private emailComposer: EmailComposer,
-    private modalController: ModalController) { }
+
+  constructor(public toastController: ToastController, private loadingController: LoadingController,
+    private modalController: ModalController, private firebaseAuth: FirebaseAuth,
+   ) {
+
+  }
 
 
   /* Envia un mail al correo seleccionado con la sugerencia del usuario*/
@@ -20,16 +24,13 @@ export class MessagePage {
     if (this.contenido == null || !this.contenido)
       this.showToast("No has escrito ningun mensaje.")
     else {
-      let email = {
-        to: 'bian.artola@hotmail.com',
-        subject: 'Mensaje de sugerencia',
-        body: this.contenido,
-      }
+      this.presentLoading();
+      this.firebaseAuth.sendMessage(this.contenido).then(() => {
+        this.loadingController.dismiss();
+        this.showToast("Su mensaje ha sido enviado correctamente.");
+        this.goBack();
+      })
 
-      // Send a text message using default options
-      this.emailComposer.open(email);
-      this.showToast("Su mensaje ha sido enviado correctamente.");
-      this.goBack();
     }
 
   }
@@ -37,8 +38,7 @@ export class MessagePage {
   async showToast(message) {
     let toast = await this.toastController.create({
       message: message,
-      duration: 2000,
-      position: 'middle'
+      duration: 2000
     });
     toast.present();
   }
@@ -47,4 +47,12 @@ export class MessagePage {
   goBack() {
     this.modalController.dismiss();
   }
+
+  async presentLoading() {
+    const loading = await this.loadingController.create();
+    await loading.present();
+  }
+
+  
+
 }

@@ -10,22 +10,31 @@ import { FirebaseAuth } from 'src/services/FirebaseAuth';
 export class PayPage implements OnInit {
 
   private cancha;
-  private horas = ["18:00", "20:00", "21:00", "22:00"]
   @Input() date;
+  @Input() hora;
 
+  private fecha: string;
+  private meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
+    "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
+  ];
 
   constructor(private modalController: ModalController, private navParams: NavParams,
-    private loadingController: LoadingController, 
-    private alertController: AlertController, private firebaseAuth: FirebaseAuth) { 
-    this.cancha = navParams.get('cancha');     
+    private loadingController: LoadingController,
+    private alertController: AlertController, private firebaseAuth: FirebaseAuth) {
+    this.cancha = navParams.get('cancha');
     this.date = navParams.get('date');
-    console.log(this.date);
-     
+    this.hora = navParams.get('hora');
+
+    this.createFecha();
   }
 
   ngOnInit() {
   }
 
+  createFecha() {
+    var auxiliar = new Date(this.date);
+    this.fecha = auxiliar.getDate() + " " + this.meses[auxiliar.getMonth()] + ", " + auxiliar.getFullYear();
+  }
 
   goBack() {
     this.modalController.dismiss();
@@ -34,12 +43,14 @@ export class PayPage implements OnInit {
   pay() {
     this.loadingController.create();
     this.firebaseAuth.getUid().then((uid) => {
-      this.firebaseAuth.setReserva(uid, this.cancha.nombre, this.cancha.icono);
+      console.log(this.date);
+      
+      this.firebaseAuth.setReserva(uid, this.cancha.nombre, this.cancha.icono, this.date);
       this.showMessage("¡El pago ha sido realizado con exito!", "Podes ver la reserva en la sección 'Mis reservas'");
       this.goBack();
       this.loadingController.dismiss();
     });
-   
+
   }
 
   async showMessage(header, message) {
