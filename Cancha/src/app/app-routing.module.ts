@@ -68,6 +68,10 @@ const routes: Routes = [
     path: 'pay',
     loadChildren: () => import('./pay/pay.module').then( m => m.PayPageModule)
   },
+  {
+    path: 'date-and-hour',
+    loadChildren: () => import('./date-and-hour/date-and-hour.module').then( m => m.DateAndHourPageModule)
+  },
 ];
 
 @NgModule({

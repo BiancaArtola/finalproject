@@ -72,12 +72,6 @@
           <ion-card-title>{{cancha.nombre}}</ion-card-title>
 
         </ion-card-header>
-
-<!-- 
-        <ion-card-content>
-          <ion-label class="horarios">Horarios disponibles: 18hs, 20hs, 22hs</ion-label>          
-          
-        </ion-card-content> -->
       </ion-card>
 
     </div>
@@ -86,7 +80,7 @@
       <ion-text *ngIf="canchas.length == 0" class="information">
         <i> En este momento no hay cancha disponibles. </i>
       </ion-text>
-      <ion-text class="recomendationText"><b>¿Querés recomendarnos alguna?</b></ion-text>
+      <ion-text class="recomendationText" (click)="openMessages()"><b>¿Querés recomendarnos alguna?</b></ion-text>
     </div>
 
 

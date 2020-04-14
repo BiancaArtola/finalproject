@@ -1,0 +1,45 @@
+<ion-content>
+  <!-- <ion-icon class="arrow" name="arrow-round-back" (click)="goBack()" size="large" class="arrow"> </ion-icon> -->
+
+  <ion-grid>
+    <ion-row>
+      <ion-label>
+        <b>Fecha</b>
+      </ion-label>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <ion-datetime displayFormat="DD de MMMM, YYYY" [(ngModel)]="dateModel" min="{{actualDate}}" max="{{maxDay}}"
+          [monthNames]="monthNames" doneText="Aceptar" cancelText="Cancelar"></ion-datetime>
+      </ion-col>
+      <hr>
+    </ion-row>
+    <ion-row>
+      <ion-label>
+        <b>Horarios disponibles</b>
+      </ion-label>
+    </ion-row>
+
+    <ion-row>
+      <ion-col *ngFor="let hora of horas">
+        <ion-button class="buttonHours" (click)="updateActive(hora)" [ngClass]="{ 'buttonTouched': active === hora}">
+          {{hora}}:00</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+
+<ion-footer>
+  <ion-grid>
+    <ion-row class="ion-text-center">
+      <ion-col>
+        <ion-button expand="full" class="buttonContinue capitalize" (click)="openPagos()">
+          <b>Continuar</b>
+        </ion-button>
+
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-footer>

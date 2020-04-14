@@ -43,8 +43,8 @@ ion-avatar {
 
 .noComments {
   color: gray;
-  font-style: italic;
   font-size: small;
+  padding-left: 5%;
 }
 
 ion-card-title {
@@ -66,4 +66,25 @@ ion-card-title {
 
 .descriptionText{
   font-size: small;
+}
+
+.labelInformation {
+  color: black;
+  font-size: large;
+}
+
+.informationGrid{
+  padding-left: 3%
+}
+
+hr{
+  border-width: 0.2px;
+  border-color: grey;
+  background-color: grey;
+}
+
+
+.reserveButton{
+  --color: black;
+  --background: #f0c112;
 }

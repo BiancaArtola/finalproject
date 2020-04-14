@@ -5,7 +5,7 @@
     </ion-buttons>
     <ion-buttons slot="end">
       <ion-text color="warning" class="city-name"> <b> Bahia Blanca </b></ion-text>
-      <ion-icon src="assets/icon/chevron-down.png" color="warning"></ion-icon>
+      <ion-icon src="assets/icon/chevron-down.svg"></ion-icon>
     </ion-buttons>
     <ion-title>
     </ion-title>
@@ -15,7 +15,7 @@
 <ion-content>
   <hr>
   <ion-label class="title">
-    <b> Selecciona un deporte </b>
+    <b> Seleccioná un deporte </b>
   </ion-label>
 
   <ion-grid>
@@ -58,40 +58,39 @@
 
   <hr>
   <ion-label class="title">
-    <b> Descubri nuestras canchas </b>
+    <b> Descubrí nuestras canchas </b>
   </ion-label>
-
-  <ion-card *ngFor="let number of [0,1]" (click)="openCourt(number)">
-    <ion-item *ngIf="canchas">
-      <ion-grid>
-        <ion-row  class="ion-text-center">
-          <ion-col size="4">
-            <ion-img src="{{canchas[number].imagen}}"></ion-img>
-          </ion-col>
-          <ion-col size="8">
-            <ion-card-content>
-              <ion-row>               
-                <b class="capitalize">{{canchas[number].nombre}}</b> 
-              </ion-row>
-              <ion-row>
-               <ion-label class="ubicationLabel">                 {{canchas[number].ubicacion}} 
-              </ion-label>
-              </ion-row>
-              <ion-row>
-                <ion-icon src="../../assets/icon/svg/{{canchas[number].deporte}}.svg"
-                class="miniIcon"></ion-icon>
-                <ion-label class="capitalize ubicationLabel">{{canchas[number].deporte}}</ion-label>
-              </ion-row>
-            </ion-card-content>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-    </ion-item>
-  </ion-card>
-
-  <ion-label *ngIf="!canchas" class="labelCanchas">No hay canchas disponibles por el momento.</ion-label>
-
   <hr>
+  <div *ngIf="!canchas">
+    <ion-label class="labelCanchas">No hay canchas disponibles por el momento.</ion-label>
+    <hr>
+  </div>
+
+  <div *ngIf="canchas">
+    <ion-card *ngFor="let number of [0,1,3]" (click)="openCourt(number)">
+      <ion-item>
+        <ion-grid>
+          <ion-row class="ion-text-center">
+            <ion-col size="4">
+              <ion-img src="{{canchas[number].imagen}}"></ion-img>
+            </ion-col>
+            <ion-col size="8">
+              <ion-card-content>
+                <ion-row>
+                  <b class="capitalize">{{canchas[number].nombre}}</b>
+                </ion-row>
+                <ion-row>
+                  <ion-label class="ubicationLabel"> {{canchas[number].ubicacion}}
+                  </ion-label>
+                </ion-row>
+
+              </ion-card-content>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-item>
+    </ion-card>
+  </div>
 
   <ion-grid>
     <ion-row>

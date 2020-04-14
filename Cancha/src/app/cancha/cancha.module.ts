@@ -11,6 +11,7 @@ import { CanchaPage } from './cancha.page';
 
 import { CommentsPageModule } from '../comments/comments.module';
 import { PayPageModule } from '../pay/pay.module';
+import { DateAndHourPageModule } from '../date-and-hour/date-and-hour.module';
 
 @NgModule({
   imports: [
@@ -20,6 +21,7 @@ import { PayPageModule } from '../pay/pay.module';
     // ReservasPageModule,
     CommentsPageModule,
     PayPageModule,
+    DateAndHourPageModule,
     CanchaPageRoutingModule
   ],
   declarations: [CanchaPage]

@@ -8,6 +8,7 @@ import { FiltersPage } from '../filters/filters.page';
 import { OrderPage } from '../order/order.page';
 import { Storage } from '@ionic/storage';
 import { storage } from 'firebase';
+import { MessagePage } from '../message/message.page';
 
 
 @Component({
@@ -114,7 +115,8 @@ export class DeportePage {
     await modal.present();
 
     const { data } = await modal.onWillDismiss();
-    this.reorderArray(data);
+    if (data)
+     this.reorderArray(data);
   }
 
   reorderArray(data) {
@@ -153,6 +155,14 @@ export class DeportePage {
 
     this.storage.set('cantJugadoresModelo', null);
     this.storage.set('tipoCanchaModelo', null);
+  }
+
+  async openMessages() {
+    
+    const modal = await this.modalController.create({
+      component: MessagePage,
+    });
+    return await modal.present();
   }
 
 }

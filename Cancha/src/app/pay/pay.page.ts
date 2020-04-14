@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ModalController, NavParams, AlertController, LoadingController } from '@ionic/angular';
 import { FirebaseAuth } from 'src/services/FirebaseAuth';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-pay',
@@ -19,7 +20,7 @@ export class PayPage implements OnInit {
   ];
 
   constructor(private modalController: ModalController, private navParams: NavParams,
-    private loadingController: LoadingController,
+    private loadingController: LoadingController,private router: Router,
     private alertController: AlertController, private firebaseAuth: FirebaseAuth) {
     this.cancha = navParams.get('cancha');
     this.date = navParams.get('date');
@@ -43,12 +44,10 @@ export class PayPage implements OnInit {
   pay() {
     this.loadingController.create();
     this.firebaseAuth.getUid().then((uid) => {
-      console.log(this.date);
       
       this.firebaseAuth.setReserva(uid, this.cancha.nombre, this.cancha.icono, this.date);
-      this.showMessage("¡El pago ha sido realizado con exito!", "Podes ver la reserva en la sección 'Mis reservas'");
-      this.goBack();
       this.loadingController.dismiss();
+      this.showMessage("¡El pago ha sido realizado con exito!", "Podes ver la reserva en la sección 'Mis reservas'");
     });
 
   }
@@ -57,7 +56,15 @@ export class PayPage implements OnInit {
     const alert = await this.alertController.create({
       header: header,
       message: message,
-      buttons: ['OK']
+      buttons: [
+        {
+          text: 'Ok',
+          handler: () => {
+            this.router.navigate(['/home']);
+            this.modalController.dismiss(true);
+          }
+        }
+      ]
     });
     await alert.present();
   }

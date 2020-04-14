@@ -25,13 +25,18 @@
         {{cancha.ubicacion}}
       </ion-card-subtitle>
     </ion-card-header>
-
     <ion-card-content>
       <ion-text class="descriptionText"> {{cancha.descripcion}}</ion-text>
-
     </ion-card-content>
 
-    <ion-grid>
+    <ion-grid class="informationGrid">
+      <hr>
+
+      <ion-row>
+        <ion-col>
+          <ion-label class="labelInformation">Información adicional</ion-label>
+        </ion-col>
+      </ion-row>
       <ion-row>
         <ion-col>
           <ion-label>
@@ -41,7 +46,7 @@
             {{cancha.deporte}}
           </ion-label>
         </ion-col>
-       
+
       </ion-row>
       <ion-row>
         <ion-col>
@@ -52,20 +57,30 @@
             {{cancha.piso}}
           </ion-label>
         </ion-col>
-       
-      </ion-row>
-      <!-- <ion-row>
-        <ion-label>
-          <b>Horarios disponibles</b>
-        </ion-label>
-      </ion-row>
 
-      <ion-row>
-        <ion-col *ngFor="let hora of horas">
-          <ion-button class="buttonHours" (click)="updateActive(hora)" [ngClass]="{ 'buttonTouched': active === hora}">
-            {{hora}}:00</ion-button>
+      </ion-row>
+      <ion-row *ngIf="cancha.deporte == 'futbol'">
+        <ion-col>
+          <ion-label>
+            <b>Cantidad de jugadores por equipo:</b>
+          </ion-label>
+          <ion-label class="capitalize">
+            {{cancha.cantJugadores}}
+          </ion-label>
         </ion-col>
-      </ion-row> -->
+
+      </ion-row>
+      <ion-row *ngIf="cancha.deporte == 'futbol'">
+        <ion-col>
+          <ion-label>
+            <b>Tipo de cancha:</b>
+          </ion-label>
+          <ion-label class="capitalize">
+            {{cancha.tipoCancha}}
+          </ion-label>
+        </ion-col>
+
+      </ion-row>
 
     </ion-grid>
 
@@ -78,9 +93,13 @@
       <b>Comentarios </b>
     </ion-list-header>
 
-    <ion-item>
-      <ion-label *ngIf="cancha.comentarios.length == 0" class="noComments">No hay comentarios aun.</ion-label>
-      <div *ngIf="cancha.comentarios || cancha.comentarios.length != 0">
+    <div *ngIf="cancha.comentarios.length == 0">
+      <ion-label class="noComments">Esta cancha no tiene comentarios. ¡Se el primero!</ion-label>
+    </div>
+
+
+
+    <ion-item *ngIf="cancha.comentarios.length != 0">
         <ion-item *ngFor="let comentario of cancha.comentarios; let i = index">
           <ion-avatar slot="start">
             <img src="../../assets/images/usuario.jpg">
@@ -90,7 +109,6 @@
             <p><i>"{{cancha.comentarios[i].comentario}}"</i></p>
           </ion-label>
         </ion-item>
-      </div>
     </ion-item>
 
     <div class="ion-text-end">
@@ -103,8 +121,8 @@
 <ion-footer>
 
   <div class="padding">
-    <ion-button expand="full" (click)="openPagos()">
-      <b>Reservar</b>
+    <ion-button expand="full" (click)="openDateHour()" class="reserveButton">
+      <b class="capitalize">Reservar</b>
     </ion-button>
 
   </div>

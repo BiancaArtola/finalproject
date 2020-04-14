@@ -3,6 +3,7 @@ import { NavParams, ModalController, LoadingController, AlertController } from '
 import { FirebaseAuth } from 'src/services/FirebaseAuth';
 import { CommentsPage } from '../comments/comments.page';
 import { PayPage } from '../pay/pay.page';
+import { DateAndHourPage } from '../date-and-hour/date-and-hour.page';
 
 @Component({
   selector: 'app-cancha',
@@ -14,8 +15,6 @@ export class CanchaPage {
   @Input() id: number;
   @Input() date;
   private cancha;
-  private horas = [19, 20, 21, 22];
-  private active;
 
 
   constructor(navParams: NavParams, private modalController: ModalController,
@@ -32,33 +31,18 @@ export class CanchaPage {
     })
   }
 
-  updateActive(hora) {
-    this.active = hora;
-  }
-
-  async openPagos() {
-    if (this.active) {
-      const modal = await this.modalController.create({
-        component: PayPage,
-        componentProps:
-        {
+  async openDateHour() {
+    const modal = await this.modalController.create({
+      component: DateAndHourPage,
+      componentProps: {
           cancha: this.cancha,
-          date: this.date,
-          hora: this.active
-        }
-      });
-      return await modal.present();
-    }
-    else 
-    this.showMessage("Debe seleccionar un horario para comenzar con la reserva")
-  }
+          date: this.date,      
+      },
+      cssClass: 'my-custom-modal-css'
 
-  async showMessage(header) {
-    const alert = await this.alertController.create({
-      header: header,
-      buttons: ['OK']
+      
     });
-    await alert.present();
+    return await modal.present();
   }
 
   async presentLoading() {

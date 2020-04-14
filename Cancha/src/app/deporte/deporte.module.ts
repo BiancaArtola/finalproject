@@ -11,6 +11,7 @@ import { CanchaPageModule } from '../cancha/cancha.module';
 import { MapsPageModule } from '../maps/maps.module';
 import { FiltersPageModule } from '../filters/filters.module';
 import { OrderPageModule } from '../order/order.module';
+import { MessagePageModule } from '../message/message.module';
 
 @NgModule({
   imports: [
@@ -21,6 +22,7 @@ import { OrderPageModule } from '../order/order.module';
     CanchaPageModule,
     FiltersPageModule,
     MapsPageModule,
+    MessagePageModule,
     OrderPageModule
   ],
   declarations: [DeportePage]

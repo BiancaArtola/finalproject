@@ -16,7 +16,7 @@
 @import "~@ionic/angular/css/normalize.css";
 @import "~@ionic/angular/css/structure.css";
 @import "~@ionic/angular/css/typography.css";
-@import '~@ionic/angular/css/display.css';
+@import "~@ionic/angular/css/display.css";
 
 /* Optional CSS utils that can be commented out */
 @import "~@ionic/angular/css/padding.css";
@@ -25,25 +25,25 @@
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
 
-
-ion-toolbar{
-    --background: white;
+ion-toolbar {
+  --background: white;
 }
 
 .my-custom-modal-css .modal-wrapper {
-    //height: 80%;
-  //  top: 20%;
-    width: 80%;
-    height: 60%;
-  //  position: absolute; 
-   // display: block;  
- }
+  width: 80%;
+  height: 60%;
+}
 
- .ion-text-center {
+.my-custom-modal-css2 .modal-wrapper {
+  width: 80%;
+  height: 55%;
+}
+
+.ion-text-center {
   align-items: center;
 }
 
 .capitalize {
   text-transform: capitalize;
-
 }
+
