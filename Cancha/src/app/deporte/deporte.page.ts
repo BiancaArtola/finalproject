@@ -3,12 +3,11 @@ import { ModalController, LoadingController } from '@ionic/angular';
 import { CanchaPage } from '../cancha/cancha.page';
 import { DatePicker } from '@ionic-native/date-picker/ngx';
 import { Router, ActivatedRoute, Params, NavigationExtras } from '@angular/router';
-import { FirebaseAuth } from 'src/services/FirebaseAuth';
 import { FiltersPage } from '../filters/filters.page';
 import { OrderPage } from '../order/order.page';
 import { Storage } from '@ionic/storage';
-import { storage } from 'firebase';
 import { MessagePage } from '../message/message.page';
+import { CanchasService } from 'src/services/canchas.service';
 
 
 @Component({
@@ -30,7 +29,8 @@ export class DeportePage {
   private canchas;
 
 
-  constructor(private router: Router, private datePicker: DatePicker, private firebaseAuth: FirebaseAuth,
+  constructor(private router: Router, private datePicker: DatePicker, 
+    private canchasService: CanchasService,
     public modalController: ModalController, private route: ActivatedRoute,
     private loadingController: LoadingController, private storage: Storage) {
     this.maxDay = new Date();
@@ -44,7 +44,7 @@ export class DeportePage {
       this.sport = params['sport'];
 
       this.presentLoading().then(() => {
-        this.firebaseAuth.getDocumentsWithSport(this.sport).then((information) => {
+        this.canchasService.getDocumentsWithSport(this.sport).then((information) => {
           this.canchas = information;
           this.loadingController.dismiss();
         });
@@ -78,7 +78,8 @@ export class DeportePage {
       {
         id: id,
         date: this.dateModel
-      }
+      },
+      id: "canchaModal"
     });
     return await modal.present();
   }
@@ -100,7 +101,7 @@ export class DeportePage {
       this.loadingController.dismiss();
     }
     else {
-      this.firebaseAuth.getDocumentsWithSport(this.sport).then((information) => {
+      this.canchasService.getDocumentsWithSport(this.sport).then((information) => {
         this.canchas = information;
         this.loadingController.dismiss();
       });
@@ -110,7 +111,7 @@ export class DeportePage {
   async order() {
     const modal = await this.modalController.create({
       component: OrderPage,
-      cssClass: 'my-custom-modal-css'
+      cssClass: 'my-custom-modal-css2'
     });
     await modal.present();
 
@@ -148,8 +149,7 @@ export class DeportePage {
   }
 
 
-  clearStorage() {
-    
+  clearStorage() {    
     this.storage.set('materialModelo', null);
     this.storage.set('horariosModelo', null);
 
@@ -157,8 +157,7 @@ export class DeportePage {
     this.storage.set('tipoCanchaModelo', null);
   }
 
-  async openMessages() {
-    
+  async openMessages() {    
     const modal = await this.modalController.create({
       component: MessagePage,
     });

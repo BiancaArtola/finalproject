@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController, AlertController } from '@ionic/angular';
-import { FirebaseAuth } from 'src/services/FirebaseAuth';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
+import { AuthenticationService } from 'src/services/authentication.service';
 
 @Component({
   selector: 'app-forgot-password',
@@ -12,8 +12,8 @@ export class ForgotPasswordPage {
   private resetPasswordForm: FormGroup;
   private emailModel;
 
-  constructor(private modalController: ModalController, private firebaseAuth: FirebaseAuth,
-    private alertController: AlertController, public formBuilder: FormBuilder) {
+  constructor(private modalController: ModalController,  private alertController: AlertController, 
+    public formBuilder: FormBuilder, private authenticationService: AuthenticationService) {
     this.resetPasswordForm = this.createForm();
   }
 
@@ -31,7 +31,7 @@ export class ForgotPasswordPage {
   }
 
   resetPassword() {
-    this.firebaseAuth.resetPassword(this.resetPasswordForm.value.email).then(() => {
+    this.authenticationService.resetPassword(this.resetPasswordForm.value.email).then(() => {
       this.emailModel = null;
       this.showMessage("Revise su correo", "Se ha enviado un email para recuperar su contraseña.")
     })

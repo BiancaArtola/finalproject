@@ -9,7 +9,7 @@
 }
 
 .background {
-  --background: url("../../assets/images/imagen.png") 0 0/100% 100% no-repeat;
+  --background: url("../../assets/images/prueba(1).jpg") 0 0/100% 100% no-repeat;
 }
 
 ion-icon {
@@ -27,9 +27,14 @@ ion-avatar {
 }
 
 .name {
-  font-size: x-large;
+  font-size: larger;
   text-transform: capitalize;
+  padding-bottom: 10%;
+}
 
+.email {
+  color: grey;
+  font-size: medium;
 }
 
 ion-content{
@@ -40,7 +45,33 @@ ion-content{
 }
 
 hr{
-  border-color: black;
-  border-width: 1px;
-  background-color: black;
+  border-color: grey;
+  border-width: 0.2px;
+  background-color: grey;
+  padding-left: 5%;
+  padding-right: 5%;
+}
+
+.labelDatos{
+  font-size: larger;
+  padding: 5%;
+}
+
+.labelNombre {
+  padding-left: 5%;
+  font-size: small;
+}
+
+.border {
+  padding-top: 2%
+}
+
+ion-button {
+  --color: black;
+  --background: #f0c112;
+}
+
+ion-footer {
+  padding-left: 5%;
+  padding-right: 5%;
 }

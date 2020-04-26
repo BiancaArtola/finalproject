@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ToastController, ModalController, LoadingController } from '@ionic/angular';
-import { FirebaseAuth } from 'src/services/FirebaseAuth';
+import { MensajesService } from 'src/services/mensajes.service';
 
 @Component({
   selector: 'app-message',
@@ -13,7 +13,7 @@ export class MessagePage {
 
 
   constructor(public toastController: ToastController, private loadingController: LoadingController,
-    private modalController: ModalController, private firebaseAuth: FirebaseAuth,
+    private modalController: ModalController, private mensajesService: MensajesService
    ) {
 
   }
@@ -25,7 +25,7 @@ export class MessagePage {
       this.showToast("No has escrito ningun mensaje.")
     else {
       this.presentLoading();
-      this.firebaseAuth.sendMessage(this.contenido).then(() => {
+      this.mensajesService.sendMessage(this.contenido).then(() => {
         this.loadingController.dismiss();
         this.showToast("Su mensaje ha sido enviado correctamente.");
         this.goBack();

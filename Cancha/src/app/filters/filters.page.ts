@@ -1,7 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ModalController, NavParams, ToastController, LoadingController } from '@ionic/angular';
 import { FilterService } from 'src/services/filter.service';
-import { FirebaseAuth } from 'src/services/FirebaseAuth';
 import { Storage } from '@ionic/storage';
 
 @Component({
@@ -37,7 +36,7 @@ export class FiltersPage implements OnInit {
   private toggleChecked = false;
 
   constructor(private modalController: ModalController, private navParams: NavParams,
-    private firebaseAuth: FirebaseAuth, private loadingController: LoadingController,
+    private loadingController: LoadingController,
     private toastController: ToastController, private filterService: FilterService,
     private storage: Storage) {
     this.setHours();
@@ -186,21 +185,21 @@ export class FiltersPage implements OnInit {
 
 
   filterOneCondition(condition, value) {
-    this.firebaseAuth.filterOneCondition(condition, value, this.sport).then((canchas) => {
+    this.filterService.filterOneCondition(condition, value, this.sport).then((canchas) => {
       this.loadingController.create();
       this.modalController.dismiss(canchas);
     })
   }
 
   filterTwoConditions(condition1, value1, condition2, value2) {
-    this.firebaseAuth.filterTwoConditions(condition1, value1, condition2, value2, this.sport).then((canchas) => {
+    this.filterService.filterTwoConditions(condition1, value1, condition2, value2, this.sport).then((canchas) => {
       this.loadingController.create();
       this.modalController.dismiss(canchas);
     })
   }
 
   filterTreeConditions(condition1, value1, condition2, value2, condition3, value3) {
-    this.firebaseAuth.filterTreeConditions(condition1, value1, condition2, value2, condition3, value3, this.sport).then((canchas) => {
+    this.filterService.filterTreeConditions(condition1, value1, condition2, value2, condition3, value3, this.sport).then((canchas) => {
       this.loadingController.create();
       this.modalController.dismiss(canchas);
     })

@@ -1,14 +1,15 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ModalController, NavParams, AlertController, LoadingController } from '@ionic/angular';
-import { FirebaseAuth } from 'src/services/FirebaseAuth';
 import { Router } from '@angular/router';
+import { ReservasService } from 'src/services/reservas.service';
+import { AuthenticationService } from 'src/services/authentication.service';
 
 @Component({
   selector: 'app-pay',
   templateUrl: './pay.page.html',
   styleUrls: ['./pay.page.scss'],
 })
-export class PayPage implements OnInit {
+export class PayPage {
 
   private cancha;
   @Input() date;
@@ -20,16 +21,13 @@ export class PayPage implements OnInit {
   ];
 
   constructor(private modalController: ModalController, private navParams: NavParams,
-    private loadingController: LoadingController,private router: Router,
-    private alertController: AlertController, private firebaseAuth: FirebaseAuth) {
+    private loadingController: LoadingController,private router: Router, private reservasService: ReservasService,
+    private alertController: AlertController, private authenticationService: AuthenticationService) {
     this.cancha = navParams.get('cancha');
     this.date = navParams.get('date');
     this.hora = navParams.get('hora');
 
     this.createFecha();
-  }
-
-  ngOnInit() {
   }
 
   createFecha() {
@@ -43,9 +41,9 @@ export class PayPage implements OnInit {
 
   pay() {
     this.loadingController.create();
-    this.firebaseAuth.getUid().then((uid) => {
+    this.authenticationService.getUid().then((uid) => {
       
-      this.firebaseAuth.setReserva(uid, this.cancha.nombre, this.cancha.icono, this.date);
+      this.reservasService.setReserva(uid, this.cancha.nombre, this.cancha.icono, this.date);
       this.loadingController.dismiss();
       this.showMessage("¡El pago ha sido realizado con exito!", "Podes ver la reserva en la sección 'Mis reservas'");
     });
@@ -61,7 +59,9 @@ export class PayPage implements OnInit {
           text: 'Ok',
           handler: () => {
             this.router.navigate(['/home']);
-            this.modalController.dismiss(true);
+            this.goBack();
+            this.modalController.dismiss(null, null, "dateAndHourModal");
+            this.modalController.dismiss(null, null, "canchaModal");            
           }
         }
       ]

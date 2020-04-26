@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { NavParams, ModalController, ToastController } from '@ionic/angular';
-import { FirebaseAuth } from 'src/services/FirebaseAuth';
 import { Storage } from '@ionic/storage';
+import { AuthenticationService } from 'src/services/authentication.service';
 
 @Component({
   selector: 'app-comments',
@@ -14,7 +14,7 @@ export class CommentsPage implements OnInit {
   private usuario: string;
 
   constructor(private navParams: NavParams, private storage: Storage, private toastController: ToastController,
-     private firebaseAuth: FirebaseAuth, private modalController: ModalController) {
+     private authenticationService: AuthenticationService, private modalController: ModalController) {
     this.id = navParams.get('id');
 
   }
@@ -24,7 +24,7 @@ export class CommentsPage implements OnInit {
 
   sendMessage() {
     this.storage.get('user').then((usuario) => {
-      this.firebaseAuth.setComment(this.id, this.contenido)
+      this.authenticationService.setComment(this.id, this.contenido)
       this.modalController.dismiss();
       this.presentToast();
     });

@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { Storage } from '@ionic/storage';
 import { Router } from '@angular/router';
-import { ModalController, ToastController, AlertController } from '@ionic/angular';
+import { ModalController, ToastController, AlertController, LoadingController } from '@ionic/angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { FirebaseAuth } from 'src/services/FirebaseAuth';
+import { AuthenticationService } from 'src/services/authentication.service';
 
 
 @Component({
@@ -15,21 +15,21 @@ export class RegisterPage {
   myForm: FormGroup;
 
   constructor(private storage: Storage, private router: Router, private toastController: ToastController,
-    private modalController: ModalController, public formBuilder: FormBuilder, private firebaseAuth: FirebaseAuth,
-    private alertController: AlertController) {
+    private modalController: ModalController, public formBuilder: FormBuilder, private authenticationService: AuthenticationService,
+    private alertController: AlertController, private loadingController: LoadingController) {
     this.myForm = this.createMyForm();
   }
 
-  async register() {
+  async register() {  
     if (this.myForm.valid) {
       if (!this.checkPasswords()) {
+        this.presentLoading();
         var name = this.myForm.value.nombre + " " + this.myForm.value.apellido;
-        console.log(name);
         
-        this.firebaseAuth.signupUser(this.myForm.value.usuario, this.myForm.value.password, name).then(
+        this.authenticationService.signupUser(this.myForm.value.usuario, this.myForm.value.password, name).then(
           () => {
             this.goHome();
-            this.showMessage("Bienvenido", "El usuario se ha creado con exito");
+            this.loadingController.dismiss().then(()=> this.showMessage("¡Bienvenido!", "El usuario se ha creado con éxito.") )
           },
           (error) => {
             this.showMessage("Ocurrio un error", error.message);
@@ -38,6 +38,11 @@ export class RegisterPage {
       else
         this.showMessage("Ocurrio un error", "Las contraseñas no coinciden");
     }
+  }
+
+  async presentLoading() {
+    const loading = await this.loadingController.create();
+    await loading.present();
   }
 
   async showMessage(header, message) {

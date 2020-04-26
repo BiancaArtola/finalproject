@@ -1,9 +1,8 @@
 import { Component, Input } from '@angular/core';
 import { NavParams, ModalController, LoadingController, AlertController } from '@ionic/angular';
-import { FirebaseAuth } from 'src/services/FirebaseAuth';
 import { CommentsPage } from '../comments/comments.page';
-import { PayPage } from '../pay/pay.page';
 import { DateAndHourPage } from '../date-and-hour/date-and-hour.page';
+import { CanchasService } from 'src/services/canchas.service';
 
 @Component({
   selector: 'app-cancha',
@@ -18,13 +17,12 @@ export class CanchaPage {
 
 
   constructor(navParams: NavParams, private modalController: ModalController,
-    private alertController: AlertController,
-    private loadingController: LoadingController, private firebaseAuth: FirebaseAuth) {
+    private canchasService: CanchasService, private loadingController: LoadingController) {
     this.id = navParams.get('id');
     this.date = navParams.get('date');
 
     this.presentLoading().then(() => {
-      this.firebaseAuth.getDocument(this.id).then((cancha) => {
+      this.canchasService.getDocument(this.id).then((cancha) => {
         this.cancha = cancha;
         this.loadingController.dismiss();
       })
@@ -38,8 +36,10 @@ export class CanchaPage {
           cancha: this.cancha,
           date: this.date,      
       },
-      cssClass: 'my-custom-modal-css'
-
+      cssClass: 'my-custom-modal-css',
+      id: 'dateAndHourModal',
+      showBackdrop: true,
+      
       
     });
     return await modal.present();

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController, AlertController, LoadingController } from '@ionic/angular';
-import { FirebaseAuth } from 'src/services/FirebaseAuth';
+import { ReservasService } from 'src/services/reservas.service';
+import { AuthenticationService } from 'src/services/authentication.service';
 
 @Component({
   selector: 'app-reservas',
@@ -14,8 +15,9 @@ export class ReservasPage {
   private reservasConcretadas = [];
   private uid;
 
-  constructor(private modalController: ModalController, private firebaseAuth: FirebaseAuth,
-    private alertController: AlertController, private loadingController: LoadingController) {
+  constructor(private modalController: ModalController, private authenticationService: AuthenticationService,
+    private alertController: AlertController, private loadingController: LoadingController,
+    private reservasService: ReservasService) {
   }
 
   ngOnInit() {
@@ -23,9 +25,9 @@ export class ReservasPage {
   }
 
   getReservas() {
-    this.firebaseAuth.getUid().then((uid) => {
+    this.authenticationService.getUid().then((uid) => {
       this.uid = uid;
-      this.firebaseAuth.getReservas(uid).then((reservas) => {
+      this.reservasService.getReservas(uid).then((reservas) => {
         this.reservas = reservas;
         this.separeReservas()
       })
@@ -38,7 +40,8 @@ export class ReservasPage {
 
         var date: Date = element.fecha.toDate();
         var formatDate = date.getDate() + "/" + date.getMonth() + "/" + date.getFullYear();
-        if (element.fecha.seconds * 1000 < Date.now()) {
+        if ((element.fecha.seconds+86400) * 1000 < Date.now()) {
+          //La fecha de reserva + los segundos correspondientes a un dia
           element.fecha = formatDate;
           this.reservasConcretadas.push(element);
         } else {
@@ -78,7 +81,7 @@ export class ReservasPage {
   cancelarReserva(reserva) {
     this.presentLoading();
 
-    this.firebaseAuth.cancelarReserva(this.uid, reserva.id).then((cancelado) => {
+    this.reservasService.cancelarReserva(this.uid, reserva.id).then((cancelado) => {
       if (cancelado){
         this.reservas = null;
         this.reservasActivas = [];

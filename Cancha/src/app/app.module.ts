@@ -21,8 +21,6 @@ import { MessagePageModule } from './message/message.module';
 import { TutorialPageModule } from './tutorial/tutorial.module';
 import { ProfilePageModule } from './profile/profile.module';
 
-import { FirebaseAuth } from './../services/FirebaseAuth';
-
 import { HttpClientModule } from '@angular/common/http';
 import { RegisterPageModule } from './register/register.module';
 import { ReservasPageModule } from './reservas/reservas.module';
@@ -31,7 +29,9 @@ import { CommentsPageModule } from './comments/comments.module';
 import { HelpPageModule } from './help/help.module';
 import { CanchaPageModule } from './cancha/cancha.module';
 import { PayPageModule } from './pay/pay.module';
-import { Storage } from '@ionic/storage';
+import { HomePopoverPageModule } from './home-popover/home-popover.module';
+import { FilterService } from 'src/services/filter.service';
+import { ReservasService } from 'src/services/reservas.service';
 
 
 @NgModule({
@@ -53,16 +53,18 @@ import { Storage } from '@ionic/storage';
     HelpPageModule,
     CanchaPageModule,
     PayPageModule,
+    HomePopoverPageModule,
     AngularFireModule.initializeApp(environment.firebase)
   ],
   providers: [
     StatusBar,
     SplashScreen,
     DatePicker,    
-    FirebaseAuth,
     AngularFirestore,
     FirebaseAuthentication,
     // HTTP,
+    FilterService,
+    ReservasService,
     EmailComposer,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],

@@ -5,7 +5,6 @@ import { FormsModule, ReactiveFormsModule }         from '@angular/forms';
 import { RegisterPageRoutingModule } from './register-routing.module';
 
 import { RegisterPage } from './register.page';
-import { FirebaseAuth } from 'src/services/FirebaseAuth';
 
 @NgModule({
   imports: [
@@ -21,9 +20,7 @@ import { FirebaseAuth } from 'src/services/FirebaseAuth';
     ReactiveFormsModule
   ],
   providers:
-  [
-    FirebaseAuth
-  ],
+  [],
   declarations: [RegisterPage]
 })
 export class RegisterPageModule {}

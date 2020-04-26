@@ -1,11 +1,13 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Storage } from '@ionic/storage';
-import { NavController, ModalController, LoadingController, AlertController } from '@ionic/angular';
+import { NavController, ModalController, LoadingController, AlertController, PopoverController } from '@ionic/angular';
 import { TutorialPage } from '../tutorial/tutorial.page';
-import { FirebaseAuth } from 'src/services/FirebaseAuth';
 import { MessagePage } from '../message/message.page';
 import { CanchaPage } from '../cancha/cancha.page';
+import { HomePopoverPage } from '../home-popover/home-popover.page';
+import { CanchasService } from 'src/services/canchas.service';
+import { AuthenticationService } from 'src/services/authentication.service';
 
 @Component({
   selector: 'app-home',
@@ -23,8 +25,9 @@ export class HomePage {
 
 
   constructor(private router: Router, private storage: Storage, private navController: NavController,
-    private modalController: ModalController, private firebaseAuth: FirebaseAuth,
-    private loadingController: LoadingController, private alertController: AlertController) {
+    private modalController: ModalController, private authenticationService: AuthenticationService,
+    private loadingController: LoadingController, private alertController: AlertController,
+    private popoverController: PopoverController, private canchasService: CanchasService) {
 
     storage.get('user').then((val) => {
       if (!val) {
@@ -41,8 +44,7 @@ export class HomePage {
       else { //El usuario ya esta registrado entonces se dirige hacia la pagina de inicio
         console.log("Si hay usuario ", val);
         this.presentLoading().then(() => {
-          //this.firebaseAuth.setCancha();
-          this.firebaseAuth.getAllDocumentsInCollection().then(information => {
+          this.canchasService.getAllDocumentsInCollection().then(information => {
             this.canchas = information;
             this.loadingController.dismiss();
           });
@@ -51,6 +53,10 @@ export class HomePage {
 
       }
     });
+  }
+
+  ngOnInit(){
+   // this.loadingController.dismiss();
   }
 
   async presentLoading() {
@@ -112,7 +118,7 @@ export class HomePage {
   }
 
   goToLogin() {
-    this.firebaseAuth.logoutUser().then(() => {
+    this.authenticationService.logoutUser().then(() => {
       this.router.navigate(['/login']);
     }, (error) => {
       console.log("Ocurrio un error.");
@@ -123,7 +129,7 @@ export class HomePage {
   async searchSport() {
     const loading = await this.loadingController.create();
     await loading.present();
-    this.firebaseAuth.searchByName(this.modeloCancha.toLowerCase())
+    this.canchasService.searchByName(this.modeloCancha.toLowerCase())
       .then((cancha: number) => {
         this.openCourt(cancha);
         this.modeloCancha = "";
@@ -144,6 +150,15 @@ export class HomePage {
     });
     this.loadingController.dismiss();
     await alert.present();
+  }
+
+  async presentPopover(ev: any) {
+    const popover = await this.popoverController.create({
+      component: HomePopoverPage,
+      event: ev,
+      translucent: true
+    });
+    return await popover.present();
   }
 
 

@@ -1,30 +1,37 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ModalController } from '@ionic/angular';
-import { FirebaseAuth } from 'src/services/FirebaseAuth';
+import { AuthenticationService } from 'src/services/authentication.service';
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.page.html',
   styleUrls: ['./profile.page.scss'],
 })
-export class ProfilePage implements OnInit {
+export class ProfilePage {
 
   private nombre;
+  private email;
+  private showButton = false;
 
-
-  constructor(private modalController: ModalController, private firebaseAuth: FirebaseAuth) {
-    this.firebaseAuth.getUserName().then((nombre) =>{
+  constructor(private modalController: ModalController, private authenticationService: AuthenticationService) {
+    this.authenticationService.getUserName().then((nombre) =>{
       this.nombre = nombre;      
-      console.log(this.nombre);
-      
+      this.email = this.authenticationService.getEmail();
+      this.showButton=false;      
     })
-
    }
 
-  ngOnInit() {
-  }
 
   dismiss() {
     this.modalController.dismiss();
+  }
+
+  appearButton(){
+   this.showButton = true;
+  }
+
+  changeName(){
+    this.showButton = false;    
+    this.authenticationService.updateUser(this.nombre);
   }
 }

@@ -19,11 +19,56 @@
         </ion-label>
       </ion-col>
     </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-label class="email">
+           {{ email }} 
+        </ion-label>
+      </ion-col>
+    </ion-row>
   </ion-grid>
 </ion-toolbar>
 </ion-header>
 
 <ion-content class="second-background">
 
+  <ion-grid>
+    <ion-row>
+      <ion-label class="labelDatos">
+        <b>Mis datos</b>
+      </ion-label>
+    </ion-row>
+    <ion-row>
+      <ion-label class="labelNombre">
+       Nombre y apellido 
+      </ion-label>
+    </ion-row>
+    <ion-row>
+      <ion-col class="border" >
+        <ion-input  type="text" [(ngModel)]="nombre" (ionInput)="appearButton()"></ion-input>
+        <hr>
+
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-label class="labelNombre">
+        Email 
+      </ion-label>
+    </ion-row>
+    <ion-row>
+      <ion-col class="border" >
+       <ion-label>{{email}} </ion-label>
+       <hr>
+
+      </ion-col>
+    </ion-row>
+  </ion-grid>
     
 </ion-content>
+
+<ion-footer *ngIf="showButton">
+  <ion-button  (click)="changeName()" expand="full">
+    <b class="capitalize">Aplicar cambios</b>
+  </ion-button>
+</ion-footer>

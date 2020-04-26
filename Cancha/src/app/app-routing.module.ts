@@ -72,6 +72,10 @@ const routes: Routes = [
     path: 'date-and-hour',
     loadChildren: () => import('./date-and-hour/date-and-hour.module').then( m => m.DateAndHourPageModule)
   },
+  {
+    path: 'home-popover',
+    loadChildren: () => import('./home-popover/home-popover.module').then( m => m.HomePopoverPageModule)
+  },
 ];
 
 @NgModule({

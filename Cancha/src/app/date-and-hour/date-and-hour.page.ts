@@ -7,7 +7,7 @@ import { PayPage } from '../pay/pay.page';
   templateUrl: './date-and-hour.page.html',
   styleUrls: ['./date-and-hour.page.scss'],
 })
-export class DateAndHourPage implements OnInit {
+export class DateAndHourPage  {
   @Input() date;
   private actualDate: String = new Date().toISOString();
   private maxDay;
@@ -32,16 +32,6 @@ export class DateAndHourPage implements OnInit {
     this.maxDay = this.maxDay.toISOString();
   }
 
-  ngOnInit() {
-    console.log("aca");
-    
-  }
-
-  ionViewDidLeave(){
-    console.log("me fui de date and hour");
-    
-  }
-
   updateActive(hora) {
     this.active = hora;
   }
@@ -58,15 +48,6 @@ export class DateAndHourPage implements OnInit {
           }
         });
         await modal.present();
-        
-
-        const { data } = await modal.onDidDismiss();
-        console.log(data);
-        
-        if (data){
-          console.log("entre aca brodiiii");
-          this.dismiss();
-        }
       }
       else 
         this.showMessage("Debe seleccionar un horario para comenzar con la reserva")

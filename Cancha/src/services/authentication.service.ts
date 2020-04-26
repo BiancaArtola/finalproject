@@ -7,10 +7,12 @@ import { RootService } from './root.service';
 @Injectable({
   providedIn: 'root'
 })
-export class FirebaseAuth extends RootService {
+export class AuthenticationService extends RootService {
 
   constructor() {
     super();
+    this.db = firebase.firestore(this.app);
+
   }
 
   // getInformation(): Promise<void> {
@@ -140,5 +142,4 @@ export class FirebaseAuth extends RootService {
       });
     });
   }
-
 }
