@@ -16,13 +16,13 @@ export class LoginPage {
 
   myForm: FormGroup;
   usuario: string;
+  contrasena;
 
   constructor(private router: Router, private modalController: ModalController, 
     private authenticationService: AuthenticationService,
     public formBuilder: FormBuilder, public loadingController: LoadingController,
     private storage: Storage, private alertController: AlertController, private platform: Platform) {
     this.storage.set('user', null);
-    this.platform.backButton.unsubscribe();
     this.myForm = this.createMyForm();
   }
 
@@ -46,6 +46,8 @@ export class LoginPage {
         this.router.navigate(['/home']).then(() => this.loadingController.dismiss())
       }, (error) => {
         this.showMessage("Ocurrio un error.", error.message);
+        this.loadingController.dismiss();
+        this.contrasena = null;
       })
 
   }

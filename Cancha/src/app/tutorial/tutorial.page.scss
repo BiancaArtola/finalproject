@@ -7,20 +7,26 @@ ion-icon {
   font-size: 150px;
 }
 
-ion-title {
+.title {
   padding-top: 10%;
   font-size: xx-large;
 }
 
 .tituloChico {
   font-size: x-large;
+  word-wrap: break-word;
+
 }
 ion-label {
   font-size: medium;
+  word-wrap: break-word;
+
 }
 
 .label {
   padding: 5%;
+  word-wrap: break-word;
+
 }
 
 ion-button {
@@ -53,4 +59,8 @@ ion-img {
 ion-slides {
   --bullet-background: black;
   --bullet-background-active: grey;
+}
+
+ion-slide {
+  display: block
 }

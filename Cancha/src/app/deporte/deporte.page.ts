@@ -28,8 +28,10 @@ export class DeportePage {
   private sport: String;
   private canchas;
 
+  private loading = true;
 
-  constructor(private router: Router, private datePicker: DatePicker, 
+
+  constructor(private router: Router, private datePicker: DatePicker,
     private canchasService: CanchasService,
     public modalController: ModalController, private route: ActivatedRoute,
     private loadingController: LoadingController, private storage: Storage) {
@@ -43,12 +45,11 @@ export class DeportePage {
     this.route.params.subscribe((params: Params) => {
       this.sport = params['sport'];
 
-      this.presentLoading().then(() => {
-        this.canchasService.getDocumentsWithSport(this.sport).then((information) => {
-          this.canchas = information;
-          this.loadingController.dismiss();
-        });
-      })
+      this.canchasService.getDocumentsWithSport(this.sport).then((information) => {
+        this.canchas = information;
+        this.loading = false;
+      });
+
     });
   }
 
@@ -117,7 +118,7 @@ export class DeportePage {
 
     const { data } = await modal.onWillDismiss();
     if (data)
-     this.reorderArray(data);
+      this.reorderArray(data);
   }
 
   reorderArray(data) {
@@ -149,7 +150,7 @@ export class DeportePage {
   }
 
 
-  clearStorage() {    
+  clearStorage() {
     this.storage.set('materialModelo', null);
     this.storage.set('horariosModelo', null);
 
@@ -157,7 +158,7 @@ export class DeportePage {
     this.storage.set('tipoCanchaModelo', null);
   }
 
-  async openMessages() {    
+  async openMessages() {
     const modal = await this.modalController.create({
       component: MessagePage,
     });

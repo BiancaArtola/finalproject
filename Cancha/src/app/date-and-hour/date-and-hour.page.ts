@@ -30,6 +30,15 @@ export class DateAndHourPage  {
     this.maxDay = new Date();
     this.maxDay.setDate(this.maxDay.getDate() + 10);
     this.maxDay = this.maxDay.toISOString();
+
+    this.parche();
+  }
+
+  parche(){
+    let numero = Math.floor(Math.random() * 6)
+    
+    let horasPrueba = this.horas.slice(0, numero+1);
+    
   }
 
   updateActive(hora) {

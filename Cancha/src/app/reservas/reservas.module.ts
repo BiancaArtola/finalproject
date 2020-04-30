@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { ReservasPageRoutingModule } from './reservas-routing.module';
 
 import { ReservasPage } from './reservas.page';
+import { ReservaInformationPageModule } from '../reserva-information/reserva-information.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    ReservasPageRoutingModule
+    ReservasPageRoutingModule,
+    ReservaInformationPageModule
   ],
   declarations: [ReservasPage]
 })

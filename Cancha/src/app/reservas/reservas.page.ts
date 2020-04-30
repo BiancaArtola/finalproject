@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ModalController, AlertController, LoadingController } from '@ionic/angular';
 import { ReservasService } from 'src/services/reservas.service';
 import { AuthenticationService } from 'src/services/authentication.service';
+import { ReservaInformationPage } from '../reserva-information/reserva-information.page';
 
 @Component({
   selector: 'app-reservas',
@@ -14,6 +15,7 @@ export class ReservasPage {
   private reservasActivas = [];
   private reservasConcretadas = [];
   private uid;
+  private loading = true;
 
   constructor(private modalController: ModalController, private authenticationService: AuthenticationService,
     private alertController: AlertController, private loadingController: LoadingController,
@@ -29,7 +31,8 @@ export class ReservasPage {
       this.uid = uid;
       this.reservasService.getReservas(uid).then((reservas) => {
         this.reservas = reservas;
-        this.separeReservas()
+        this.separeReservas();
+        this.loading = false;
       })
     })
   }
@@ -39,8 +42,11 @@ export class ReservasPage {
       this.reservas.forEach(element => {
 
         var date: Date = element.fecha.toDate();
-        var formatDate = date.getDate() + "/" + date.getMonth() + "/" + date.getFullYear();
-        if ((element.fecha.seconds+86400) * 1000 < Date.now()) {
+        var month = date.getMonth() + 1;
+        console.log(month);
+
+        var formatDate = date.getDate() + "/" + month + "/" + date.getFullYear();
+        if ((element.fecha.seconds + 86400) * 1000 < Date.now()) {
           //La fecha de reserva + los segundos correspondientes a un dia
           element.fecha = formatDate;
           this.reservasConcretadas.push(element);
@@ -78,11 +84,23 @@ export class ReservasPage {
     await alert.present();
   }
 
+  async openReserva(reserva) {
+    const modal = await this.modalController.create({
+      component: ReservaInformationPage,
+      componentProps:
+      {
+        reserva: reserva
+      }
+    });
+    return await modal.present();
+
+  }
+
   cancelarReserva(reserva) {
     this.presentLoading();
 
     this.reservasService.cancelarReserva(this.uid, reserva.id).then((cancelado) => {
-      if (cancelado){
+      if (cancelado) {
         this.reservas = null;
         this.reservasActivas = [];
         this.reservasConcretadas = [];

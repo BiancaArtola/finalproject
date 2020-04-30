@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Storage } from '@ionic/storage';
-import { NavController, ModalController, LoadingController, AlertController, PopoverController } from '@ionic/angular';
+import { NavController, ModalController, LoadingController, AlertController, PopoverController, Platform } from '@ionic/angular';
 import { TutorialPage } from '../tutorial/tutorial.page';
 import { MessagePage } from '../message/message.page';
 import { CanchaPage } from '../cancha/cancha.page';
@@ -22,12 +22,16 @@ export class HomePage {
   private usuario: string;
   private name: string
   private modeloCancha;
+  private message: string;
+  private loading = true;
+  private subscription;
 
 
   constructor(private router: Router, private storage: Storage, private navController: NavController,
     private modalController: ModalController, private authenticationService: AuthenticationService,
     private loadingController: LoadingController, private alertController: AlertController,
-    private popoverController: PopoverController, private canchasService: CanchasService) {
+    private popoverController: PopoverController, private canchasService: CanchasService,
+    private platform: Platform) {
 
     storage.get('user').then((val) => {
       if (!val) {
@@ -43,20 +47,34 @@ export class HomePage {
       }
       else { //El usuario ya esta registrado entonces se dirige hacia la pagina de inicio
         console.log("Si hay usuario ", val);
-        this.presentLoading().then(() => {
-          this.canchasService.getAllDocumentsInCollection().then(information => {
-            this.canchas = information;
-            this.loadingController.dismiss();
-          });
-          this.usuario = val;
-        })
-
+        this.getAllDocumentsInCollection();
+        this.usuario = val;
       }
     });
   }
 
-  ngOnInit(){
-   // this.loadingController.dismiss();
+  ionViewDidEnter() {
+    this.subscription = this.platform.backButton.subscribeWithPriority(0, () => {
+      navigator['app'].exitApp();
+    });
+  }
+
+  ionViewWillLeave() {
+    
+    this.subscription.unsubscribe();
+  }
+
+  getAllDocumentsInCollection() {
+    this.loading = true;
+    this.canchasService.getAllDocumentsInCollection()
+      .then(information => {
+        this.loading = false;
+        this.canchas = information;
+        this.message = "No hay canchas disponibles por el momento."
+      });
+  }
+
+  ngOnInit() {
   }
 
   async presentLoading() {
@@ -104,7 +122,8 @@ export class HomePage {
       componentProps:
       {
         id: id
-      }
+      },
+      id: "canchaModal"
     });
     return await modal.present();
   }

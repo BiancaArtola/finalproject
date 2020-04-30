@@ -19,83 +19,102 @@
     <ion-row>
       <b class="labelReservas">Reservas activas</b>
     </ion-row>
-    <div *ngIf="reservasActivas">
-      <ion-card *ngFor="let reserva of reservasActivas">
-        <ion-row class="ion-text-center">
-          <ion-col size="3">
-            <div class="padding">
-              <ion-avatar>
-                <ion-img src="{{ reserva.icono }}">
-                </ion-img>
-              </ion-avatar>
-            </div>
 
-          </ion-col>
-          <ion-col class="ion-text-center">
-            <ion-card-header class="blackLetter">
-              <b class="capitalize"> {{ reserva.nombre }}</b>
-            </ion-card-header>
-            <ion-card-content class="blackLetter">
-              Fecha de la reserva: {{reserva.fecha}}
-            </ion-card-content>
-          </ion-col>
+    <ion-row class="ion-text-center" *ngIf="loading">
+      <ion-col>
+        <ion-spinner name="lines"></ion-spinner>
+      </ion-col>
+    </ion-row>
+
+    <div *ngIf="!loading">
+      <div *ngIf="reservasActivas">
+        <ion-card *ngFor="let reserva of reservasActivas" >
+          <ion-row class="ion-text-center" (click)="openReserva(reserva)">
+            <ion-col size="3">
+              <div class="padding">
+                <ion-avatar>
+                  <ion-img src="{{ reserva.icono }}">
+                  </ion-img>
+                </ion-avatar>
+              </div>
+
+            </ion-col>
+            <ion-col class="ion-text-center">
+              <ion-card-header class="blackLetter">
+                <b class="capitalize"> {{ reserva.nombre }}</b>
+              </ion-card-header>
+              <ion-card-content class="blackLetter">
+                Fecha de la reserva: {{reserva.fecha}}
+                Horario de la reserva: {{reserva.hora}}:00hs
+              </ion-card-content>
+           
+            </ion-col>
+          </ion-row>
+          <ion-row class="ion-text-center">
+            <ion-col class="ion-text-right" (click)="createAlert(reserva)">
+              <ion-label class="cancelText">
+                <b>Cancelar reserva</b>
+              </ion-label>
+              <ion-icon name="close" class="cancelIcon"></ion-icon>
+
+            </ion-col>
+          </ion-row>
+        </ion-card>
+      </div>
+
+      <div *ngIf="(!reservasActivas) || (reservasActivas.length == 0)">
+        <ion-row>
+          <ion-label class="noHayReservas">
+            Por el momento no tienes reservas activas. <b class="reserveText" (click)="dismiss()">Reserva aquí.</b>
+          </ion-label>
         </ion-row>
-        <ion-row class="ion-text-center">
-          <ion-col class="ion-text-right" (click)="createAlert(reserva)">
-            <ion-label class="cancelText">
-              <b>Cancelar reserva</b>
-            </ion-label>
-            <ion-icon name="close" class="cancelIcon"></ion-icon>
-
-          </ion-col>
-        </ion-row>
-      </ion-card>
-    </div>
-
-    <div *ngIf="(!reservasActivas) || (reservasActivas.length == 0)">
-      <ion-row>
-        <ion-label class="noHayReservas">
-          Por el momento no tienes reservas activas. <b class="reserveText" (click)="dismiss()">Reserva aquí.</b>
-        </ion-label>
-      </ion-row>
-
+      </div>
     </div>
 
     <ion-row>
       <b class="labelReservas">Reservas concretadas</b>
     </ion-row>
 
-    <div *ngIf="reservasConcretadas">
-      <ion-card *ngFor="let reserva of reservasConcretadas">
-        <ion-row class="ion-text-center">
-          <ion-col size="3">
-            <div class="padding">
-              <ion-avatar>
-                <ion-img class="blackandwhite" src="{{ reserva.icono }}">
-                </ion-img>
-              </ion-avatar>
-            </div>
-          </ion-col>
-          <ion-col class="ion-text-center">
-            <ion-card-header>
-              <b class="capitalize">{{reserva.nombre}}</b>
-            </ion-card-header>
-            <ion-card-content>
-              Fecha de la reserva: {{reserva.fecha}}
-            </ion-card-content>
-          </ion-col>
+    <ion-row class="ion-text-center" *ngIf="loading">
+      <ion-col>
+        <ion-spinner name="lines"></ion-spinner>
+      </ion-col>
+    </ion-row>
+
+    <div *ngIf="!loading">
+      <div *ngIf="reservasConcretadas">
+        <ion-card *ngFor="let reserva of reservasConcretadas">
+          <ion-row class="ion-text-center">
+            <ion-col size="3">
+              <div class="padding">
+                <ion-avatar>
+                  <ion-img class="blackandwhite" src="{{ reserva.icono }}">
+                  </ion-img>
+                </ion-avatar>
+              </div>
+            </ion-col>
+            <ion-col class="ion-text-center">
+              <ion-card-header>
+                <b class="capitalize">{{reserva.nombre}}</b>
+              </ion-card-header>
+              <ion-card-content>
+                Fecha de la reserva: {{reserva.fecha}}
+              </ion-card-content>
+            </ion-col>
+          </ion-row>
+        </ion-card>
+      </div>
+
+      <div *ngIf="(!reservasConcretadas) || (reservasConcretadas.length == 0)">
+        <ion-row>
+          <ion-label class="noHayReservas">
+            Por el momento no tienes reservas concretadas.
+          </ion-label>
         </ion-row>
-      </ion-card>
-    </div>
-
-    <div *ngIf="(!reservasConcretadas) || (reservasConcretadas.length == 0)">
-      <ion-row>
-        <ion-label class="noHayReservas">
-          Por el momento no tienes reservas concretadas.
-        </ion-label>
-      </ion-row>
+      </div>
 
     </div>
+
   </ion-grid>
 
 </ion-content>

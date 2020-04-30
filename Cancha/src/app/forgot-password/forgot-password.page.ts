@@ -33,7 +33,7 @@ export class ForgotPasswordPage {
   resetPassword() {
     this.authenticationService.resetPassword(this.resetPasswordForm.value.email).then(() => {
       this.emailModel = null;
-      this.showMessage("Revise su correo", "Se ha enviado un email para recuperar su contraseña.")
+      this.showMessageAndDismiss("Revise su correo", "Se ha enviado un email para recuperar su contraseña.")
     })
     .catch((error)=>{
       this.showMessage("Este usuario no existe.", "Por favor, revise el email que ha ingresado.");      
@@ -49,4 +49,21 @@ export class ForgotPasswordPage {
     });
     await alert.present();
   }
+
+  async showMessageAndDismiss(header, message){
+    const alert = await this.alertController.create({
+      header: header,
+      message: message,
+      buttons: [
+        {
+          text: 'Ok',
+          handler: () => {
+            this.modalController.dismiss();         
+          }
+        }
+      ]
+    });
+    await alert.present();
+  }
+ 
 }

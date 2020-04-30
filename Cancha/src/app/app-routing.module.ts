@@ -76,6 +76,10 @@ const routes: Routes = [
     path: 'home-popover',
     loadChildren: () => import('./home-popover/home-popover.module').then( m => m.HomePopoverPageModule)
   },
+  {
+    path: 'reserva-information',
+    loadChildren: () => import('./reserva-information/reserva-information.module').then( m => m.ReservaInformationPageModule)
+  },
 ];
 
 @NgModule({

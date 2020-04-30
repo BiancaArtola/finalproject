@@ -1,0 +1,29 @@
+.labelTitle {
+    font-size: large;
+  }
+
+  hr{
+    border-width: 0.2px;
+    border-color: grey;
+    background-color: grey;
+  }
+
+  .labelInformation {
+    color: black;
+    font-size: large;
+  }
+
+  .descriptionText{
+    font-size: small;
+  }
+
+  .informationGrid{
+    padding-left: 3%
+  }
+  
+ion-row{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}

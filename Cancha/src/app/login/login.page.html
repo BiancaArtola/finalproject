@@ -4,8 +4,12 @@
     <!--    <ion-img src="../../assets/icon/rayo1024.png" ></ion-img> -->
     <div class="ion-text-center">
       <ion-text>
-        <h1> BIENVENIDO </h1>
+        <h1> INICIA SESION </h1>
       </ion-text>
+      <!-- <ion-label class="title">
+        <b>        Inicia sesión con tu cuenta 
+        </b>
+      </ion-label> -->
     </div>
     <form [formGroup]="myForm" novalidate (ngSubmit)="login()">
 
@@ -19,7 +23,7 @@
 
       <ion-row>
         <ion-col>
-          <ion-input type="password" placeholder="Contraseña" formControlName="password">
+          <ion-input type="password" placeholder="Contraseña" formControlName="password"  [(ngModel)]="contrasena" >
             <ion-icon name="unlock" size="large"></ion-icon>
           </ion-input>
         </ion-col>

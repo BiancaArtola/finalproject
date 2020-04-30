@@ -53,8 +53,15 @@
   </ion-grid>
 
 
-
-  <ion-grid>
+  <ion-grid *ngIf="loading">
+    <ion-row class="ion-text-center">
+      <ion-col>
+        <ion-spinner name="lines"></ion-spinner>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  
+  <ion-grid *ngIf="!loading">
 
     <div *ngFor="let cancha of canchas">
      
@@ -78,7 +85,7 @@
 
     <div *ngIf="canchas" class="informationText">
       <ion-text *ngIf="canchas.length == 0" class="information">
-        <i> En este momento no hay cancha disponibles. </i>
+        <i> En este momento no hay cancha disponibles para la fecha indicada. </i>
       </ion-text>
       <ion-text class="recomendationText" (click)="openMessages()"><b>¿Querés recomendarnos alguna?</b></ion-text>
     </div>

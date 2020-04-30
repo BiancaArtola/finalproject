@@ -47,7 +47,7 @@
 
       <ion-row>
         <ion-col>
-          <ion-input type="password" placeholder="Contraseña" formControlName="password">
+          <ion-input type="password" placeholder="Contraseña" formControlName="password" [(ngModel)]="contrasena1">
             <ion-icon name="unlock" size="large"></ion-icon>
           </ion-input>
           <div *ngIf="!myForm.controls.password.valid && myForm.get('password').touched">
@@ -59,7 +59,7 @@
 
       <ion-row>
         <ion-col>
-          <ion-input type="password" placeholder="Ingrese nuevamente la contraseña" formControlName="confirmPass">
+          <ion-input type="password" placeholder="Ingrese nuevamente la contraseña" formControlName="confirmPass" [(ngModel)]="contrasena2">
             <ion-icon name="unlock" size="large"></ion-icon>
           </ion-input>
           <div *ngIf="!myForm.controls.confirmPass.valid && myForm.get('confirmPass').touched">

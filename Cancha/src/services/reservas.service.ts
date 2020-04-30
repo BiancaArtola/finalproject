@@ -14,15 +14,18 @@ export class ReservasService extends RootService{
     this.db = firebase.firestore(this.app);
   }
 
-  setReserva(uid, nombre, icono, date) {
-
+  setReserva(uid, nombre, icono, date, hora, id) {
+    console.log(hora);
+    
     this.db.collection("reservas").doc(uid).update(
       {
         canchas: firebase.firestore.FieldValue.arrayUnion({
           fecha: firebase.firestore.Timestamp.fromDate(new Date(date)),
           nombre: nombre,
           icono: icono,
-          id: Date.now()
+          id: Date.now(),
+          idCancha: id,
+          hora: hora
         })
       }).catch(() => {
         this.db.collection("reservas").doc(uid).set(
@@ -31,7 +34,9 @@ export class ReservasService extends RootService{
               fecha: firebase.firestore.Timestamp.fromDate(new Date(date)),
               nombre: nombre,
               icono: icono,
-              id: Date.now()
+              id: Date.now(),
+              idCancha: id,
+              hora: hora
             })
           })
       }
@@ -61,7 +66,9 @@ export class ReservasService extends RootService{
                 fecha: querySnapshot.data().canchas[index].fecha,
                 nombre: querySnapshot.data().canchas[index].nombre,
                 icono: querySnapshot.data().canchas[index].icono,
-                id: querySnapshot.data().canchas[index].id
+                id: querySnapshot.data().canchas[index].id,
+                idCancha: querySnapshot.data().canchas[index].idCancha,
+                hora: querySnapshot.data().canchas[index].hora,
               })
             });
             resolve(true);

@@ -1,5 +1,5 @@
 .buttonHours {
-  --background: #f3db83;
+  --background: #C8C8C7;
 }
 
 .buttonTouched {
@@ -16,4 +16,9 @@ ion-grid {
 }
 
 ion-backdrop {
-  --backdrop-opacity: 0.7}
+  --backdrop-opacity: 0.7
+}
+
+ion-datetime {
+  color: grey
+}

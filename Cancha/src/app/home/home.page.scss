@@ -11,9 +11,15 @@ ion-content {
 
   .title {
     font-size: 1.3em;
-    padding-left: 3%;
-    padding-right: 3%;
-    padding-bottom: 3%;
+    padding: 3%
+  }
+
+  .title2{
+    font-size: large;
+  }
+
+  .padding {
+    padding: 3%
   }
 
   .sport {
@@ -31,7 +37,7 @@ ion-content {
   }
 
   .labelCanchas{
-    padding-left: 5%;
+   // padding-left: 5%;
     color: gray;
     font-style: italic;
     font-size: small;
@@ -73,5 +79,7 @@ ion-content {
     padding: 0%
   }
 
-
+.reload {
+  padding: 3%
+}
 }

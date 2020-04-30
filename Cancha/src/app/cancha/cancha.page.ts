@@ -14,33 +14,36 @@ export class CanchaPage {
   @Input() id: number;
   @Input() date;
   private cancha;
-
+  private loading = true;
 
   constructor(navParams: NavParams, private modalController: ModalController,
     private canchasService: CanchasService, private loadingController: LoadingController) {
     this.id = navParams.get('id');
     this.date = navParams.get('date');
 
-    this.presentLoading().then(() => {
-      this.canchasService.getDocument(this.id).then((cancha) => {
-        this.cancha = cancha;
-        this.loadingController.dismiss();
-      })
-    })
+    this.getDocument(this.id);
+
+  }
+
+  getDocument(id){
+    this.canchasService.getDocument(this.id).then((cancha) => {      
+      this.cancha = cancha;
+      this.loading = false;
+    });
   }
 
   async openDateHour() {
     const modal = await this.modalController.create({
       component: DateAndHourPage,
       componentProps: {
-          cancha: this.cancha,
-          date: this.date,      
+        cancha: this.cancha,
+        date: this.date,
       },
       cssClass: 'my-custom-modal-css',
       id: 'dateAndHourModal',
       showBackdrop: true,
-      
-      
+
+
     });
     return await modal.present();
   }
