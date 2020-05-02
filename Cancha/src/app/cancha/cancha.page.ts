@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { NavParams, ModalController, LoadingController, AlertController } from '@ionic/angular';
+import { NavParams, ModalController, LoadingController, AlertController, MenuController } from '@ionic/angular';
 import { CommentsPage } from '../comments/comments.page';
 import { DateAndHourPage } from '../date-and-hour/date-and-hour.page';
 import { CanchasService } from 'src/services/canchas.service';
@@ -16,7 +16,7 @@ export class CanchaPage {
   private cancha;
   private loading = true;
 
-  constructor(navParams: NavParams, private modalController: ModalController,
+  constructor(navParams: NavParams, private modalController: ModalController, private menuCtrl: MenuController,
     private canchasService: CanchasService, private loadingController: LoadingController) {
     this.id = navParams.get('id');
     this.date = navParams.get('date');
@@ -24,6 +24,10 @@ export class CanchaPage {
     this.getDocument(this.id);
 
   }
+
+  ionViewWillEnter() {
+    this.menuCtrl.enable(false);
+   }
 
   getDocument(id){
     this.canchasService.getDocument(this.id).then((cancha) => {      

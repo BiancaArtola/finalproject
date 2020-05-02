@@ -96,13 +96,17 @@ export class AuthenticationService extends RootService {
   }
 
   updateUser(nombre) {
-    firebase.auth().onAuthStateChanged(function (user) {
-      if (user) {
-        user.updateProfile({
-          displayName: nombre
-        })
-      }
-    })
+    return new Promise((resolve, reject) => {
+
+      firebase.auth().onAuthStateChanged(function (user) {
+        if (user) {
+          user.updateProfile({
+            displayName: nombre
+          })
+          resolve(true);
+        }
+      });
+    });
   }
 
   getEmail() {

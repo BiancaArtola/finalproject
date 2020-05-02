@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { Platform, MenuController, ModalController } from '@ionic/angular';
+import { Platform, MenuController, ModalController, Events } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Router } from '@angular/router';
@@ -18,19 +18,29 @@ import { AuthenticationService } from 'src/services/authentication.service';
 })
 export class AppComponent {
 
-  private userName;
+  public userName;
 
-  constructor(private router: Router, private modalController:ModalController,
+  constructor(private router: Router, private modalController: ModalController,public events: Events,
     private menu: MenuController, private platform: Platform, private authenticationService: AuthenticationService,
-    private splashScreen: SplashScreen, private statusBar: StatusBar
-  ) {
+    private splashScreen: SplashScreen, private statusBar: StatusBar) {
     this.initializeApp();
-  
-    this.authenticationService.getUserName().then((nombre) =>{
-      
-      this.userName = nombre;  
-      console.log("here", this.userName);
+    this.getUserName();
+
+      events.subscribe('user:login', () => {
+        this.getUserName();
+      });
+
+      events.subscribe('user:created', (user) => {
+        this.userName = user;
+      });
     
+    
+  }
+
+  getUserName() {
+    this.authenticationService.getUserName().then((nombre) => {
+      this.userName = nombre;
+      console.log("here", this.userName);
     })
 
   }
@@ -49,17 +59,16 @@ export class AppComponent {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
 
-      
+
     });
   }
 
-  goToLogin(){
-   
+  goToLogin() {
     this.router.navigate(['/login']);
     this.menu.close();
   }
 
-  async goToMessage(){
+  async goToMessage() {
     this.menu.close();
 
     const modal = await this.modalController.create({
@@ -68,7 +77,7 @@ export class AppComponent {
     return await modal.present();
   }
 
-  async goToProfile(){
+  async goToProfile() {
     this.menu.close();
 
     const modal = await this.modalController.create({
@@ -77,11 +86,11 @@ export class AppComponent {
     return await modal.present();
   }
 
-  goHome(){
+  goHome() {
     this.menu.close();
   }
 
-  async goToHelp(){
+  async goToHelp() {
     this.menu.close();
 
     const modal = await this.modalController.create({
@@ -90,7 +99,7 @@ export class AppComponent {
     return await modal.present();
   }
 
-  async goToReservas(){
+  async goToReservas() {
     this.menu.close();
 
     const modal = await this.modalController.create({

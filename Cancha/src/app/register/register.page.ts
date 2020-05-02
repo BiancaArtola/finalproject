@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
 import { Storage } from '@ionic/storage';
 import { Router } from '@angular/router';
-import { ModalController, ToastController, AlertController, LoadingController } from '@ionic/angular';
+import { ModalController, ToastController, AlertController, LoadingController, Events } from '@ionic/angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthenticationService } from 'src/services/authentication.service';
-
 
 @Component({
   selector: 'app-register',
@@ -17,7 +16,8 @@ export class RegisterPage {
 
   constructor(private storage: Storage, private router: Router, private toastController: ToastController,
     private modalController: ModalController, public formBuilder: FormBuilder, private authenticationService: AuthenticationService,
-    private alertController: AlertController, private loadingController: LoadingController) {
+    private alertController: AlertController, private loadingController: LoadingController,
+    public events: Events) {
     this.myForm = this.createMyForm();
   }
 
@@ -27,8 +27,9 @@ export class RegisterPage {
         this.presentLoading();
         var name = this.myForm.value.nombre + " " + this.myForm.value.apellido;
 
-        this.authenticationService.signupUser(this.myForm.value.usuario, this.myForm.value.password, name).then(
-          () => {
+        this.authenticationService.signupUser(this.myForm.value.usuario, this.myForm.value.password, name)
+        .then(() => {
+          this.events.publish('user:created', name);
             this.goHome();
             this.loadingController.dismiss().then(() => this.showMessage("¡Bienvenido!", "El usuario se ha creado con éxito."))
           },

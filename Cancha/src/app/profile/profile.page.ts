@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { ModalController, Events } from '@ionic/angular';
 import { AuthenticationService } from 'src/services/authentication.service';
 
 @Component({
@@ -13,7 +13,8 @@ export class ProfilePage {
   private email;
   private showButton = false;
 
-  constructor(private modalController: ModalController, private authenticationService: AuthenticationService) {
+  constructor(private modalController: ModalController, private authenticationService: AuthenticationService,
+    public events: Events) {
     this.authenticationService.getUserName().then((nombre) =>{
       this.nombre = nombre;      
       this.email = this.authenticationService.getEmail();
@@ -32,6 +33,9 @@ export class ProfilePage {
 
   changeName(){
     this.showButton = false;    
-    this.authenticationService.updateUser(this.nombre);
+    this.authenticationService.updateUser(this.nombre).then(()=>{
+      this.events.publish('user:created', this.nombre);
+
+    })
   }
 }

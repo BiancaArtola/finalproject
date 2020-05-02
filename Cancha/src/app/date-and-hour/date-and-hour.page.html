@@ -20,13 +20,6 @@
     </ion-row>
 
     <ion-row>
-      <ion-col>
-        <ion-select interface="popover" placeholder="Selecciona una opción" [(ngModel)]="horarioModelo"
-          okText="Seleccionar" cancelText="Cancelar">
-          <ion-select-option *ngFor="let hora of horas">{{hora}}:00 hs</ion-select-option>
-        </ion-select>
-      </ion-col>
-
 
       <ion-col *ngFor="let hora of horas" size="4">
         <ion-button class="buttonHours" (click)="updateActive(hora)" [ngClass]="{ 'buttonTouched': active === hora}">

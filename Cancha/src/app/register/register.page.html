@@ -5,7 +5,7 @@
     <ion-grid>
       <div>
         <ion-text>
-          <h1><b>Crear una cuenta</b></h1>
+          <h1><b>CREAR UNA CUENTA</b></h1>
         </ion-text>
       </div>
       <ion-row>
@@ -59,7 +59,8 @@
 
       <ion-row>
         <ion-col>
-          <ion-input type="password" placeholder="Ingrese nuevamente la contraseña" formControlName="confirmPass" [(ngModel)]="contrasena2">
+          <ion-input type="password" placeholder="Ingrese nuevamente la contraseña"  (keyup.enter)="register()"
+          formControlName="confirmPass" [(ngModel)]="contrasena2">
             <ion-icon name="unlock" size="large"></ion-icon>
           </ion-input>
           <div *ngIf="!myForm.controls.confirmPass.valid && myForm.get('confirmPass').touched">

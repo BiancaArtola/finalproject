@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ModalController, LoadingController } from '@ionic/angular';
+import { ModalController, LoadingController, MenuController } from '@ionic/angular';
 import { CanchaPage } from '../cancha/cancha.page';
 import { DatePicker } from '@ionic-native/date-picker/ngx';
 import { Router, ActivatedRoute, Params, NavigationExtras } from '@angular/router';
@@ -32,7 +32,7 @@ export class DeportePage {
 
 
   constructor(private router: Router, private datePicker: DatePicker,
-    private canchasService: CanchasService,
+    private canchasService: CanchasService, private menuCtrl: MenuController,
     public modalController: ModalController, private route: ActivatedRoute,
     private loadingController: LoadingController, private storage: Storage) {
     this.maxDay = new Date();
@@ -52,6 +52,10 @@ export class DeportePage {
 
     });
   }
+
+  ionViewWillEnter() {
+    this.menuCtrl.enable(false);
+   }
 
   async presentLoading() {
     const loading = await this.loadingController.create({

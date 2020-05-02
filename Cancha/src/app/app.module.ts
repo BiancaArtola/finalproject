@@ -11,7 +11,6 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { DatePicker } from '@ionic-native/date-picker/ngx';
 import { EmailComposer } from '@ionic-native/email-composer/ngx';
 import { FirebaseAuthentication } from '@ionic-native/firebase-authentication/ngx';
-// import { HTTP } from '@ionic-native/http/ngx';
 
 import { AppComponent } from './app.component';
 import { environment } from '../environments/environment';
@@ -62,7 +61,6 @@ import { ReservasService } from 'src/services/reservas.service';
     DatePicker,    
     AngularFirestore,
     FirebaseAuthentication,
-    // HTTP,
     FilterService,
     ReservasService,
     EmailComposer,

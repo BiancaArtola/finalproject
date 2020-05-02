@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Storage } from '@ionic/storage';
-import { NavController, ModalController, LoadingController, AlertController, PopoverController, Platform } from '@ionic/angular';
+import { NavController, ModalController, LoadingController, AlertController, PopoverController, Platform, MenuController } from '@ionic/angular';
 import { TutorialPage } from '../tutorial/tutorial.page';
 import { MessagePage } from '../message/message.page';
 import { CanchaPage } from '../cancha/cancha.page';
@@ -31,7 +31,7 @@ export class HomePage {
     private modalController: ModalController, private authenticationService: AuthenticationService,
     private loadingController: LoadingController, private alertController: AlertController,
     private popoverController: PopoverController, private canchasService: CanchasService,
-    private platform: Platform) {
+    private platform: Platform, public menuCtrl: MenuController) {
 
     storage.get('user').then((val) => {
       if (!val) {
@@ -60,9 +60,13 @@ export class HomePage {
   }
 
   ionViewWillLeave() {
-    
     this.subscription.unsubscribe();
   }
+
+  ionViewWillEnter() {
+    this.menuCtrl.enable(true);
+  }
+
 
   getAllDocumentsInCollection() {
     this.loading = true;
