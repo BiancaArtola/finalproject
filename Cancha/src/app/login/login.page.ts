@@ -53,23 +53,37 @@ export class LoginPage {
   }
 
   async goHome() {
-    this.presentLoading();
+    const loading = await this.loadingController.create();
+    await loading.present();
     this.authenticationService.loginUser(this.myForm.value.usuario, this.myForm.value.password).then(
       () => {
         this.storage.set('user', this.usuario);
         this.contrasena = null;
         this.usuario = null;
         this.events.publish('user:login', null);
-
         this.router.navigate(['/home']).then(() => this.loadingController.dismiss())
       }, (error) => {
-        this.showMessage("Ocurrio un error.", error.message);
+        this.manageError(error);
         this.loadingController.dismiss();
         this.contrasena = null;
-      })
-
+      });
   }
 
+  manageError(error) {
+    var errorCode = error.code;
+    if (errorCode === 'auth/wrong-password')
+      this.showMessage("Ocurrio un error.", "La contraseña ingresada es incorrecta.");
+    else if (errorCode === 'auth/user-not-found')
+      this.showMessage("Ocurrio un error.", "No existe usuario registrado con ese mail. Por favor, cree una nueva cuenta.");
+    else if (errorCode === 'auth/invalid-email')
+      this.showMessage("Ocurrio un error.", "El email ingresado no es válido.");
+      else if (errorCode === 'auth/user-disabled')
+      this.showMessage("Ocurrio un error.", "El usuario correspondiente a este email ha sido deshabilitado.");
+    else
+      this.showMessage("Ocurrio un error.", "Chequee la conexión a internet e intente nuevamente.");
+  }
+
+  
   async showMessage(header, message) {
     const alert = await this.alertController.create({
       header: header,

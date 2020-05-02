@@ -24,18 +24,24 @@ export class RegisterPage {
   async register() {
     if (this.myForm.valid) {
       if (!this.checkPasswords()) {
-        this.presentLoading();
+        const loading = await this.loadingController.create(); //dejarlo asi porque sino no anda sin conexion
+        await loading.present();
+
         var name = this.myForm.value.nombre + " " + this.myForm.value.apellido;
 
         this.authenticationService.signupUser(this.myForm.value.usuario, this.myForm.value.password, name)
-        .then(() => {
-          this.events.publish('user:created', name);
-            this.goHome();
-            this.loadingController.dismiss().then(() => this.showMessage("¡Bienvenido!", "El usuario se ha creado con éxito."))
-          },
-          (error) => {
-            this.showMessage("Ocurrio un error", error.message);
-          })
+          .then(
+            () => {
+              this.events.publish('user:created', name);
+              this.goHome();
+              this.loadingController.dismiss().then(() => this.showMessage("¡Bienvenido!", "El usuario se ha creado con éxito."))
+            },
+            (error) => {
+              this.loadingController.dismiss()
+              this.manageError(error);
+              this.contrasena1 = null;
+              this.contrasena2 = null;
+            })
       }
       else {
         this.showMessage("Ocurrio un error", "Las contraseñas no coinciden").then(() => {
@@ -45,6 +51,20 @@ export class RegisterPage {
 
       }
     }
+  }
+
+  manageError(error) {
+    var errorCode = error.code;
+    if (errorCode === 'auth/email-already-in-use')
+      this.showMessage("Ocurrio un error.", "Ya existe una cuenta para el email ingresado. Por favor, pruebe con otro email o recupere su contraseña.");
+    else if (errorCode === 'auth/operation-not-allowed')
+      this.showMessage("Ocurrio un error.", "La operación no esta permitida.");
+    else if (errorCode === 'auth/invalid-email')
+      this.showMessage("Ocurrio un error.", "El email ingresado no es válido.");
+    else if (errorCode === 'auth/weak-password')
+      this.showMessage("Ocurrio un error.", "La contraseña ingresada no es segura. Pruebe con otra combinación.");
+    else
+      this.showMessage("Ocurrio un error.", "Chequee la conexión a internet e intente nuevamente.");
   }
 
   async presentLoading() {
