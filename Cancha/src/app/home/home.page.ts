@@ -129,7 +129,8 @@ export class HomePage {
       },
       id: "canchaModal"
     });
-    return await modal.present();
+    await modal.present();
+    await modal.onWillDismiss().then(()=>    this.menuCtrl.enable(true)    );
   }
 
 

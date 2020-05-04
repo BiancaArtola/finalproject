@@ -29,6 +29,7 @@ export class CanchaPage {
     this.menuCtrl.enable(false);
    }
 
+  
   getDocument(id){
     this.loading = true;
     this.canchasService.getDocument(this.id).then((cancha) => { 

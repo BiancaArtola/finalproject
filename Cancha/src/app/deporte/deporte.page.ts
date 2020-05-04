@@ -48,6 +48,10 @@ export class DeportePage {
     });
   }
 
+  ionViewWillLeave() {
+    this.menuCtrl.enable(true);
+  }
+  
 
   getDocumentsWithSport() {
     this.conexion = true;
