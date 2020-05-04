@@ -14,9 +14,9 @@ export class RegisterPage {
   myForm: FormGroup;
   contrasena1; contrasena2;
 
-  constructor(private storage: Storage, private router: Router, private toastController: ToastController,
-    private modalController: ModalController, public formBuilder: FormBuilder, private authenticationService: AuthenticationService,
-    private alertController: AlertController, private loadingController: LoadingController,
+  constructor(public storage: Storage, public router: Router, public toastController: ToastController,
+    public modalController: ModalController, public formBuilder: FormBuilder, public authenticationService: AuthenticationService,
+    public alertController: AlertController, public loadingController: LoadingController,
     public events: Events) {
     this.myForm = this.createMyForm();
   }
@@ -94,7 +94,7 @@ export class RegisterPage {
   /**
    * Se aplican todos los requisitos para los campos de registro
    */
-  private createMyForm() {
+  public createMyForm() {
     return this.formBuilder.group({
       nombre: ['', Validators.required],
       apellido: ['', Validators.required],

@@ -17,24 +17,24 @@ import { CanchasService } from 'src/services/canchas.service';
 })
 export class DeportePage {
 
-  private date;
-  private actualDate: String = new Date().toISOString();
-  private maxDay;
+  public date;
+  public actualDate: String = new Date().toISOString();
+  public maxDay;
 
-  private dateModel = new Date().toISOString();
+  public dateModel = new Date().toISOString();
 
-  private monthNames = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
+  public monthNames = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
 
-  private sport: String;
-  private canchas;
+  public sport: String;
+  public canchas;
 
-  private loading = true;
-  private conexion = true;
+  public loading = true;
+  public conexion = true;
 
-  constructor(private router: Router, private datePicker: DatePicker,
-    private canchasService: CanchasService, private menuCtrl: MenuController,
-    public modalController: ModalController, private route: ActivatedRoute,
-    private loadingController: LoadingController, private storage: Storage) {
+  constructor(public router: Router, public datePicker: DatePicker,
+    public canchasService: CanchasService, public menuCtrl: MenuController,
+    public modalController: ModalController, public route: ActivatedRoute,
+    public loadingController: LoadingController, public storage: Storage) {
     this.maxDay = new Date();
     this.maxDay.setDate(this.maxDay.getDate() + 10);
     this.maxDay = this.maxDay.toISOString();

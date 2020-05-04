@@ -11,11 +11,11 @@ export class ReservaInformationPage implements OnInit {
 
   @Input() reserva;
 
-  private cancha;
-  private loading = true;
+  public cancha;
+  public loading = true;
 
-  constructor(private modalController: ModalController, private canchasService: CanchasService,
-    private navParams: NavParams) {
+  constructor(public modalController: ModalController, public canchasService: CanchasService,
+    public navParams: NavParams) {
     this.reserva = navParams.get('reserva');
 
     this.getDocument();

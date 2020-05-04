@@ -36,8 +36,8 @@ export class MapsPage implements OnInit {
   data;
   canchas = [{ lat: -38.7162826, lng: -62.2583714 }, { lat: -38.7164612, lng: -61.3221848 }];
 
-  constructor(public toastCtrl: ToastController, private platform: Platform,
-    private route: ActivatedRoute, private router: Router) {
+  constructor(public toastCtrl: ToastController, public platform: Platform,
+    public route: ActivatedRoute, public router: Router) {
     this.route.queryParams.subscribe(params => {
       if (params && params.special) {
         this.data = JSON.parse(params.special);

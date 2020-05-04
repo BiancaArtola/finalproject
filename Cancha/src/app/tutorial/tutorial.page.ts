@@ -11,7 +11,7 @@ export class TutorialPage implements OnInit {
 
   @ViewChild(IonSlides, { static: true }) slides: IonSlides;
 
-  private showText = true;
+  public showText = true;
   slideOpts = {
     initialSlide: 0,
     // pagination: {
@@ -20,7 +20,7 @@ export class TutorialPage implements OnInit {
     // }
   };
 
-  constructor(private storage: Storage, private modalController: ModalController) {
+  constructor(public storage: Storage, public modalController: ModalController) {
     storage.set('tutorial', true);
   }
 

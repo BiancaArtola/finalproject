@@ -11,18 +11,18 @@ import { AuthenticationService } from 'src/services/authentication.service';
 })
 export class PayPage {
 
-  private cancha;
+  public cancha;
   @Input() date;
   @Input() hora;
 
-  private fecha: string;
-  private meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
+  public fecha: string;
+  public meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
     "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
   ];
 
-  constructor(private modalController: ModalController, private navParams: NavParams,
-    private loadingController: LoadingController,private router: Router, private reservasService: ReservasService,
-    private alertController: AlertController, private authenticationService: AuthenticationService) {
+  constructor(public modalController: ModalController, public navParams: NavParams,
+    public loadingController: LoadingController,public router: Router, public reservasService: ReservasService,
+    public alertController: AlertController, public authenticationService: AuthenticationService) {
     this.cancha = navParams.get('cancha');
     this.date = navParams.get('date');
     this.hora = navParams.get('hora');

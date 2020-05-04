@@ -11,17 +11,17 @@ import { ReservaInformationPage } from '../reserva-information/reserva-informati
 })
 export class ReservasPage {
 
-  private reservas;
-  private reservasActivas = [];
-  private reservasConcretadas = [];
-  private uid;
-  private loading = true;
-  private conexion = true;
+  public reservas;
+  public reservasActivas = [];
+  public reservasConcretadas = [];
+  public uid;
+  public loading = true;
+  public conexion = true;
 
 
-  constructor(private modalController: ModalController, private authenticationService: AuthenticationService,
-    private alertController: AlertController, private loadingController: LoadingController,
-    private reservasService: ReservasService) {
+  constructor(public modalController: ModalController, public authenticationService: AuthenticationService,
+    public alertController: AlertController, public loadingController: LoadingController,
+    public reservasService: ReservasService) {
   }
 
   ngOnInit() {

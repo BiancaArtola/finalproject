@@ -9,11 +9,11 @@ import { MensajesService } from 'src/services/mensajes.service';
 })
 export class MessagePage {
 
-  private contenido: string;
+  public contenido: string;
 
 
-  constructor(public toastController: ToastController, private loadingController: LoadingController,
-    private modalController: ModalController, private mensajesService: MensajesService
+  constructor(public toastController: ToastController, public loadingController: LoadingController,
+    public modalController: ModalController, public mensajesService: MensajesService
    ) {
 
   }

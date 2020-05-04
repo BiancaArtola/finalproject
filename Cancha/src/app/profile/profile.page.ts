@@ -9,11 +9,11 @@ import { AuthenticationService } from 'src/services/authentication.service';
 })
 export class ProfilePage {
 
-  private nombre;
-  private email;
-  private showButton = false;
+  public nombre;
+  public email;
+  public showButton = false;
 
-  constructor(private modalController: ModalController, private authenticationService: AuthenticationService,
+  constructor(public modalController: ModalController, public authenticationService: AuthenticationService,
     public events: Events) {
     this.authenticationService.getUserName().then((nombre) =>{
       this.nombre = nombre;      

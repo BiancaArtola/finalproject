@@ -9,19 +9,19 @@ import { PayPage } from '../pay/pay.page';
 })
 export class DateAndHourPage  {
   @Input() date;
-  private actualDate: String = new Date().toISOString();
-  private maxDay;
+  public actualDate: String = new Date().toISOString();
+  public maxDay;
 
-  private dateModel;
-  private monthNames = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
+  public dateModel;
+  public monthNames = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
 
-  private horas = [12, 15, 19, 20, 21, 22];
-  private active;
+  public horas = [12, 15, 19, 20, 21, 22];
+  public active;
 
-  private cancha;
+  public cancha;
 
-  constructor(private modalController: ModalController, private alertController: AlertController,
-    private navParams: NavParams) { 
+  constructor(public modalController: ModalController, public alertController: AlertController,
+    public navParams: NavParams) { 
     this.cancha = navParams.get('cancha');
     this.dateModel = navParams.get('date');
     if (!this.dateModel)

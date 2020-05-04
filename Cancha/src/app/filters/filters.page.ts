@@ -13,32 +13,32 @@ export class FiltersPage implements OnInit {
   @Input() sport: string;
 
 
-  private monthNames = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
-  private hours = [];
-  private cantidadJugadores = [5, 7, 9, 11];
-  private materialPiso = ['Sintetico', 'Pasto', 'Ladrillo']
-  private parts = [
+  public monthNames = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
+  public hours = [];
+  public cantidadJugadores = [5, 7, 9, 11];
+  public materialPiso = ['Sintetico', 'Pasto', 'Ladrillo']
+  public parts = [
     { val: 'Mañana (10-13 hs)', isChecked: false },
     { val: 'Tarde (16-18 hs)', isChecked: false },
     { val: 'Noche (19-23 hs)', isChecked: false }
   ];
-  private tipoCancha = ['Futbol 5', 'Futbol 7', 'Futbol 9', 'Futbol 11'];
+  public tipoCancha = ['Futbol 5', 'Futbol 7', 'Futbol 9', 'Futbol 11'];
 
-  private tipoCanchaModelo;
-  private cantJugadoresModelo;
-  private horariosModelo;
-  private materialModelo;
+  public tipoCanchaModelo;
+  public cantJugadoresModelo;
+  public horariosModelo;
+  public materialModelo;
 
-  private horariosDisabled = false;
-  private daysDisabled = false;
-  private cantJugadoresDisabled = false;
-  private tipoCanchaDisabled = false;
-  private toggleChecked = false;
+  public horariosDisabled = false;
+  public daysDisabled = false;
+  public cantJugadoresDisabled = false;
+  public tipoCanchaDisabled = false;
+  public toggleChecked = false;
 
-  constructor(private modalController: ModalController, private navParams: NavParams,
-    private loadingController: LoadingController,
-    private toastController: ToastController, private filterService: FilterService,
-    private storage: Storage) {
+  constructor(public modalController: ModalController, public navParams: NavParams,
+    public loadingController: LoadingController,
+    public toastController: ToastController, public filterService: FilterService,
+    public storage: Storage) {
     this.setHours();
     this.sport = navParams.get('sport');
     }

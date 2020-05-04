@@ -8,6 +8,7 @@ import { CanchaPage } from '../cancha/cancha.page';
 import { HomePopoverPage } from '../home-popover/home-popover.page';
 import { CanchasService } from 'src/services/canchas.service';
 import { AuthenticationService } from 'src/services/authentication.service';
+import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 
 @Component({
   selector: 'app-home',
@@ -16,39 +17,46 @@ import { AuthenticationService } from 'src/services/authentication.service';
 })
 export class HomePage {
 
-  private canchas;
+  public canchas;
   icons1 = ['futbol', 'basket', 'voley', 'hockey'];
   icons2 = ['tennis', 'padel', 'pinpon', 'otros'];
-  private usuario: string;
-  private name: string
-  private modeloCancha;
-  private message: string;
-  private loading = true;
-  private subscription;
+  public usuario: string;
+  public name: string
+  public modeloCancha;
+  public message: string;
+  public loading = true;
+  public subscription;
 
 
-  constructor(private router: Router, private storage: Storage, private navController: NavController,
-    private modalController: ModalController, private authenticationService: AuthenticationService,
-    private loadingController: LoadingController, private alertController: AlertController,
-    private popoverController: PopoverController, private canchasService: CanchasService,
-    private platform: Platform, public menuCtrl: MenuController) {
+  constructor(public router: Router, public storage: Storage, public navController: NavController,
+    public modalController: ModalController, public authenticationService: AuthenticationService,
+    public loadingController: LoadingController, public alertController: AlertController,
+    public popoverController: PopoverController, public canchasService: CanchasService,
+    public platform: Platform, public menuCtrl: MenuController, public splashScreen: SplashScreen) {
 
     storage.get('user').then((val) => {
       if (!val) {
         storage.get('tutorial').then((tutorial) => {
           if (!tutorial) { //Si el usuario aun no se registro ni vio el tutorial
-            this.goToTutorial();
+            this.goToTutorial().then(() => this.splashScreen.hide());
+            this.navController.navigateRoot(['login']);
             console.log("No hay tutorial ni usuario ", tutorial, "+", val);
+          } else {
+            //Si el usuario ya vio el tutorial pero aun no se registro
+            console.log("No hay usuario si tutorial", tutorial, "+", val);
+            this.navController.navigateRoot(['login']).then(() => this.splashScreen.hide());
           }
-          //Si el usuario ya vio el tutorial pero aun no se registro
-          console.log("No hay usuario si tutorial", tutorial, "+", val);
-          this.navController.navigateRoot(['login']);
+
+
+
         });
       }
       else { //El usuario ya esta registrado entonces se dirige hacia la pagina de inicio
         console.log("Si hay usuario ", val);
         this.getAllDocumentsInCollection();
         this.usuario = val;
+        this.splashScreen.hide();
+
       }
     });
   }
@@ -130,7 +138,7 @@ export class HomePage {
       id: "canchaModal"
     });
     await modal.present();
-    await modal.onWillDismiss().then(()=>    this.menuCtrl.enable(true)    );
+    await modal.onWillDismiss().then(() => this.menuCtrl.enable(true));
   }
 
 

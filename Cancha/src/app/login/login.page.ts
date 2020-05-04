@@ -17,12 +17,12 @@ export class LoginPage {
   myForm: FormGroup;
   usuario: string;
   contrasena;
-  private subscription;
+  public subscription;
 
-  constructor(private router: Router, private modalController: ModalController, public menuCtrl: MenuController,
-    private authenticationService: AuthenticationService, public events: Events,
+  constructor(public router: Router, public modalController: ModalController, public menuCtrl: MenuController,
+    public authenticationService: AuthenticationService, public events: Events,
     public formBuilder: FormBuilder, public loadingController: LoadingController,
-    private storage: Storage, private alertController: AlertController, private platform: Platform) {
+    public storage: Storage, public alertController: AlertController, public platform: Platform) {
     this.storage.set('user', null);
     this.myForm = this.createMyForm();
   }

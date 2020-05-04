@@ -9,11 +9,11 @@ import { AuthenticationService } from 'src/services/authentication.service';
   styleUrls: ['./forgot-password.page.scss'],
 })
 export class ForgotPasswordPage {
-  private resetPasswordForm: FormGroup;
-  private emailModel;
+  public resetPasswordForm: FormGroup;
+  public emailModel;
 
-  constructor(private modalController: ModalController,  private alertController: AlertController, 
-    public formBuilder: FormBuilder, private authenticationService: AuthenticationService) {
+  constructor(public modalController: ModalController,  public alertController: AlertController, 
+    public formBuilder: FormBuilder, public authenticationService: AuthenticationService) {
     this.resetPasswordForm = this.createForm();
   }
 

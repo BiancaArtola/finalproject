@@ -10,11 +10,11 @@ import { AuthenticationService } from 'src/services/authentication.service';
 })
 export class CommentsPage implements OnInit {
   @Input() id: number;
-  private contenido: string;
-  private usuario: string;
+  public contenido: string;
+  public usuario: string;
 
-  constructor(private navParams: NavParams, private storage: Storage, private toastController: ToastController,
-     private authenticationService: AuthenticationService, private modalController: ModalController) {
+  constructor(public navParams: NavParams, public storage: Storage, public toastController: ToastController,
+     public authenticationService: AuthenticationService, public modalController: ModalController) {
     this.id = navParams.get('id');
 
   }

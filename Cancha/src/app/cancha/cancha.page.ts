@@ -13,11 +13,11 @@ export class CanchaPage {
 
   @Input() id: number;
   @Input() date;
-  private cancha;
-  private loading = true;
+  public cancha;
+  public loading = true;
 
-  constructor(navParams: NavParams, private modalController: ModalController, private menuCtrl: MenuController,
-    private canchasService: CanchasService, private loadingController: LoadingController) {
+  constructor(navParams: NavParams, public modalController: ModalController, public menuCtrl: MenuController,
+    public canchasService: CanchasService, public loadingController: LoadingController) {
     this.id = navParams.get('id');
     this.date = navParams.get('date');
 

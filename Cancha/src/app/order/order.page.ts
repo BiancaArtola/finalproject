@@ -8,7 +8,7 @@ import { ModalController } from '@ionic/angular';
 })
 export class OrderPage implements OnInit {
 
-  constructor(private modalController: ModalController) { }
+  constructor(public modalController: ModalController) { }
 
   ngOnInit() {
   }
