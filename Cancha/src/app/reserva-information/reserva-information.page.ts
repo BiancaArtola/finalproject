@@ -18,7 +18,7 @@ export class ReservaInformationPage implements OnInit {
     private navParams: NavParams) {
     this.reserva = navParams.get('reserva');
 
-    this.getDocumentById();
+    this.getDocument();
    }
 
   ngOnInit() {
@@ -27,6 +27,16 @@ export class ReservaInformationPage implements OnInit {
   getDocumentById(){
     this.canchasService.getDocument(this.reserva.idCancha).then((cancha) => {      
       this.cancha = cancha;
+      this.loading = false;
+    });
+  }
+
+  getDocument(){
+    this.loading = true;
+    this.canchasService.getDocument(this.reserva.idCancha).then((cancha) => { 
+      this.cancha = cancha;
+      this.loading = false;
+    }).catch(()=>{
       this.loading = false;
     });
   }

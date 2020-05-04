@@ -22,8 +22,6 @@ export class FilterService extends RootService {
         .get().then(function (querySnapshot) {
           let canchas = [];
           querySnapshot.forEach(function (doc) {
-
-            console.log(doc.data());
             canchas.push(doc.data())
           });
           resolve(canchas);

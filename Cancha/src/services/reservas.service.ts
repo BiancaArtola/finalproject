@@ -1,22 +1,20 @@
 import { Injectable } from '@angular/core';
 import * as firebase from 'firebase/app';
 import 'firebase/auth';
-import { environment } from 'src/environments/environment';
 import { RootService } from './root.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ReservasService extends RootService{
+export class ReservasService extends RootService {
 
-  constructor() { 
+  constructor() {
     super();
     this.db = firebase.firestore(this.app);
   }
 
   setReserva(uid, nombre, icono, date, hora, id) {
-    console.log(hora);
-    
+
     this.db.collection("reservas").doc(uid).update(
       {
         canchas: firebase.firestore.FieldValue.arrayUnion({
@@ -50,6 +48,10 @@ export class ReservasService extends RootService{
         .get().then(function (querySnapshot) {
           if (querySnapshot.data())
             resolve(querySnapshot.data().canchas);
+          else
+            resolve(null);
+        }).catch(() => {
+          reject();
         });
     })
   }

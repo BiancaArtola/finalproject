@@ -16,24 +16,6 @@ export class CanchasService extends RootService {
   constructor() {
     super();
     this.db = firebase.firestore(this.app);
-  //  this.conection();
-   // console.log("cons "+this.conected);
-    
-  }
-
-  conection() {
-    var connectedRef = firebase.database().ref(".info/connected");
-    connectedRef.on("value", function (snap) {
-      if (snap.val() === true) { //hay internet
-        //this.conexion = true;
-        console.log("hay");
-
-      } else { //no hay conexion
-        console.log("no hay");
-       // this.conexion = false;
-      }
-    });
-
   }
 
   getAllDocumentsInCollection() {
@@ -47,19 +29,6 @@ export class CanchasService extends RootService {
           canchas.push(doc.data())
         });
         resolve(canchas)
-        // var connectedRef = firebase.database().ref(".info/connected");
-        // connectedRef.on("value", function (snap) {
-        //   if (snap.val() === true) { //hay internet
-        //     //this.conexion = true;
-        //     console.log("hay");
-        //     resolve(canchas);
-
-        //   } else { //no hay conexion
-        //     console.log("no hay");
-        //     reject();
-        //    // this.conexion = false;
-        //   }
-        // });
     
       });
 
@@ -70,6 +39,8 @@ export class CanchasService extends RootService {
     return new Promise((resolve, reject) => {
       this.db.collection("canchas").where("deporte", "==", sport)
         .get().then(function (querySnapshot) {
+          if (!querySnapshot.metadata.fromCache == false)
+            reject();
           let canchas = [];
           querySnapshot.forEach(function (doc) {
             // doc.data() is never undefined for query doc snapshots
@@ -84,12 +55,12 @@ export class CanchasService extends RootService {
   getDocument(id: number) {
     return new Promise((resolve, reject) => {
       this.db.collection("canchas").where("id", "==", id)
-        .get().then(function (querySnapshot) {
+        .get().then(function (querySnapshot) {          
           querySnapshot.forEach(function (doc) {
-            // doc.data() is never undefined for query doc snapshots
+            // doc.data() is never undefined for query doc snapshots            
             resolve(doc.data());
           });
-
+          reject();
         });
     })
   }
@@ -101,14 +72,11 @@ export class CanchasService extends RootService {
           let hayResultado = false;
 
           querySnapshot.forEach(function (doc) {
-            console.log(doc.data().id);
-
             resolve(doc.data().id);
             hayResultado = true;
           });
 
           if (!hayResultado) {
-
             reject();
 
           }

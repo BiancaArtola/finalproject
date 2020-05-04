@@ -62,11 +62,23 @@
         </ion-card>
       </div>
 
-      <div *ngIf="(!reservasActivas) || (reservasActivas.length == 0)">
+      <div *ngIf="(!reservasActivas) || (reservasActivas.length == 0) && conexion">
         <ion-row>
           <ion-label class="noHayReservas">
             Por el momento no tienes reservas activas. <b class="reserveText" (click)="dismiss()">Reserva aquí.</b>
           </ion-label>
+        </ion-row>
+      </div>
+
+      <div *ngIf="!conexion">
+        <ion-row class="reload" (click)="getReservas()">
+          <ion-col size="1">
+            <ion-icon src="../../assets/icon/svg/reload.svg"></ion-icon>
+          </ion-col>
+  
+          <ion-col size="11">
+            <ion-label class="noInternetMessage">La conexión a internet ha fallado. Haga click aqui para recargar</ion-label>
+          </ion-col>
         </ion-row>
       </div>
     </div>
@@ -99,20 +111,32 @@
               </ion-card-header>
               <ion-card-content>
                 Fecha de la reserva: {{reserva.fecha}}
+                Horario de la reserva: {{reserva.hora}}:00hs
               </ion-card-content>
             </ion-col>
           </ion-row>
         </ion-card>
       </div>
 
-      <div *ngIf="(!reservasConcretadas) || (reservasConcretadas.length == 0)">
+      <div *ngIf="(!reservasConcretadas) || (reservasConcretadas.length == 0) && conexion">
         <ion-row>
           <ion-label class="noHayReservas">
             Por el momento no tienes reservas concretadas.
           </ion-label>
         </ion-row>
       </div>
-
+      
+      <div *ngIf="!conexion">
+        <ion-row class="reload" (click)="getReservas()">
+          <ion-col size="1">
+            <ion-icon src="../../assets/icon/svg/reload.svg"></ion-icon>
+          </ion-col>
+  
+          <ion-col size="11">
+            <ion-label class="noInternetMessage">La conexión a internet ha fallado. Haga click aqui para recargar</ion-label>
+          </ion-col>
+        </ion-row>
+      </div>
     </div>
 
   </ion-grid>

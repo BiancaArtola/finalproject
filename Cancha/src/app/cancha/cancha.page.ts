@@ -30,8 +30,11 @@ export class CanchaPage {
    }
 
   getDocument(id){
-    this.canchasService.getDocument(this.id).then((cancha) => {      
+    this.loading = true;
+    this.canchasService.getDocument(this.id).then((cancha) => { 
       this.cancha = cancha;
+      this.loading = false;
+    }).catch(()=>{
       this.loading = false;
     });
   }

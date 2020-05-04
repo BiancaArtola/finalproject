@@ -16,6 +16,8 @@ export class ReservasPage {
   private reservasConcretadas = [];
   private uid;
   private loading = true;
+  private conexion = true;
+
 
   constructor(private modalController: ModalController, private authenticationService: AuthenticationService,
     private alertController: AlertController, private loadingController: LoadingController,
@@ -23,17 +25,24 @@ export class ReservasPage {
   }
 
   ngOnInit() {
-    this.getReservas();
+    this.authenticationService.getUid().then((uid) => {
+      this.uid = uid;
+      this.getReservas();
+    })
   }
 
   getReservas() {
-    this.authenticationService.getUid().then((uid) => {
-      this.uid = uid;
-      this.reservasService.getReservas(uid).then((reservas) => {
-        this.reservas = reservas;
-        this.separeReservas();
-        this.loading = false;
-      })
+    this.conexion = true;
+    this.loading = true;
+    this.reservasService.getReservas(this.uid).then((reservas) => {      
+      this.reservas = reservas;
+      this.separeReservas();
+      this.loading = false;
+    })
+    .catch(()=>{
+      this.loading = false;
+      this.conexion = false;
+
     })
   }
 
@@ -43,8 +52,6 @@ export class ReservasPage {
 
         var date: Date = element.fecha.toDate();
         var month = date.getMonth() + 1;
-        console.log(month);
-
         var formatDate = date.getDate() + "/" + month + "/" + date.getFullYear();
         if ((element.fecha.seconds + 86400) * 1000 < Date.now()) {
           //La fecha de reserva + los segundos correspondientes a un dia

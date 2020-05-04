@@ -29,7 +29,7 @@ export class DeportePage {
   private canchas;
 
   private loading = true;
-
+  private conexion = true;
 
   constructor(private router: Router, private datePicker: DatePicker,
     private canchasService: CanchasService, private menuCtrl: MenuController,
@@ -44,18 +44,26 @@ export class DeportePage {
   ngOnInit() {
     this.route.params.subscribe((params: Params) => {
       this.sport = params['sport'];
+      this.getDocumentsWithSport();
+    });
+  }
 
-      this.canchasService.getDocumentsWithSport(this.sport).then((information) => {
-        this.canchas = information;
-        this.loading = false;
-      });
 
+  getDocumentsWithSport() {
+    this.conexion = true;
+    this.loading = true;
+    this.canchasService.getDocumentsWithSport(this.sport).then((information) => {
+      this.canchas = information;
+      this.loading = false;
+    }).catch(() => {
+      this.loading = false;
+      this.conexion = false;
     });
   }
 
   ionViewWillEnter() {
     this.menuCtrl.enable(false);
-   }
+  }
 
   async presentLoading() {
     const loading = await this.loadingController.create({

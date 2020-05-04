@@ -41,8 +41,7 @@ export class PayPage {
 
   pay() {
     this.loadingController.create();
-    this.authenticationService.getUid().then((uid) => {
-      
+    this.authenticationService.getUid().then((uid) => {            
       this.reservasService.setReserva(uid, this.cancha.nombre, this.cancha.icono, this.date, this.hora, this.cancha.id);
       this.loadingController.dismiss();
       this.showMessage("¡El pago ha sido realizado con exito!", "Podes ver la reserva en la sección 'Mis reservas'");

@@ -115,9 +115,10 @@ export class MapsPage implements OnInit {
     let contador: number = 0;
 
     this.data.forEach(element => {   
-      
+      var nombre = element.nombre;
+      var nombreCapitalize = nombre.charAt(0).toUpperCase() + nombre.slice(1);
       markers[contador] = this.map.addMarkerSync({
-        title: element.nombre,
+        title: nombreCapitalize,
         position: { lat: element.coordenadas[0], lng: element.coordenadas[1] },
         animation: GoogleMapsAnimation.BOUNCE,
         icon: 'http://maps.google.com/mapfiles/ms/icons/purple-dot.png'
