@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ModalController, AlertController, LoadingController } from '@ionic/angular';
 import { ReservasService } from 'src/services/reservas.service';
 import { AuthenticationService } from 'src/services/authentication.service';

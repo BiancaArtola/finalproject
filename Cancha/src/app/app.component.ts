@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
-
 import { Platform, MenuController, ModalController, Events } from '@ionic/angular';
-import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Router } from '@angular/router';
 import { Environment } from '@ionic-native/google-maps';
@@ -22,7 +20,7 @@ export class AppComponent {
 
   constructor(private router: Router, private modalController: ModalController,public events: Events,
     private menu: MenuController, private platform: Platform, private authenticationService: AuthenticationService,
-    private splashScreen: SplashScreen, private statusBar: StatusBar) {
+     private statusBar: StatusBar) {
     this.initializeApp();
     this.getUserName();
 
@@ -39,8 +37,8 @@ export class AppComponent {
 
   getUserName() {
     this.authenticationService.getUserName().then((nombre) => {
-      this.userName = nombre;
-      console.log("here", this.userName);
+      if (nombre)
+        this.userName = nombre;
     })
 
   }
@@ -57,9 +55,6 @@ export class AppComponent {
       });
 
       this.statusBar.styleDefault();
-     // this.splashScreen.hide();
-
-
     });
   }
 

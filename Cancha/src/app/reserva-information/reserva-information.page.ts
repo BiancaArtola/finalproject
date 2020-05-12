@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ModalController, NavParams } from '@ionic/angular';
 import { CanchasService } from 'src/services/canchas.service';
 
@@ -7,7 +7,7 @@ import { CanchasService } from 'src/services/canchas.service';
   templateUrl: './reserva-information.page.html',
   styleUrls: ['./reserva-information.page.scss'],
 })
-export class ReservaInformationPage implements OnInit {
+export class ReservaInformationPage {
 
   @Input() reserva;
 
@@ -17,12 +17,9 @@ export class ReservaInformationPage implements OnInit {
   constructor(public modalController: ModalController, public canchasService: CanchasService,
     public navParams: NavParams) {
     this.reserva = navParams.get('reserva');
-
     this.getDocument();
    }
 
-  ngOnInit() {
-  }
 
   getDocumentById(){
     this.canchasService.getDocument(this.reserva.idCancha).then((cancha) => {      

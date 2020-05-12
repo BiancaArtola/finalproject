@@ -27,15 +27,15 @@ export class CanchaPage {
 
   ionViewWillEnter() {
     this.menuCtrl.enable(false);
-   }
+  }
 
-  
-  getDocument(id){
+
+  getDocument(id) {
     this.loading = true;
-    this.canchasService.getDocument(this.id).then((cancha) => { 
+    this.canchasService.getDocument(this.id).then((cancha) => {
       this.cancha = cancha;
       this.loading = false;
-    }).catch(()=>{
+    }).catch(() => {
       this.loading = false;
     });
   }
@@ -75,6 +75,12 @@ export class CanchaPage {
       },
       cssClass: 'my-custom-modal-css'
     });
-    return await modal.present();
+    await modal.present();
+    await modal.onWillDismiss().then(() => {
+      this.canchasService.getComments(this.id).then((comentarios) => {
+        this.cancha.comentarios = comentarios;
+      });
+
+    });
   }
 }

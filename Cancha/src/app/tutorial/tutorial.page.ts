@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { Storage } from '@ionic/storage';
 import { ModalController, IonSlides } from '@ionic/angular';
 
@@ -7,24 +7,17 @@ import { ModalController, IonSlides } from '@ionic/angular';
   templateUrl: './tutorial.page.html',
   styleUrls: ['./tutorial.page.scss'],
 })
-export class TutorialPage implements OnInit {
+export class TutorialPage  {
 
   @ViewChild(IonSlides, { static: true }) slides: IonSlides;
 
   public showText = true;
   slideOpts = {
     initialSlide: 0,
-    // pagination: {
-    //   el: '.swiper-pagination',
-    //   type: 'fraction',
-    // }
   };
 
   constructor(public storage: Storage, public modalController: ModalController) {
     storage.set('tutorial', true);
-  }
-
-  ngOnInit() {
   }
 
   dismiss() {

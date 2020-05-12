@@ -46,9 +46,6 @@ export class HomePage {
             console.log("No hay usuario si tutorial", tutorial, "+", val);
             this.navController.navigateRoot(['login']).then(() => this.splashScreen.hide());
           }
-
-
-
         });
       }
       else { //El usuario ya esta registrado entonces se dirige hacia la pagina de inicio
@@ -153,8 +150,6 @@ export class HomePage {
     this.authenticationService.logoutUser().then(() => {
       this.router.navigate(['/login']);
     }, (error) => {
-      console.log("Ocurrio un error.");
-
     })
   }
 
