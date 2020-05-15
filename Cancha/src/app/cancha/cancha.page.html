@@ -89,7 +89,7 @@
         </ion-row>
       </ion-grid>
     </ion-card>
-
+<ion-grid>
     <ion-list *ngIf="cancha">
       <ion-list-header>
         <b>Comentarios </b>
@@ -98,8 +98,8 @@
       <div *ngIf="cancha.comentarios.length == 0">
         <ion-label class="noComments">Esta cancha no tiene comentarios. ¡Se el primero!</ion-label>
       </div>
-      <ion-grid *ngIf="cancha.comentarios.length != 0">
-        <ion-row>
+     
+        <ion-row *ngIf="cancha.comentarios.length != 0">
           <ion-col>
             <ion-item *ngFor="let comentario of cancha.comentarios; let i = index">
               <ion-avatar slot="start">
@@ -113,11 +113,11 @@
             </ion-item>
           </ion-col>
         </ion-row>
-      </ion-grid>
       <div class="ion-text-end">
         <ion-text (click)="openComments()" class="comentario"> Deja un comentario sobre esta cancha </ion-text>
       </div>
     </ion-list>
+  </ion-grid>
 
     <ion-grid *ngIf="!cancha" (click)="getDocument(id)">
       <ion-row class="reload">
