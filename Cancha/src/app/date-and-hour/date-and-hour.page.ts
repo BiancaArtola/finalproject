@@ -15,7 +15,7 @@ export class DateAndHourPage  {
   public dateModel;
   public monthNames = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
 
-  public horas = [12, 15, 19, 20, 21, 22];
+  public horas = [12, 15, 18, 20, 21, 22];
   public active;
 
   public cancha;

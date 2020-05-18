@@ -33,7 +33,6 @@ export class HomePage {
     public loadingController: LoadingController, public alertController: AlertController,
     public popoverController: PopoverController, public canchasService: CanchasService,
     public platform: Platform, public menuCtrl: MenuController, public splashScreen: SplashScreen) {
-
     storage.get('user').then((val) => {
       if (!val) {
         storage.get('tutorial').then((tutorial) => {

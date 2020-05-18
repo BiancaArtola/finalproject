@@ -3,6 +3,7 @@ import { ModalController, NavParams, AlertController, LoadingController } from '
 import { Router } from '@angular/router';
 import { ReservasService } from 'src/services/reservas.service';
 import { AuthenticationService } from 'src/services/authentication.service';
+import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 
 @Component({
   selector: 'app-pay',
@@ -21,6 +22,7 @@ export class PayPage {
   ];
 
   constructor(public modalController: ModalController, public navParams: NavParams,
+    private localNotifications: LocalNotifications,
     public loadingController: LoadingController,public router: Router, public reservasService: ReservasService,
     public alertController: AlertController, public authenticationService: AuthenticationService) {
     this.cancha = navParams.get('cancha');
@@ -44,6 +46,7 @@ export class PayPage {
     this.authenticationService.getUid().then((uid) => {            
       this.reservasService.setReserva(uid, this.cancha.nombre, this.cancha.icono, this.date, this.hora, this.cancha.id);
       this.loadingController.dismiss();
+      this.sendNotification();
       this.showMessage("¡El pago ha sido realizado con exito!", "Podes ver la reserva en la sección 'Mis reservas'");
     });
 
@@ -66,6 +69,18 @@ export class PayPage {
       ]
     });
     await alert.present();
+  }
+
+  
+  sendNotification(){
+    let horaNotificacion = new Date(this.date);    
+    horaNotificacion.setHours(this.hora-2,0,0);
+
+    this.localNotifications.schedule({
+      title: 'Recordatorio de alquiler',
+      trigger: {at: horaNotificacion},
+      text: 'Tienes una reserva hoy a las '+this.hora+':00hs en '+this.cancha.nombre+'.'
+   });
   }
 
 }

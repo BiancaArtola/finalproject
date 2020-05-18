@@ -31,6 +31,7 @@ import { PayPageModule } from './pay/pay.module';
 import { HomePopoverPageModule } from './home-popover/home-popover.module';
 import { FilterService } from 'src/services/filter.service';
 import { ReservasService } from 'src/services/reservas.service';
+import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 
 
 @NgModule({
@@ -64,6 +65,7 @@ import { ReservasService } from 'src/services/reservas.service';
     FilterService,
     ReservasService,
     EmailComposer,
+    LocalNotifications,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]
