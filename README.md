@@ -1,6 +1,6 @@
-# Proyecto Final de Carrera - Diseño centrado en el usuario para la gestión de recursos de tiempo finito compartidos online.
+# Final Project - User-centered design for managing finite time resources shared online.
 
-This project consists of a mobile application for Android users. This application allows the rental of courts in the city of Bahía Blanca, quickly, easily and safely. The main objective of this application is to achieve a good user-centered design (UCD), so that anyone can use it without complications. It was developed with the Ionic framework, using Firebase to access the required information.
+This project consists of a mobile application for Android users. This application allows the rental of courts in the city of Bahía Blanca, quickly, easily, and safely. The main objective of this application is to achieve a good user-centered design (UCD) so that anyone can use it without complications. It was developed with the Ionic framework, using Firebase to access the required information.
 
 ## About
 The main screen of the application looks like this:
@@ -20,7 +20,7 @@ The screen to authenticate in the application looks like this:
 
 ## Built With
 
-* [IONIC](https://ionicframework.com/docs) - An open source UI toolkit for building performant, high-quality mobile and desktop apps using web technologies — HTML, CSS, and JavaScript — with integrations for popular frameworks like Angular.
+* [IONIC](https://ionicframework.com/docs) - An open-source UI toolkit for building performant, high-quality mobile and desktop apps using web technologies — HTML, CSS, and JavaScript — with integrations for popular frameworks like Angular.
 * [Angular](https://angular.io/docs) - The web Framework
 * [Firebase](https://firebase.google.com/docs) - Database 
 
