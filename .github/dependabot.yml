@@ -3,7 +3,7 @@
 version: 2
 updates:
   - package-ecosystem: "npm"
-    directory: "/"
+    directory: "/Cancha"
     schedule:
       interval: "daily"
     pull-request-branch-name:
