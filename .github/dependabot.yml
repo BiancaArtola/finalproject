@@ -11,5 +11,4 @@ updates:
       # for example, `dependabot-npm_and_yarn-next_js-acorn-6.4.1`
       separator: "-"
     allow:
-      - match:
-          update_type: "security"
+      - dependency_type: "security"
