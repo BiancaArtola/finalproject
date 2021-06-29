@@ -23,7 +23,7 @@
     "@ionic-native/date-picker": "^5.19.0",
     "@ionic-native/email-composer": "^5.19.1",
     "@ionic-native/firebase-authentication": "^5.19.1",
-    "@ionic-native/google-maps": "^5.0.0-beta.27",
+    "@ionic-native/google-maps": "^5.5.0",
     "@ionic-native/http": "^5.20.0",
     "@ionic-native/local-notifications": "^5.26.0",
     "@ionic-native/push": "^5.26.0",
